@@ -21,11 +21,14 @@ const routes = {
 
 //Render main content based on intial pathname. Defaults to home page
 function computeInitialRoute(){
-    const initialPathname= URL.parse(window.location.href)?.pathname.slice(1) ?? "home" //remove slash from pathnme
+    //remove slash from pathname
+    const initialPathname= URL.parse(window.location.href)?.pathname.slice(1) ?? "home" 
     let initialContent;
+    
     if(initialPathname in routes){
         initialContent = routes[initialPathname].content()
-        window.history.pushState({routesKey: initialPathname}, "", `${BASE_URL}`) // push entry url to history
+        // push entry url to history
+        window.history.pushState({routesKey: initialPathname}, "", `${BASE_URL}`) 
     }
     else { //no routes match pathname
         initialContent = routes["home"].content() 
