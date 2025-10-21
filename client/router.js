@@ -25,10 +25,13 @@ function computeInitialRoute(){
     let initialContent;
     if(initialPathname in routes){
         initialContent = routes[initialPathname].content()
+        window.history.pushState({routesKey: initialPathname}, "", `${BASE_URL}`) // push entry url to history
     }
     else { //no routes match pathname
         initialContent = routes["home"].content() 
+        window.history.pushState({routesKey: "home"}, "", `${BASE_URL}`)
     }
+    
     renderMain(initialContent)
 }
 computeInitialRoute()
@@ -38,8 +41,9 @@ computeInitialRoute()
 
 
 window.addEventListener("popstate", (event) => {
-    const routeKey = event.state.routesKey
-    const contentToDisplay = routes[routeKey].content()
+    const routeKey = event.state?.routesKey
+    const route = routes[routeKey] || routes["home"];
+    const contentToDisplay = route.content()
     renderMain(contentToDisplay)
 })
 
