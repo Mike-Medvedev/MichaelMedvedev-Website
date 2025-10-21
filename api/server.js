@@ -1,4 +1,5 @@
 import express from "express"
+import path from "path"
 const app = express()
 
 app.use(express.json())
@@ -9,7 +10,7 @@ const logger = function(req, res, next){
     next();
 }
 app.use(logger)
-app.use(express.static(process.cwd())) // serve from current working directy where node process started from
+app.use(express.static(path.join(process.cwd(), "client"))) // serve from current working directy where node process started from
 
 const PORT = 3000
 
