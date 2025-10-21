@@ -1,0 +1,26 @@
+{
+  "name": "michaelmedvedev-website",
+  "version": "1.0.0",
+  "description": "Michael Medvedevs Website",
+  "keywords": [
+    "Portfolio"
+  ],
+  "homepage": "https://github.com/Mike-Medvedev/MichaelMedvedev-Website#readme",
+  "bugs": {
+    "url": "https://github.com/Mike-Medvedev/MichaelMedvedev-Website/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mike-Medvedev/MichaelMedvedev-Website.git"
+  },
+  "license": "ISC",
+  "author": "Michael Medvedev",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
