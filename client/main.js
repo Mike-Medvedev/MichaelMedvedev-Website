@@ -4,4 +4,5 @@
  * Registers Event Listeners
  * Fetches Data from server
  */
-console.log("main.js")
+
+import "./router.js"

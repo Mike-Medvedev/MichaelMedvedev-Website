@@ -15,3 +15,19 @@ button {
     background-color: var(--primary-color);
     color: #ffffff
 }
+.container{
+    display: flex;
+    flex-direction: column;
+    width: inherit;
+    height: inherit;
+}
+header {
+    height: 10%;
+    display: flex;
+}
+main {
+    height: 80%;
+}
+footer{
+    height: 10%;
+}

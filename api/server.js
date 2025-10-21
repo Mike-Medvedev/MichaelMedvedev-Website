@@ -10,7 +10,7 @@ const logger = function(req, res, next){
     next();
 }
 app.use(logger)
-app.use(express.static(path.join(process.cwd(), "client"))) // serve from current working directy where node process started from
+app.use(express.static(path.join(process.cwd(), "client"))) //process.cwd is where node process started from (root dir)
 
 const PORT = 3000
 
