@@ -30,7 +30,7 @@ function computeInitialRoute(){
         // push entry url to history
         window.history.pushState({routesKey: initialPathname}, "", `${BASE_URL}`) 
     }
-    else { //no routes match pathname
+    else { //no routes match pathname, go home
         initialContent = routes["home"].content() 
         window.history.pushState({routesKey: "home"}, "", `${BASE_URL}`)
     }
@@ -61,17 +61,17 @@ homeButton.addEventListener("click", () => {
     renderMain(contentToDisplay)
 })
 programmingButton.addEventListener("click", () => {
-    window.history.pushState({routesKey: "programming"}, "", `${BASE_URL}/programming`)
+    window.history.pushState({routesKey: "programming"}, "", `${BASE_URL}${routes.programming.route}`)
     const contentToDisplay = routes["programming"].content()
     renderMain(contentToDisplay)
 })
 guitarButton.addEventListener("click", () => {
-    window.history.pushState({routesKey: "guitar"}, "", `${BASE_URL}/guitar`)
+    window.history.pushState({routesKey: "guitar"}, "", `${BASE_URL}${routes.guitar.route}`)
     const contentToDisplay = routes["guitar"].content()
     renderMain(contentToDisplay)
 })
 snowboardingButton.addEventListener("click", () => {
-    window.history.pushState({routesKey: "snowboarding"}, "", `${BASE_URL}/snowboarding`)
+    window.history.pushState({routesKey: "snowboarding"}, "", `${BASE_URL}${routes.snowboarding.route}`)
     const contentToDisplay = routes["snowboarding"].content()
     renderMain(contentToDisplay)
 })
