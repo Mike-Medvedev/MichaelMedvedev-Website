@@ -6,14 +6,17 @@ app.use(express.json())
 
 const logger = function(req, res, next){
     console.log("Recieved Request from: ", req.host + req.url)
-    // console.log("Ip Address of user is: ", req.ip)
     next();
 }
+
 app.use(logger)
-app.use(express.static(path.join(process.cwd(), "client"))) //process.cwd is where node process started from (root dir)
+
+//process.cwd is where node process started from (root dir)
+app.use(express.static(path.join(process.cwd(), "client"))) 
 
 const PORT = 3000
 
+//{*splat} is express v5 catchall route
 app.get("/{*splat}", (req, res) => {
     res.status(200).sendFile(path.join(process.cwd(), "client", "index.html"))
 })
