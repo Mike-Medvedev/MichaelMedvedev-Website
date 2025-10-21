@@ -14,8 +14,8 @@ app.use(express.static(path.join(process.cwd(), "client"))) //process.cwd is whe
 
 const PORT = 3000
 
-app.get("/", (req, res) => {
-    res.status(200).send("Ok")
+app.get("/{*splat}", (req, res) => {
+    res.status(200).sendFile(path.join(process.cwd(), "client", "index.html"))
 })
 
 app.post("/", (req, res) => {
