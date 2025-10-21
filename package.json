@@ -18,7 +18,8 @@
   "type": "module",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node api/server.js",
+    "devserver": "node --watch api/server.js"
   },
   "dependencies": {
     "express": "^5.1.0"
