@@ -31,25 +31,26 @@ select {
 
 /* Declaring Design System Primitives */
 :root{
+
     /* -------------------*/
     /* Primitives */
     /* -------------------*/
 
     /* Colors */
-    --black-500: #252526;
-    --black-700: #1E1E1E;
+    --black-700: #252526;
+    --black-900: #1E1E1E;
     
     --blue-300: oklch(.809 .105 251.813);
     --blue-400: oklch(.707 .165 254.624);
     --blue-500: oklch(.623 .214 259.815);
 
     --bluegray-300: oklch(.373 .034 259.733); /* Light Blue Grey */ /* --dark-4: oklch(.373 .034 259.733 / 0.5); */
-    --bluegray-500: oklch(.278 .033 256.848); /* Dark Blue Grey */  /* --dark-3: oklch(.278 .033 256.848 / 0.5); */ /* Use for button backgound hover*/
-    --bluegray-900: oklch(.21 .034 264.665); /* Dark Blue */
+    --bluegray-800: oklch(.278 .033 256.848); /* Dark Blue Grey */ 
+    --bluegray-900: oklch(0.214 0.03 257.417); /* Dark Blue */
     /* linear-gradient(90deg, #4fc3f7 0%, #64b5f6 50%, #42a5f5 100%);  Use for Last Name gradient*/
-    /* color-mix(in oklab, var(--color-blue-500) 20%, transparent); Use for button background color */
+
     
-    --white-0: #FFFFFF
+    --white-0: #FFFFFF;
     --white-100: oklch(.707 .165 254.624);
     --white-200: oklch(.872 .01 258.338);
     --white-300: oklch(.707 .022 261.325);
@@ -82,19 +83,19 @@ select {
     --font-size-800: 2.25rem;
 
     --font-weight-50: 50;
-    --font-weght-100: 100;
-    --font-weght-200: 200;
-    --font-weght-300: 300;
-    --font-weght-400: 400; /*Regular */
-    --font-weght-500: 500;
-    --font-weght-600: 600;
-    --font-weght-700: 700; /* Bold */
-    --font-weght-800: 800;
-    --font-weght-900: 900;
+    --font-weight-100: 100;
+    --font-weight-200: 200;
+    --font-weight-300: 300;
+    --font-weight-400: 400; /*Regular */
+    --font-weight-500: 500;
+    --font-weight-600: 600;
+    --font-weight-700: 700; /* Bold */
+    --font-weight-800: 800;
+    --font-weight-900: 900;
 
-    --line-height-small: 1.1;
-    --line-height-regular: 1.5;
-    --line-height-large: 1.8;
+    --line-height-sm: 1.1;
+    --line-height-m: 1.5;
+    --line-height-lg: 1.8;
 
     /* Size */
     --size-0: 0px;
@@ -108,26 +109,101 @@ select {
     --size-8: 3rem;
     --size-9: 64rem;
 
+    /* border */
+
+    --border-radius-sm: 1px;
+    --border-radius-m: 4px;
+    --border-radius-lg: 8px;
+    --border-radius-xl: 14px;
+    --border-radius-xll: 32px;
+    --border-radius-circle: 9999px;
+
+    --border-width-sm: 1px;
+    --border-width-m: 2px;
+    --border-width-lg: 4px;
+    
+    /* shadow */
+    --shadow-sm: 1.2px 2.4px 2.4px color-mix(in oklab, var(--blue-500) 10%, transparent);
+    --shadow-m: 3.2px 6.4px 6.4px color-mix(in oklab, var(--blue-500) 20%, transparent);
+    --shadow-lg: 6.2px 12.3px 12.3px color-mix(in oklab, var(--blue-500) 30%, transparent);
+    /* gradient */
+    --primary-gradient: linear-gradient(90deg, #4fc3f7 0%, #64b5f6 50%, #42a5f5 100%); 
+    --surface-gradient: linear-gradient(to bottom right, oklch(from var(--bluegray-800) l c h / 0.3), oklch(from var(--bluegray-900) l c h / 0.3));
+
+
+
+    /* -------------------*/
+    /* Semantics */
+    /* -------------------*/
+
+    /* Colors */
+    --background-color-surface: var(--black-700);
+    --background-color-body: var(--black-900);
+    --background-color-secondary: var(--bluegray-900);
+    --background-color-primary: var(--blue-400);
     
 
+    --text-base: var(--white-0);
+    --text-primary: var(--blue-400);
+    --text-muted: var(--white-200);
+    --text-muted-extra: var(--white-300);
+    --text-quote: var(--white-400);
 
+    --text-base-size: var(--font-size-200);
+    --text-base-weight: var(--font-weight-400);
 
+    --border-color-active: var(--blue-500);
+    --border-color-hover: oklch(from var(--bluegray-800) l c h / 0.5);
+    --border-color-surface: oklch(from var(--bluegray-900) l c h / 0.5);
+    --border-style: solid;
+    --border-width: var(--border-width-sm);
 
 
     
-    --text-base: #FFFFFF;
-    --text-primary: oklch(.707 .165 254.624);
-    --text-muted: oklch(.872 .01 258.338);
-    --text-muted-extra: oklch(.707 .022 261.325);
-    --text-quote: oklch(.551 .027 264.364);
 
     --background-body: #1E1E1E;
     --background-header: #252526;
     --background-heatmap: oklch(.21 .034 264.665);
     --background-activity: oklch(.278 .033 256.848);
 
+    /* Component Tokens */
+    /* Background */
+    --background-color: var(--background-color-body);
+    /* Card */
+    --card-background-color: var(--background-color-surface);
+    --card-background-color-secondary: var(--background-color-secondary);
+    --card-background-gradient: var(-surface-gradient);
+    --card-border-color: var(--border-color-surface);
+    --card-border-radius: var(--border-radius-xl);
+    --card-border-width: var(--border-width-sm);
+    --card-border-style: var(--border-style);
+    --card-border-color-hover: var(--border-color-hover);
+    --card-shadow-hover: var(--shadow-sm);
+    --card-padding: var(--space-4);
+    --card-gap: calc(var(--space-2) + 2px);
+
+    /* Button */
+    --button-background-color: color-mix(in oklab, var(--blue-500) 20%, transparent);
+    --button-background-hover: color-mix(in oklab, var(--bluegray-800) 20%, transparent);
+    --buton-background-active: var(--background-color-primary);
+    --button-text-color: var(--text-primary);
+    --button-border-active: var(--border-color-active);
+    --button-border-hover: color-mix(in oklab, var(--bluegray-800) 20%, transparent);
+    --button-padding-inline: var(--size-5);
+    --button-padding-block: var(--size-3);
+
+
+
+    
 }
 
 body {
-    background-color
+    color: var(--white-0);
+    background-color: var(--black-500);
+}
+
+main{
+    width: 200px;
+    height: 200px;
+    background: var(--surface-gradient);
 }
