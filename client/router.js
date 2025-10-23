@@ -6,11 +6,12 @@ const routes = {
     snowboarding: "/snowboarding"
 }
 const pages = document.querySelectorAll("main");
-
+const navButtons = document.querySelectorAll("nav button")
 function toggleActivePage(pageToActivate){
     if(pageToActivate === "/") pageToActivate = "home";
     else if(pageToActivate.startsWith("/")) pageToActivate = pageToActivate.slice(1);
     pages.forEach(page => page.hidden = page.id !== pageToActivate);
+    navButtons.forEach(button => button.classList.toggle("active", button.id === pageToActivate))
 }
 
 
