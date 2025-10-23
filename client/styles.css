@@ -416,13 +416,11 @@ img{
 }
 .heatmap-content{
     display: flex;
-    flex-direction: column;
-    background-color: var(--card-background)
+    justify-content: space-between;
+    align-items: center;
 }
 .heatmap{
-    width: 100px;
-    height: 100px;
-    background-color: blue;
+   display: flex;
 }
 .button-stack{
     display: flex;
