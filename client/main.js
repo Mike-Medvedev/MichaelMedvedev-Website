@@ -13,4 +13,16 @@ async function loadHeatMap(){
     const heatmap = document.querySelector(".heatmap")
     heatmap.innerHTML = heatmapHtml;
 }
-loadHeatMap();
+loadHeatMap().then(() => {
+    const heatmap = document.querySelector("table");
+    heatmap.addEventListener("mouseover", (event) => {
+        const cell = event.target.closest("td");
+        if(!cell) return;
+        cell.classList.add("active-tooltip");
+    })
+    heatmap.addEventListener("mouseout", (event) => {
+        const cell = event.target.closest("td");
+        if(!cell) return;
+        cell.classList.remove("active-tooltip");
+    })
+});

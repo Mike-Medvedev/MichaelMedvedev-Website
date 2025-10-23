@@ -33,6 +33,7 @@ const programmingButton = document.querySelector("button#programming")
 const guitarButton = document.querySelector("button#guitar")
 const snowboardingButton = document.querySelector("button#snowboarding")
 
+
 homeButton.addEventListener("click", () => {
     if(URL.parse(window.location.href)?.pathname === routes.home) return;
     window.history.pushState({routesKey: routes.home}, "", `${BASE_URL}`);
@@ -53,4 +54,3 @@ snowboardingButton.addEventListener("click", () => {
     window.history.pushState({routesKey: routes.snowboarding}, "", `${BASE_URL}${routes.snowboarding}`)
     toggleActivePage(routes.snowboarding);
 })
-
