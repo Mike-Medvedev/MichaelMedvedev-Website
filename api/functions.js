@@ -37,5 +37,8 @@ export function createTable(){
         table += string;
     }
     table += `</table>`;
+    console.log(dates.length)
+    for(let week of dates) console.log(week.length)
     return table;
 }
+createTable();
