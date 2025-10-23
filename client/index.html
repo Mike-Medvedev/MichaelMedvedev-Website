@@ -5,37 +5,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michael Medvedev</title>
-    <!-- <script src="main.js" type="module"></script> -->
+    <script src="main.js" type="module"></script>
     <link href="styles.css" rel="stylesheet" />
 </head>
 
 <body>
     <header>
-        <section>
+        <section class="header-section">
             <nav>
-                <button class="active">Home</button>
-                <button>Programming</button>
-                <button>Guitar</button>
-                <button>Snowboarding</button>
+                <button class="active" id="home">Home</button>
+                <button id="programming">Programming</button>
+                <button id="guitar">Guitar</button>
+                <button id="snowboarding">Snowboarding</button>
             </nav>
             <div>
                 <button>Instagram</button>
-                <button>Linked In</button>
+                <button>LinkedIn</button>
             </div>
         </section>
     </header>
-    <main>
+    <!-----------HOME PAGE-------------->
+    <main id="home">
         <div class="avatar">
             <img src="./assets/mike-holding-guitar.png" />
         </div>
         <section class="main-section">
-            <h1>Michael <span>Medvedev</span></h1>
-            <h4>Software Engineer</h4>
-            <p>I'm an entrepreneur, engineer, musician, and snowboarder. I am the founder of Gilded Guitars and more recently, infatuated with programming. I build with the goal of impacting millions for the better.</p>
-            <p>I'm open sourcing my life, tracking every activity I do, to visualize passion.</p>
-            <p>"Little by little, one travels far." — J.R.R. Tolkien</p>
+            <h1>Michael <span class="text-gradient">Medvedev</span></h1>
+            <p class="text-xl">Software Engineer</p>
+            <p class="text-muted-extra">I'm an entrepreneur, engineer, musician, and snowboarder. I am the founder of Gilded Guitars and more recently, infatuated with programming. I build with the goal of impacting millions for the better.</p>
+            <p class="text-muted-extra">I'm open sourcing my life, tracking every activity I do, to visualize passion.</p>
+            <p class="text-muted-extra"><span class="text-quote">"Little by little, one travels far." — </span>J.R.R. Tolkien</p>
+        </section>
+        <section>
+            <div class="card">
+                <p class="text-xl text-muted">719 Activities in the last year</p>
+                <section class="heatmap-content">
+                    <div class="heatmap"></div>
+                    <div class="button-stack">
+                        <button>2025</button>
+                        <button>2024</button>
+                        <button>2023</button>
+                        <button>2022</button>
+                    </div>
+                </section>
+            </div>
         </section>
     </main>
+    <!-----------HOME PAGE-------------->
+
+    <!-----------PROGRAMMING PAGE-------------->
+    <main id="programming">
+        PROGRAMMING
+    </main>
+    <!-----------PROGRAMMING PAGE-------------->
+
+    <!-----------GUITAR PAGE-------------->
+    <main id="guitar">
+        GUITAR
+    </main>
+    <!-----------GUITAR PAGE-------------->
+
+    <!-----------SNOWBOARDING PAGE-------------->
+    <main id="snowboarding">
+        SNOWBOARDING
+    </main>
+    <!-----------SNOWBOARDING PAGE-------------->
     <footer>
         <p>@Michael Medvedev 2025</p>
     </footer>

@@ -16,7 +16,7 @@ figure,
 blockquote,
 dl,
 dd {
-    margin-block-end: 0;
+    margin-block-start: 0;
 }
 
 body {
@@ -105,7 +105,7 @@ button{
     --font-size-sm: 0.875rem;
     --font-size-m: 1rem;
     --font-size-lg: 1.25rem;
-    --font-size-xl: 1.75rem;
+    --font-size-xl: 1.5rem;
     --font-size-2xl: 2rem;
     --font-size-3xl: 3rem;
     --font-size-4xl: 4rem;
@@ -181,6 +181,7 @@ button{
     --text-muted: var(--white-200);
     --text-muted-extra: var(--white-300);
     --text-quote: var(--white-400);
+    --text-gradiant: var(--primary-gradient);
 
     --text-base-size: var(--font-size-m);
     --text-base-weight: var(--font-weight-400);
@@ -203,13 +204,13 @@ button{
     --card-background-color: var(--background-color-surface);
     --card-background-color-secondary: var(--background-color-secondary);
     --card-background-gradient: var(-surface-gradient);
-    --card-border-color: var(--border-color-surface);
+    --card-border-color: var(--border-color-hover);
     --card-border-radius: var(--border-radius-xl);
     --card-border-width: var(--border-width-sm);
     --card-border-style: var(--border-style);
     --card-border-color-hover: var(--border-color-hover);
     --card-shadow-hover: var(--shadow-sm);
-    --card-padding: var(--container-padding);
+    --card-padding: calc(var(--container-padding) + 0.75rem);
     --card-gap: calc(var(--space-2) + 2px);
 
     /* Button */
@@ -231,10 +232,72 @@ button{
     /* Avatar */
     --avatar-width: var(--size-9);
     --avatar-height: var(--size-9);
-    --avatar-border: var(--border-width) var(--border-style) var(--border-color-muted);
+    --avatar-border: var(--border-width-lg) var(--border-style) var(--border-color-muted);
     --avatar-border-radius: var(--border-radius-circle);
     --avatar-shadow: var(--shadow-m);
 
+    /* Headings */
+    --heading-1-size: var(--font-size-5xl);
+    --heading-1-line-height: var(--line-height-sm);
+
+    --heading-2-size: var(--font-size-4xl);
+    --heading-2-line-height: var(--line-height-sm);
+
+    --heading-3-size: var(--font-size-3xl);
+    --heading-3-line-height: var(--line-height-sm);
+
+    --heading-4-size: var(--font-size-2xl);
+    --heading-4-line-height: var(--line-height-sm);
+
+    --heading-5-size: var(--font-size-xl);
+    --heading-5-line-height: var(--line-height-sm);
+
+}
+
+h1 {
+    font-size: var(--heading-1-size);
+    line-height: var(--heading-1-line-height);
+}
+h2 {
+    font-size: var(--heading-2-size);
+    line-height: var(--heading-2-line-height);
+}
+h3 {
+    font-size: var(--heading-3-size);
+    line-height: var(--heading-3-line-height);
+}
+h4 {
+    font-size: var(--heading-4-size);
+    line-height: var(--heading-4-line-height);
+}
+h5 {
+    font-size: var(--heading-5-size);
+    line-height: var(--heading-5-line-height);
+}
+.text-xl{
+    font-size: var(--font-size-xl);
+}
+.text-muted{
+    color: var(--text-muted);
+}
+.text-muted-extra{
+    color: var(--text-muted-extra);
+}
+.text-quote{
+    color: var(--text-quote);
+}
+
+.text-gradient{
+    background-image: var(--text-gradiant);
+    background-clip: text;
+    color: transparent;
+}
+
+.page{
+    display: none;
+}
+.page.active{
+    display: block
 }
 
 body {
@@ -251,13 +314,21 @@ header {
     border: var(--border-width) var(--border-style) var(--border-color-surface);
     padding: var(--container-padding);
 
-    & > section {
+    .header-section {
         max-width: 80rem;
         margin-inline: auto;
         display: flex;
         justify-content: space-between;
     }
+    @media (max-width: 768px ){
+        .header-section  {
+            flex-direction: column;
+        }
+    }
 }
+main[hidden] {
+    display: none;
+  }
 
 main {
    flex:1;
@@ -271,7 +342,7 @@ main {
         align-items: center;
         justify-content: center;
         max-width: 60rem;
-        & > p{
+        & > :where(p, h1, h5){
             text-align: center;
         }
    }
@@ -285,7 +356,6 @@ button {
     padding-block: var(--button-padding-block);
     border-radius: var(--button-border-radius);
     border: 1px solid transparent;
-
     &:hover{
         background-color: var(--button-background-color-hover);
         color: var(--button-text-color-hover);
@@ -321,3 +391,27 @@ img{
     object-fit: cover;
     border-radius: var(--avatar-border-radius);
 }
+.card{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-background-color-secondary);
+    padding: var(--card-padding);
+    border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
+    gap: var(--card-gap);
+    border-radius: var(--card-border-radius);
+}
+.heatmap-content{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-background)
+}
+.heatmap{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+}
+.button-stack{
+    display: flex;
+    flex-direction: column;
+}
+
