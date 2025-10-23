@@ -31,11 +31,11 @@ export function createTable(){
         let string = `<tr>`
         for(let week of dates){
             if(!week[i]) continue;
-            string += `<td>${week[i]}</td>`
+            string += `<td data-activity-level="${week[i].getDay() % 2 ? 3 : week[i].getDay() % 5 ? 0 : 4}" data-date="${week[i].toISOString().split("T")[0]}"></td>`
         }
         string += `</tr>`
         table += string;
     }
-    table += + `</table>`;
+    table += `</table>`;
     return table;
 }
