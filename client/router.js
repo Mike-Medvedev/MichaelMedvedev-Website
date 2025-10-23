@@ -7,6 +7,7 @@ const routes = {
 }
 const pages = document.querySelectorAll("main");
 const navButtons = document.querySelectorAll("nav button")
+
 function toggleActivePage(pageToActivate){
     if(pageToActivate === "/") pageToActivate = "home";
     else if(pageToActivate.startsWith("/")) pageToActivate = pageToActivate.slice(1);
@@ -14,14 +15,11 @@ function toggleActivePage(pageToActivate){
     navButtons.forEach(button => button.classList.toggle("active", button.id === pageToActivate))
 }
 
-
 {
     let initialPathname= URL.parse(window.location.href)?.pathname.slice(1) ?? "home";
     if(!(initialPathname in routes)) initialPathname = "home";
     toggleActivePage(initialPathname);
 }
-
-
 
 
 window.addEventListener("popstate", (event) => {
