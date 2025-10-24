@@ -362,6 +362,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: var(--container-padding);
     max-width: 60rem;
     width: 100%;
@@ -477,7 +478,6 @@ img {
         border-collapse: separate;
         border-spacing: 3px;
         overflow: hidden;
-        position: relative;
     }
 
     td {
@@ -485,18 +485,22 @@ img {
         width: var(--table-cell-width);
         border-radius: var( --table-cell-border-radius);
         background-color: var(--table-cell-background-color);
+        position: relative;
     }
     td[data-activity-level="3"]{
+        position: relative;
         background-color: var(--table-cell-background-color-2);
         border-radius: var( --table-cell-border-radius);
         height: var(--table-cell-height);
         width: var(--table-cell-width);
+        position: relative;
     }
     td[data-activity-level="4"]{
         height: var(--table-cell-height);
         border-radius: var( --table-cell-border-radius);
         width: var(--table-cell-width);
         background-color: var(--table-cell-background-color-3);
+        position: relative;
     }
 }
 
@@ -534,4 +538,19 @@ div[data-activity-level="4"]{
 .button-stack {
     display: flex;
     flex-direction: column;
+}
+
+td.active-tooltip{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: fit-content;
+    background-color: white;
+}
+
+td.active-tooltip::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: attr(data-date);
 }
