@@ -171,7 +171,7 @@ button {
     /* Colors */
     --background-color-surface: var(--black-700);
     --background-color-body: var(--black-900);
-    --background-color-secondary:color-mix(in oklab, var(--bluegray-900) 30%, transparent);
+    --background-color-secondary: color-mix(in oklab, var(--bluegray-900) 30%, transparent);
     --background-color-primary: color-mix(in oklab, var(--blue-500) 20%, transparent);
 
 
@@ -320,7 +320,8 @@ h5 {
 .page.active {
     display: block
 }
-.mr-1{
+
+.mr-1 {
     margin-right: var(--space-1);
 }
 
@@ -366,6 +367,7 @@ main {
     padding: var(--container-padding);
     max-width: 60rem;
     width: 100%;
+
     .main-section {
         display: flex;
         flex-direction: column;
@@ -453,16 +455,16 @@ img {
     align-items: center;
 }
 
-.heatmap-container{
+.heatmap-container {
     width: 100%;
     display: block;
 
-    .heatmap-legend{
+    .heatmap-legend {
         display: flex;
         justify-content: flex-end;
         align-items: center;
 
-        & > div{
+        &>div {
             display: flex;
             place-items: center;
         }
@@ -471,66 +473,72 @@ img {
 
 .heatmap {
     display: flex;
+    min-width: fit-content;
 
-    table{
+    table {
         width: max-content;
         table-layout: fixed;
         border-collapse: separate;
         border-spacing: 3px;
-        overflow: hidden;
+        position: relative;
     }
 
     td {
+        position:relative;
         height: var(--table-cell-height);
         width: var(--table-cell-width);
-        border-radius: var( --table-cell-border-radius);
+        border-radius: var(--table-cell-border-radius);
         background-color: var(--table-cell-background-color);
-        position: relative;
     }
-    td[data-activity-level="3"]{
-        position: relative;
+
+    td[data-activity-level="3"] {
+        position:relative;
         background-color: var(--table-cell-background-color-2);
-        border-radius: var( --table-cell-border-radius);
+        border-radius: var(--table-cell-border-radius);
         height: var(--table-cell-height);
         width: var(--table-cell-width);
-        position: relative;
     }
-    td[data-activity-level="4"]{
+
+    td[data-activity-level="4"] {
+        position:relative;
         height: var(--table-cell-height);
-        border-radius: var( --table-cell-border-radius);
+        border-radius: var(--table-cell-border-radius);
         width: var(--table-cell-width);
         background-color: var(--table-cell-background-color-3);
-        position: relative;
     }
 }
 
-div[data-activity-level="0"]{
+div[data-activity-level="0"] {
     background-color: var(--table-cell-background-color);
-    border-radius: var( --table-cell-border-radius);
+    border-radius: var(--table-cell-border-radius);
     height: var(--table-cell-height);
     width: var(--table-cell-width);
 }
-div[data-activity-level="1"]{
+
+div[data-activity-level="1"] {
     background-color: var(--table-cell-background-color);
-    border-radius: var( --table-cell-border-radius);
+    border-radius: var(--table-cell-border-radius);
     height: var(--table-cell-height);
     width: var(--table-cell-width);
 }
-div[data-activity-level="2"]{
+
+div[data-activity-level="2"] {
     background-color: var(--table-cell-background-color);
-    border-radius: var( --table-cell-border-radius);
+    border-radius: var(--table-cell-border-radius);
     height: var(--table-cell-height);
     width: var(--table-cell-width);
 }
-div[data-activity-level="3"]{
+
+div[data-activity-level="3"] {
     background-color: var(--table-cell-background-color-2);
-    border-radius: var( --table-cell-border-radius);
+    border-radius: var(--table-cell-border-radius);
     height: var(--table-cell-height);
     width: var(--table-cell-width);
 }
-div[data-activity-level="4"]{
+
+div[data-activity-level="4"] {
     background-color: var(--table-cell-background-color-3);
-    border-radius: var( --table-cell-border-radius);
+    border-radius: var(--table-cell-border-radius);
     height: var(--table-cell-height);
     width: var(--table-cell-width);
 }
@@ -540,17 +548,25 @@ div[data-activity-level="4"]{
     flex-direction: column;
 }
 
-td.active-tooltip{
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: fit-content;
-    background-color: white;
+@media (max-width: 1010px) {
+    .button-stack {
+        display: none;
+    }
+
+    .card {
+        max-width: fit-content;
+    }
 }
 
+
 td.active-tooltip::after {
-    position: absolute;
-    top: 0;
-    right: 0;
     content: attr(data-date);
+    position: absolute;
+    bottom: 115%;
+    background-color: var(--white-300);
+    border-radius: var(--border-radius-m);
+    text-wrap: nowrap;
+    padding-inline: 0.5rem;
+    padding-block: 0.25rem;
+    font-size: var(--font-size-sm);
 }
