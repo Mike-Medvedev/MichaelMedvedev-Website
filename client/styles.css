@@ -203,6 +203,7 @@ button {
     /* Card */
     --card-background-color: var(--background-color-surface);
     --card-background-color-secondary: var(--background-color-secondary);
+    --card-background-color-tertiary: color-mix(in oklab, var(--color-gray-800) 50%, transparent);
     --card-background-gradient: var(-surface-gradient);
     --card-border-color: var(--border-color-hover);
     --card-border-radius: var(--border-radius-xl);
@@ -291,8 +292,17 @@ h5 {
     font-size: var(--font-size-xl);
 }
 
+.text-lg {
+    font-size: var(--font-size-lg);
+}
+
+
 .text-muted {
     color: var(--text-muted);
+}
+
+.text-sm {
+    font-size: var(--font-size-sm);
 }
 
 .text-muted-extra {
@@ -323,6 +333,13 @@ h5 {
 
 .mr-1 {
     margin-right: var(--space-1);
+}
+
+.mb-3{
+    margin-bottom: var(--space-3)
+}
+.mb-4{
+    margin-bottom: var(--space-4)
 }
 
 body {
@@ -563,10 +580,20 @@ td.active-tooltip::after {
     content: attr(data-date);
     position: absolute;
     bottom: 115%;
-    background-color: var(--white-300);
+    background-color: var(--white-400);
     border-radius: var(--border-radius-m);
     text-wrap: nowrap;
     padding-inline: 0.5rem;
     padding-block: 0.25rem;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-50);
+}
+.activity-overview{
+    display: none;
+}
+.activities{
+    padding-inline: 1rem;
+}
+.activity{
+    display: flex;
+    flex-direction: column;
 }
