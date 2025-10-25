@@ -29,14 +29,18 @@ app.get("/heatmap", (req, res) => {
     // i can get the last year by making a new date and doing .setFullyear()
 })
 
-//{*splat} is express v5 catchall route
-app.get("/{*splat}", (req, res) => {
-    res.status(200).sendFile(path.join(process.cwd(), "client", "index.html"))
-})
 
 app.post("/", (req, res) => {
     res.status(200).send("OK")
 })
 
+app.get("/activity", (req, res) => {
+    res.json({"date": req.query["selected-day"], "activities": ["You Dont Know JS: Chapters 1 - 2", "Reading About CSS Responsiveness", "Ran 19 miles"] })
+})
+
+//{*splat} is express v5 catchall route
+app.get("/{*splat}", (req, res) => {
+    res.status(200).sendFile(path.join(process.cwd(), "client", "index.html"))
+})
 
 app.listen(PORT, () => {console.log(`server listening on port ${PORT}`)})
