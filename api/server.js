@@ -35,7 +35,16 @@ app.post("/", (req, res) => {
 })
 
 app.get("/activity", (req, res) => {
-    res.json({"date": req.query["selected-day"], "activities": ["You Dont Know JS: Chapters 1 - 2", "Reading About CSS Responsiveness", "Ran 19 miles"] })
+    const selectedDay = new Date(req.query["selected-day"]);
+    console.log(selectedDay)
+    console.log("New Date: ", new Date("2024-10-26"))
+    if(selectedDay.getTime() == new Date("2024-10-26").getTime()){
+        res.json({"date": req.query["selected-day"], "activities": [{title: "Read a book about stuff", category: "coding"}]})
+    }
+    else {
+        res.json({"date": req.query["selected-day"], "activities": [{title: "You Dont Know JS: Chapters 1 - 2", category: "coding"}, {title: "Reading About CSS Responsiveness",  category: "coding"}, {title: "Ran 19 miles", category: "fitness"}] })
+    }
+    
 })
 
 //{*splat} is express v5 catchall route
