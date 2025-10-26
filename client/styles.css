@@ -639,3 +639,18 @@ td.active-tooltip::after {
     background-color: white;
     margin-right: var(--space-1);
 }
+.arrow-svg{
+    width: 6rem;
+    height: 6rem;
+}
+.svg-section{
+    width: 100%;
+    display: flex;
+    margin-top: var(--space-9);
+    justify-content: flex-end;
+    position: relative;
+}
+.svg-section-text{
+    display: flex;
+
+}
