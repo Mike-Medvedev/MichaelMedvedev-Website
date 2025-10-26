@@ -172,6 +172,7 @@ button {
     --background-color-surface: var(--black-700);
     --background-color-body: var(--black-900);
     --background-color-secondary: color-mix(in oklab, var(--bluegray-900) 30%, transparent);
+    --background-color-secondary-light: color-mix(in oklab, var(--bluegray-800) 30%, transparent);
     --background-color-primary: color-mix(in oklab, var(--blue-500) 20%, transparent);
 
 
@@ -189,6 +190,7 @@ button {
     --border-color-surface: var(--white-500);
     --border-color-active: color-mix(in oklab, var(--blue-500) 30%, transparent);
     --border-color-muted: color-mix(in oklab, var(--blue-500) 20%, transparent);
+    --border-color-light: color-mix(in oklab, var(--bluegray-700) 30%, transparent);
     --border-color-hover: oklch(from var(--bluegray-800) l c h / 0.5);
     --border-color-secondary: oklch(from var(--bluegray-900) l c h / 0.5);
     --border-style: solid;
@@ -569,10 +571,6 @@ div[data-activity-level="4"] {
     .button-stack {
         display: none;
     }
-
-    .card {
-        max-width: fit-content;
-    }
 }
 
 
@@ -589,11 +587,55 @@ td.active-tooltip::after {
 }
 .activity-overview{
     display: none;
+    width: 100%;
+    padding: var(--card-padding);
+    flex-direction: column;
 }
 .activities{
     padding-inline: 1rem;
-}
-.activity{
     display: flex;
     flex-direction: column;
+    gap: var(--card-gap);
+}
+.activity{
+   padding: var(--card-padding);
+   background-color: var(--background-color-secondary-light);
+   border-radius: var(--border-radius-xl);
+   border: var(--card-border-width) var(--card-border-style) var(--border-color-light);
+   display: flex;
+   gap: var(--card-gap);
+}
+.category{
+    width: var(--space-4);
+    height: var(--space-4);
+    border-radius: var(--border-radius-circle);
+    background-color: white;
+}
+.category[size="small"]{
+    width: var(--space-3);
+    height: var(--space-3);
+    border-radius: var(--border-radius-circle);
+    background-color: white;
+}
+.activity-legend{
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border: var(--card-border-width) var(--card-border-style) transparent;
+    border-top-color: var(--border-color-light);
+    display: flex;
+    gap: var(--card-gap);
+}
+
+.category-item{
+    font-size: var(--font-size-50);
+}
+
+.category-item::before{
+    content: "";
+    display: inline-block;
+    width: var(--space-2);
+    height: var(--space-2);
+    border-radius: var(--border-radius-circle);
+    background-color: white;
+    margin-right: var(--space-1);
 }
