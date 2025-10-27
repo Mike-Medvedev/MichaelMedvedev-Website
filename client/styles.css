@@ -598,10 +598,9 @@ div[data-activity-level="4"] {
     }
 }
 
-
-td.active-tooltip::before {
-    content: attr(data-activities);
+span.active-tooltip{
     position: absolute;
+    width: fit-content;
     bottom: 115%;
     background-color: var(--white-400);
     border-radius: var(--border-radius-m);
@@ -612,11 +611,13 @@ td.active-tooltip::before {
     z-index: 9999;
     opacity: 1 !important;
 }
-td.active-tooltip.tooltip-right::before {
+
+
+span.active-tooltip.tooltip-right {
     right: 0
 }
 
-td.active-tooltip.tooltip-left::before {
+span.active-tooltip.tooltip-left{
     left: 0
 }
 
