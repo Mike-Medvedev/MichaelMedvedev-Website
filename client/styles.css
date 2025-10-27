@@ -465,7 +465,12 @@ img {
     border: var(--card-border-width) var(--card-border-style) var(--card-border-color);
     gap: var(--card-gap);
     border-radius: var(--card-border-radius);
-    overflow: scroll;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.card::-webkit-scrollbar {
+    display: none;
 }
 
 .heatmap-content {
@@ -575,7 +580,7 @@ div[data-activity-level="4"] {
 
 
 td.active-tooltip::after {
-    content: attr(data-date);
+    content: attr(data-activities);
     position: absolute;
     bottom: 115%;
     background-color: var(--white-400);
