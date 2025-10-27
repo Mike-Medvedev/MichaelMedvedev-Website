@@ -36,9 +36,9 @@ app.post("/", (req, res) => {
 
 app.get("/activity", (req, res) => {
     const selectedDay = new Date(req.query["selected-day"]);
-    console.log(selectedDay)
+    console.log("Selected Day is: ", selectedDay)
     console.log("New Date: ", new Date("2024-10-26"))
-    if(selectedDay.getTime() == new Date("2024-10-26").getTime()){
+    if(selectedDay.getTime() == new Date("2024-10-27").getTime()){
         res.json({"date": req.query["selected-day"], "activities": [{title: "Read a book about stuff", category: "coding"}]})
     }
     else {
