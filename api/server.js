@@ -3,6 +3,38 @@ import path from "path"
 import * as functions from "./functions.js"
 const app = express()
 
+const CategoryEnum = ["Coding", "Reading", "Fitness", "Music"]
+Object.freeze(CategoryEnum)
+
+function ActivityType(title, category){
+    Object.defineProperties(this, {
+        "title": {
+            get(){
+               return this._title 
+            },
+            set(value){
+                if(typeof value != "string") throw new Error("Title must be a string")
+                this._title = value
+            }
+        },
+        "category": {
+            get(){
+                return this._category;
+            },
+            set(value){
+                if(typeof value != "string") throw new Error("Category must be a string")
+                if(!(value in CategoryEnum)) throw new Error(`Category must be ${CategoryEnum.join(", ")}`)
+                this._category = value
+            }
+        }
+    })
+    this.title = title;
+    this.category = category
+   
+}
+Object.seal(ActivityType)
+
+
 app.use(express.json())
 
 const logger = function(req, res, next){
@@ -36,8 +68,6 @@ app.post("/", (req, res) => {
 
 app.get("/activity", (req, res) => {
     const selectedDay = new Date(req.query["selected-day"]);
-    console.log("Selected Day is: ", selectedDay)
-    console.log("New Date: ", new Date("2024-10-26"))
     if(selectedDay.getTime() == new Date("2024-10-27").getTime()){
         res.json({"date": req.query["selected-day"], "activities": [{title: "Read a book about stuff", category: "coding"}]})
     }
