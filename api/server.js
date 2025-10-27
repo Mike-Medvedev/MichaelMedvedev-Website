@@ -191,4 +191,4 @@ app.get("/{*splat}", (req, res) => {
     res.status(200).sendFile(path.join(process.cwd(), "client", "index.html"))
 })
 
-app.listen(PORT, () => { console.log(`server listening on port ${PORT}`) })
+app.listen(PORT, '0.0.0.0', () => { console.log(`server listening on port ${PORT}`) })

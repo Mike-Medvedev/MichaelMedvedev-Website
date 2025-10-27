@@ -47,7 +47,6 @@ export function createTable(database) {
     let activityLevelMap = allActivities.all(firstDay.toISOString().split("T")[0], lastDay.toISOString().split("T")[0]); //[{date: "2025-05-05", count: 5}]
     const a = {}
     Object.values(activityLevelMap).forEach(d => a[d.date] = d.count)
-    console.log(a)
 
     //loop through array starting from currentMonth, if you reac end of array, go back to beginning until you hit 1 index before starting
     const currentMonthIndex = monthPrefixes.findIndex((month) => month === currentMonth.slice(0,3))
@@ -76,8 +75,7 @@ export function createTable(database) {
         else string += `<td class="activity-label"></td>`;
         for (let week of dates) {
             if (!week[i]) continue;
-            console.log(week[i])
-            string += `<td data-activity-level="${a[week[i].toISOString().split("T")[0]] || 0}" data-date="${week[i].toISOString().split("T")[0]}"></td>`
+            string += `<td data-activity-level="${a[week[i].toISOString().split("T")[0]] || 0}" data-date="${week[i].toISOString().split("T")[0]}"><span></span<</td>`
         }
         string += `</tr>`
         table += string;
