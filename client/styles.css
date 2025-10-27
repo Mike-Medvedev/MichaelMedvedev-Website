@@ -601,6 +601,8 @@ td.active-tooltip::after {
     padding-inline: 0.5rem;
     padding-block: 0.25rem;
     font-size: var(--font-size-50);
+    z-index: 1000;
+    opacity: 1;
 }
 .activity-overview{
     display: none;

@@ -35,7 +35,6 @@ loadHeatMap().then(() => {
         if(cell.classList.contains("activity-label"))return;
         cell.classList.add("active-tooltip");
         const localDate = new Date(cell.getAttribute("data-date"))
-        console.log(localDate.toLocaleDateString("en-US", {weekday: "long"}))
         cell.setAttribute("data-activities", `No Activities on ${localDate.toLocaleDateString("en-US", {month: "long"})} ${localDate.getDate()}${monthSuffix[localDate.getDate() % 10]}`)
     })
     heatmap.addEventListener("click", async (event) => {
@@ -48,6 +47,9 @@ loadHeatMap().then(() => {
         const cellDate = cell.getAttribute("data-date");
         if(cell.getAttribute("selected")){ //when selecting previously selected cell
             cell.removeAttribute("selected");
+            document.querySelectorAll('td').forEach(td => {
+                td.style.opacity = '1';
+            });
             return;
         }
         else{ //when selecting different cell
@@ -59,6 +61,9 @@ loadHeatMap().then(() => {
             }
 
             cell.setAttribute("selected", "true");
+            document.querySelectorAll('td:not([selected="true"])').forEach(td => {
+                td.style.opacity = '0.5';
+            });
             activityOverview.style.display = "block";
             const response = await fetch(`http://localhost:3000/activity?selected-day=${cellDate}`);
             const result = await response.json();
