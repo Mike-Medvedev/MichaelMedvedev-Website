@@ -32,19 +32,20 @@ loadHeatMap().then(() => {
     heatmap.addEventListener("mouseover", (event) => {
         const cell = event.target.closest("td");
         if(!cell) return;
+        if(cell.classList.contains("activity-label"))return;
         cell.classList.add("active-tooltip");
         const localDate = new Date(cell.getAttribute("data-date"))
+        console.log(localDate.toLocaleDateString("en-US", {weekday: "long"}))
         cell.setAttribute("data-activities", `No Activities on ${localDate.toLocaleDateString("en-US", {month: "long"})} ${localDate.getDate()}${monthSuffix[localDate.getDate() % 10]}`)
     })
     heatmap.addEventListener("click", async (event) => {
         const cell = event.target.closest("td");
         if(!cell) return;
-
+        if(cell.classList.contains("activity-label"))return;
         const previousSelectedCells = heatmap.querySelectorAll("td[selected='true']");
         const activityOverview = document.querySelector(".activity-overview")
         const activityContainer = document.querySelector(".activities")
         const cellDate = cell.getAttribute("data-date");
-
         if(cell.getAttribute("selected")){ //when selecting previously selected cell
             cell.removeAttribute("selected");
             return;
@@ -98,7 +99,7 @@ loadHeatMap().then(() => {
     })
     heatmap.addEventListener("mouseout", (event) => {
         const cell = event.target.closest("td");
-        if(!cell) return;
+        if(!cell ) return;
         cell.classList.remove("active-tooltip");
     })
 });

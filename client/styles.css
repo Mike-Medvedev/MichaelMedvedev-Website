@@ -407,7 +407,7 @@ a {
         color: var(--text-primary-light);
     }
 
-    &:active {}
+
 }
 
 button {
@@ -498,21 +498,34 @@ img {
 .heatmap {
     display: flex;
     min-width: fit-content;
-
+}
     table {
-        width: max-content;
         table-layout: fixed;
         border-collapse: separate;
         border-spacing: 3px;
-        position: relative;
+    }
+
+    tr {
+        height: 12px;
     }
 
     td {
-        position:relative;
+        position: relative;
         height: var(--table-cell-height);
         width: var(--table-cell-width);
         border-radius: var(--table-cell-border-radius);
         background-color: var(--table-cell-background-color);
+
+        span {
+            position: absolute;
+            bottom: -3px;
+            right: 0;
+            font-size: var(--font-size-50);
+        }
+    }
+    td.activity-label{
+        background-color: transparent
+        
     }
 
     td[data-activity-level="3"] {
@@ -530,7 +543,6 @@ img {
         width: var(--table-cell-width);
         background-color: var(--table-cell-background-color-3);
     }
-}
 
 div[data-activity-level="0"] {
     background-color: var(--table-cell-background-color);
