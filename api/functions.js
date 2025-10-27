@@ -1,7 +1,7 @@
 function findFirstDayOfWeek(date){
     const firstDayOfWeek = new Date(date);
-    const dayOfWeek = firstDayOfWeek.getDay();
-    firstDayOfWeek.setDate(firstDayOfWeek.getDate() - dayOfWeek)
+    const dayOfWeek = firstDayOfWeek.getUTCDay();
+    firstDayOfWeek.setUTCDate(firstDayOfWeek.getUTCDate() - dayOfWeek)
     return firstDayOfWeek;
 }
 function createDates() {
@@ -61,7 +61,7 @@ export function createTable() {
         else string += `<td class="activity-label"></td>`;
         for (let week of dates) {
             if (!week[i]) continue;
-            string += `<td data-activity-level="${week[i].getDay() % 2 ? 3 : week[i].getDay() % 5 ? 0 : 4}" data-date="${week[i].toISOString().split("T")[0]}"></td>`
+            string += `<td data-activity-level="${week[i].getUTCDay() % 2 ? 3 : week[i].getUTCDay() % 5 ? 0 : 4}" data-date="${week[i].toISOString().split("T")[0]}"></td>`
         }
         string += `</tr>`
         table += string;

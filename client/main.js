@@ -34,8 +34,19 @@ loadHeatMap().then(() => {
         if(!cell) return;
         if(cell.classList.contains("activity-label"))return;
         cell.classList.add("active-tooltip");
-        const localDate = new Date(cell.getAttribute("data-date"))
-        cell.setAttribute("data-activities", `No Activities on ${localDate.toLocaleDateString("en-US", {month: "long"})} ${localDate.getDate()}${monthSuffix[localDate.getDate() % 10]}`)
+        const cellDate = new Date(cell.getAttribute("data-date")) //the actual day
+        const rect = heatmap.getBoundingClientRect();
+        const heatmapMidpoint = (rect.width / 2) + rect.left;
+        if(event.clientX > heatmapMidpoint){
+            cell.classList.add("tooltip-right")
+            cell.classList.remove("tooltip-left")
+        }
+        else{
+            cell.classList.add("tooltip-left")
+            cell.classList.remove("tooltip-right")
+        } 
+        // dont convert to localTime, because data-date is UTC
+        cell.setAttribute("data-activities", `No Activities on ${cellDate.toLocaleDateString("en-US", {month: "long", timeZone: "UTC"})} ${cellDate.getUTCDate()}${monthSuffix[cellDate.getUTCDate() % 10]}`) //%10 gets last digit
     })
     heatmap.addEventListener("click", async (event) => {
 
@@ -43,14 +54,14 @@ loadHeatMap().then(() => {
         const cell = event.target.closest("td");
         if(!cell) return;
         if(cell.classList.contains("activity-label"))return;
-        const previousSelectedCells = heatmap.querySelectorAll("td[selected='true']");
+        const previousSelectedCells = heatmap.querySelectorAll("td[selected='true']:not(.activity-label)");
         const activityOverview = document.querySelector(".activity-overview")
         const activityContainer = document.querySelector(".activities")
         const cellDate = cell.getAttribute("data-date");
         if(cell.getAttribute("selected")){ //when selecting previously selected cell
             cell.removeAttribute("selected");
-            document.querySelectorAll('td').forEach(td => {
-                td.style.opacity = '1';
+            document.querySelectorAll('td:not(.activity-label)').forEach(td => {
+                td.style.backgroundColor = `oklch(from ${window.getComputedStyle(td)['backgroundColor']} l c h / 1)`
             });
             return;
         }
@@ -63,10 +74,13 @@ loadHeatMap().then(() => {
             }
 
             cell.setAttribute("selected", "true");
-            document.querySelectorAll('td:not([selected="true"])').forEach(td => {
-                td.style.opacity = '0.5';
+            console.log(window.getComputedStyle(cell)['backgroundColor'])
+            document.querySelectorAll('td:not([selected="true"]):not(.activity-label)').forEach(td => {
+                td.style.backgroundColor = `oklch(from ${window.getComputedStyle(td)['backgroundColor']} l c h / 0.5)`
             });
-            document.querySelectorAll('td[selected="true"').forEach(td => td.style.opacity = '1');
+            document.querySelectorAll('td[selected="true"]:not(.activity-label)').forEach(td => {
+                td.style.backgroundColor = `oklch(from ${window.getComputedStyle(td)['backgroundColor']} l c h / 1)`
+            });
             activityOverview.style.display = "block";
             const response = await fetch(`http://localhost:3000/activity?selected-day=${cellDate}`);
             const result = await response.json();
