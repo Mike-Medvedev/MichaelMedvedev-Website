@@ -17,7 +17,20 @@ database.exec(`
       date TEXT
     ) STRICT
   `);
-
+  const insert = database.prepare(`
+    INSERT INTO activities
+    (title, category, date)
+    VALUES (?, ?, ?)
+`)
+insert.run("Coding My Website", "coding", "2025-01-27")
+insert.run("Coding My Website", "coding", "2025-01-27")
+insert.run("Coding My Website", "coding", "2025-01-27")
+insert.run("Coding My Website", "coding", "2025-10-26")
+insert.run("Coding My Website", "coding", "2025-10-25")
+insert.run("Coding My Website", "coding", "2025-10-25")
+insert.run("Coding My Website", "coding", "2025-10-25")
+insert.run("Coding My Website", "coding", "2025-09-25")
+insert.run("Coding My Website", "coding", "2025-09-25")
 
 const CategoryEnum = ["coding", "reading", "fitness", "music"]
 Object.freeze(CategoryEnum)

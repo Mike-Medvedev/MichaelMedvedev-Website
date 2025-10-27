@@ -37,14 +37,17 @@ export function createTable(database) {
     const lastDay = dates.flat(1)[dates.flat(1).length - 1]
     const currentMonth = new Date().toLocaleDateString("en-US", {month: "long"})
     const monthPrefixes = ["Jan", "Feb", "March", "April", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    console.log("first day: ", firstDay, "last day: ", lastDay)
     const allActivities = database.prepare(`
-        SELECT date, COUNT(*) FROM activities
+        SELECT date, COUNT(*) as count FROM activities
         WHERE date >= ? 
         AND date <= ?
         GROUP BY date
         `)
-    const results = allActivities.all(firstDay.toISOString().split("T")[0], lastDay.toISOString().split("T")[0])
-    console.log(results)
+    let activityLevelMap = allActivities.all(firstDay.toISOString().split("T")[0], lastDay.toISOString().split("T")[0]); //[{date: "2025-05-05", count: 5}]
+    const a = {}
+    Object.values(activityLevelMap).forEach(d => a[d.date] = d.count)
+    console.log(a)
 
     //loop through array starting from currentMonth, if you reac end of array, go back to beginning until you hit 1 index before starting
     const currentMonthIndex = monthPrefixes.findIndex((month) => month === currentMonth.slice(0,3))
@@ -73,7 +76,8 @@ export function createTable(database) {
         else string += `<td class="activity-label"></td>`;
         for (let week of dates) {
             if (!week[i]) continue;
-            string += `<td data-activity-level="${week[i].getUTCDay() % 2 ? 3 : week[i].getUTCDay() % 5 ? 0 : 4}" data-date="${week[i].toISOString().split("T")[0]}"></td>`
+            console.log(week[i])
+            string += `<td data-activity-level="${a[week[i].toISOString().split("T")[0]] || 0}" data-date="${week[i].toISOString().split("T")[0]}"></td>`
         }
         string += `</tr>`
         table += string;
