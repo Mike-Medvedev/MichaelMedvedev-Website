@@ -38,6 +38,8 @@ loadHeatMap().then(() => {
         cell.setAttribute("data-activities", `No Activities on ${localDate.toLocaleDateString("en-US", {month: "long"})} ${localDate.getDate()}${monthSuffix[localDate.getDate() % 10]}`)
     })
     heatmap.addEventListener("click", async (event) => {
+
+        const currentScrollTop = document.documentElement.scrollTop
         const cell = event.target.closest("td");
         if(!cell) return;
         if(cell.classList.contains("activity-label"))return;
@@ -64,6 +66,7 @@ loadHeatMap().then(() => {
             document.querySelectorAll('td:not([selected="true"])').forEach(td => {
                 td.style.opacity = '0.5';
             });
+            document.querySelectorAll('td[selected="true"').forEach(td => td.style.opacity = '1');
             activityOverview.style.display = "block";
             const response = await fetch(`http://localhost:3000/activity?selected-day=${cellDate}`);
             const result = await response.json();
@@ -101,6 +104,7 @@ loadHeatMap().then(() => {
             activityLegend.append(...categoryItems);
             activityContainer.replaceChildren(...activityHtml, activityLegend);
         }
+        document.documentElement.scroll({top: currentScrollTop})
     })
     heatmap.addEventListener("mouseout", (event) => {
         const cell = event.target.closest("td");
