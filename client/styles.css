@@ -259,9 +259,12 @@ button {
     --table-cell-width: var(--space-3);
     --table-cell-height: var(--space-3);
     --table-cell-background-color: oklch(from var(--bluegray-700) l c h / 0.25);
-    --table-cell-background-color-1: var(--blue-300);
-    --table-cell-background-color-2: var(--blue-400);
-    --table-cell-background-color-3: var(--blue-500);
+
+    --activity-1: oklch(0.30 0.04 255);   /* very dim, almost off */
+    --activity-2: oklch(0.46 0.08 255);   /* faintly visible */
+    --activity-3: oklch(0.62 0.15 255);   /* mid, noticeable */
+    --activity-4: oklch(0.74 0.18 255);   /* bright */
+    --activity-5: oklch(0.83 0.20 255);   /* fully bright (max) */
 
 }
 
@@ -519,6 +522,30 @@ td {
     border-radius: var(--table-cell-border-radius);
     background-color: var(--table-cell-background-color);
 
+    &[data-activity-level="0"],
+    &[data-activity-level="1"],
+    &[data-activity-level="2"],
+    &[data-activity-level="3"],
+    &[data-activity-level="4"]{
+        position: relative;
+        border-radius: var(--table-cell-border-radius);
+        height: var(--table-cell-height);
+        width: var(--table-cell-width);
+    }
+
+    &[data-activity-level="1"]{
+        background-color: var(--activity-1);
+    }
+    &[data-activity-level="2"]{
+        background-color: var(--activity-2);
+    }
+    &[data-activity-level="3"]{
+        background-color: var(--activity-3);
+    }
+    &[data-activity-level="4"]{
+        background-color: var(--activity-4);
+    }
+ 
     span {
         position: absolute;
         bottom: -3px;
@@ -531,55 +558,33 @@ td.activity-label {
     background-color: transparent
 }
 
-td[data-activity-level="3"] {
-    position: relative;
-    background-color: var(--table-cell-background-color-2);
+div[data-activity-level="0"],
+div[data-activity-level="1"],
+div[data-activity-level="2"],
+div[data-activity-level="3"],
+div[data-activity-level="4"]{
     border-radius: var(--table-cell-border-radius);
     height: var(--table-cell-height);
     width: var(--table-cell-width);
 }
-
-td[data-activity-level="4"] {
-    position: relative;
-    height: var(--table-cell-height);
-    border-radius: var(--table-cell-border-radius);
-    width: var(--table-cell-width);
-    background-color: var(--table-cell-background-color-3);
-}
-
 div[data-activity-level="0"] {
     background-color: var(--table-cell-background-color);
-    border-radius: var(--table-cell-border-radius);
-    height: var(--table-cell-height);
-    width: var(--table-cell-width);
 }
 
 div[data-activity-level="1"] {
-    background-color: var(--table-cell-background-color);
-    border-radius: var(--table-cell-border-radius);
-    height: var(--table-cell-height);
-    width: var(--table-cell-width);
+    background-color: var(--activity-1);
 }
 
 div[data-activity-level="2"] {
-    background-color: var(--table-cell-background-color);
-    border-radius: var(--table-cell-border-radius);
-    height: var(--table-cell-height);
-    width: var(--table-cell-width);
+    background-color: var(--activity-2);
 }
 
 div[data-activity-level="3"] {
-    background-color: var(--table-cell-background-color-2);
-    border-radius: var(--table-cell-border-radius);
-    height: var(--table-cell-height);
-    width: var(--table-cell-width);
+    background-color: var(--activity-3);
 }
 
 div[data-activity-level="4"] {
-    background-color: var(--table-cell-background-color-3);
-    border-radius: var(--table-cell-border-radius);
-    height: var(--table-cell-height);
-    width: var(--table-cell-width);
+    background-color: var(--activity-4);
 }
 
 .button-stack {

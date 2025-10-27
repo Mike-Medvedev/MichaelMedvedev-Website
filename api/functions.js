@@ -6,10 +6,12 @@ function findFirstDayOfWeek(date){
 }
 function createDates() {
     let currentDate = new Date()
+    currentDate.setUTCHours(0, 0, 0, 0);
     let lastYearsDate = new Date();
     lastYearsDate.setUTCFullYear(currentDate.getUTCFullYear() - 1);
     lastYearsDate = findFirstDayOfWeek(lastYearsDate);
     // starting on last years date, store that day in an datesay and then add one to that day
+    lastYearsDate.setUTCHours(0, 0, 0, 0);
 
     //loop through everyday from last years date to today
     let dates = [];
@@ -25,14 +27,24 @@ function createDates() {
     if (weeks.length > 0) {
         dates.push(weeks)
     }
-    console.log(dates)
     return dates;
 
 }
 
-export function createTable() {
+export function createTable(database) {
+    const dates = createDates();
+    const firstDay = dates.flat(1)[0];
+    const lastDay = dates.flat(1)[dates.flat(1).length - 1]
     const currentMonth = new Date().toLocaleDateString("en-US", {month: "long"})
     const monthPrefixes = ["Jan", "Feb", "March", "April", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const allActivities = database.prepare(`
+        SELECT date, COUNT(*) FROM activities
+        WHERE date >= ? 
+        AND date <= ?
+        GROUP BY date
+        `)
+    const results = allActivities.all(firstDay.toISOString().split("T")[0], lastDay.toISOString().split("T")[0])
+    console.log(results)
 
     //loop through array starting from currentMonth, if you reac end of array, go back to beginning until you hit 1 index before starting
     const currentMonthIndex = monthPrefixes.findIndex((month) => month === currentMonth.slice(0,3))
@@ -54,7 +66,7 @@ export function createTable() {
         3: "Wed",
         5: "Fri" 
     }
-    const dates = createDates();
+    
     for (let i = 0; i <= 6; i++) {
         let string = `<tr>`
         if(i in dayMap) string += `<td class="activity-label"><span>${dayMap[i]}</span></td>`;
@@ -67,8 +79,5 @@ export function createTable() {
         table += string;
     }
     table += `</table>`;
-    console.log(dates.length)
-    for (let week of dates) console.log(week.length)
     return table;
 }
-createTable();
