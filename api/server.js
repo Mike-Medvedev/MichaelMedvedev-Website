@@ -1,43 +1,109 @@
 import express from "express"
 import path from "path"
 import * as functions from "./functions.js"
+import { DatabaseSync } from "node:sqlite"
 const app = express()
 
-const CategoryEnum = ["Coding", "Reading", "Fitness", "Music"]
+console.log("Connecting to In-Memory Db...")
+const database = new DatabaseSync(':memory:');
+console.log("Connected to DB")
+
+console.log("Creating Activities Table...");
+database.exec(`
+    CREATE TABLE activities(
+      id INTEGER PRIMARY KEY,
+      title TEXT,
+      category TEXT,
+      date TEXT
+    ) STRICT
+  `);
+
+
+const CategoryEnum = ["coding", "reading", "fitness", "music"]
 Object.freeze(CategoryEnum)
 
-function ActivityType(title, category){
-    Object.defineProperties(this, {
-        "title": {
-            get(){
-               return this._title 
-            },
-            set(value){
-                if(typeof value != "string") throw new Error("Title must be a string")
-                this._title = value
-            }
-        },
-        "category": {
-            get(){
-                return this._category;
-            },
-            set(value){
-                if(typeof value != "string") throw new Error("Category must be a string")
-                if(!(value in CategoryEnum)) throw new Error(`Category must be ${CategoryEnum.join(", ")}`)
-                this._category = value
-            }
-        }
-    })
-    this.title = title;
-    this.category = category
-   
-}
-Object.seal(ActivityType)
+// Object.prototype.modelDump = function(){
 
+// }
+
+class Activity {
+    #title;
+    #category;
+    #date;
+    constructor(title, category) {
+        this.#title = title;
+        this.#category = category;
+        this.#date = new Date().toISOString().split('T')[0];  // for example "2025-01-27", removing time
+    }
+    get title() {
+        return this.#title
+    }
+    set title(value) {
+        if (typeof value !== "string") throw new Error("Title must be a string");
+        this.#title = value
+    }
+    get category() {
+        return this.#category;
+    }
+    set category(value) {
+        if (typeof value !== "string") throw new Error("Category must be a string");
+        if (!(CategoryEnum.includes(value.toLowerCase().trim()))) throw new Error(`Category must be ${CategoryEnum.join(", ")} Recieved: ${value}`)
+        this.#category = value
+    }
+    get date() {
+        return this.#date;
+    }
+    modelDump() {
+        return [this.#title, this.#category, this.#date] //convert to UTC string
+    }
+}
+Object.seal(Activity.prototype)
+let x = new Activity("Title", "Category")
+class PublicActivity extends Activity {
+    #id;
+    constructor(id, title, category) {
+        super(title, category) //does not inherit, but delegates lookups of these props, up prototype chain
+        this.#id = id
+    }
+    get id() {
+        return this.#id
+    }
+    set id(value) {
+        if (typeof value !== "number") {
+            throw new Error(`Activity Type Id must be a number. Recieved ${value}`);
+        }
+        this.#id = value
+    }
+}
+Object.seal(PublicActivity.prototype)
+
+class GetActivitiesReq {
+    #date;
+    #activities
+    constructor(date, activities = []) {
+        this.#date = date;
+        this.#activities = activities
+        Object.freeze(this.#activities) // (shallow freeze) underlying object since arrays are objects in js
+    }
+    get date() {
+        return this.#date;
+    }
+    set date(value) {
+        console.error("Cannot set; Date is readonly")
+        return undefined;
+    }
+    get activities() {
+        return this.#activities
+    }
+    set activities(value) {
+        console.error("Cannot set; Activites are readonly")
+        return undefined;
+    }
+}
 
 app.use(express.json())
 
-const logger = function(req, res, next){
+const logger = function (req, res, next) {
     console.log("Recieved Request from: ", req.host + req.url)
     next();
 }
@@ -45,13 +111,13 @@ const logger = function(req, res, next){
 app.use(logger)
 
 //process.cwd is where node process started from (root dir)
-app.use(express.static(path.join(process.cwd(), "client"))) 
+app.use(express.static(path.join(process.cwd(), "client")))
 
 const PORT = 3000
 
 
 app.get("/heatmap", (req, res) => {
-    const heatmapHtml = functions.createTable();
+    const heatmapHtml = functions.createTable(database);
     res.status(200).send(heatmapHtml);
     // get current day and a year before today
     // get activites for each day in that range 
@@ -67,14 +133,44 @@ app.post("/", (req, res) => {
 })
 
 app.get("/activity", (req, res) => {
-    const selectedDay = new Date(req.query["selected-day"]);
-    if(selectedDay.getTime() == new Date("2024-10-27").getTime()){
-        res.json({"date": req.query["selected-day"], "activities": [{title: "Read a book about stuff", category: "coding"}]})
-    }
-    else {
-        res.json({"date": req.query["selected-day"], "activities": [{title: "You Dont Know JS: Chapters 1 - 2", category: "coding"}, {title: "Reading About CSS Responsiveness",  category: "coding"}, {title: "Ran 19 miles", category: "fitness"}] })
+    const selectedDay = req.query["selected-day"];
+    if(!selectedDay) res.json({})
+    if(selectedDay === "all"){
+        const selectAll = database.prepare(`
+            SELECT * FROM activities`)
+        const activities = selectAll.all();
+        return res.json({date: new Date(), activities})
     }
     
+    const select = database.prepare(`
+        SELECT * FROM activities
+        WHERE date = ?`)
+    
+    const activities = select.all(selectedDay)
+    return res.json({
+        date: selectedDay,
+        activities: activities
+    })
+
+})
+
+app.post("/activity", (req, res) => {
+    try {
+        const newActivity = new Activity("Coding My Website", "Coding")
+        console.log(...newActivity.modelDump())
+        const insert = database.prepare(`
+        INSERT INTO activities
+        (title, category, date)
+        VALUES (?, ?, ?)
+        `)
+        const obj = insert.run(...newActivity.modelDump())
+        console.log("Printing last row id: ", obj.lastInsertRowid)
+        res.json(newActivity)
+    } catch (e) {
+        throw new Error(e)
+    }
+
+
 })
 
 //{*splat} is express v5 catchall route
@@ -82,4 +178,4 @@ app.get("/{*splat}", (req, res) => {
     res.status(200).sendFile(path.join(process.cwd(), "client", "index.html"))
 })
 
-app.listen(PORT, () => {console.log(`server listening on port ${PORT}`)})
+app.listen(PORT, () => { console.log(`server listening on port ${PORT}`) })
