@@ -368,6 +368,7 @@ header {
         margin-inline: auto;
         display: flex;
         justify-content: space-between;
+        align-items: center
     }
 
     @media (max-width: 768px) {
@@ -622,11 +623,12 @@ div[data-activity-level="4"] {
 }
 
 .activity {
-    padding: var(--card-padding);
+    padding: var(--space-5);
     background-color: var(--background-color-secondary-light);
     border-radius: var(--border-radius-xl);
     border: var(--card-border-width) var(--card-border-style) var(--border-color-light);
     display: flex;
+    align-items: center;
     gap: var(--card-gap);
 }
 .activity-form{
@@ -664,6 +666,21 @@ dialog {
     border-radius: var(--border-radius-circle);
     background-color: white;
 }
+.category[category="coding"] {
+    background-color: blue;
+}
+
+.category[category="reading"] {
+    background-color: red;
+}
+
+.category[category="music"] {
+    background-color: orange;
+}
+
+.category[category="fitness"] {
+    background-color: green;
+}
 
 .activity-legend {
     margin-top: var(--space-3);
@@ -676,6 +693,7 @@ dialog {
 
 .category-item {
     font-size: var(--font-size-50);
+    text-transform: capitalize;
 }
 
 .category-item::before {
@@ -684,8 +702,22 @@ dialog {
     width: var(--space-2);
     height: var(--space-2);
     border-radius: var(--border-radius-circle);
-    background-color: white;
     margin-right: var(--space-1);
+}
+.category-item[category="coding"]::before {
+    background-color: blue;
+}
+
+.category-item[category="reading"]::before {
+    background-color: red;
+}
+
+.category-item[category="music"]::before {
+    background-color: orange;
+}
+
+.category-item[category="fitness"]::before {
+    background-color: green;
 }
 
 .arrow-svg {
@@ -704,4 +736,21 @@ dialog {
 .svg-section-text {
     display: flex;
 
+}
+
+.icon{
+    width: var(--space-5);
+    height: var(--space-5);
+}
+
+.icon-anchor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2);
+    &:hover{
+        background-color: #2d2d30;
+        border-radius: var(--border-radius-lg);
+       
+    }
 }

@@ -11,6 +11,8 @@ import "./custom-tooltip.js"
 const BASE_URL = "http://192.168.1.207:3000"
 let isAdmin = false;
 
+const categories = ["coding", "reading", "fitness", "music"];
+
 const secretButton = document.querySelector("#secret-button");
 secretButton.hidden = true;
 
@@ -189,7 +191,9 @@ loadHeatMap().then(() => {
                 container.classList.add("activity");
 
                 const categoryIndicator = document.createElement("span")
-                categoryIndicator.classList.add("category", activity.category)
+                console.log("printing cateogries", activity.category)
+                categoryIndicator.classList.add("category")
+                categoryIndicator.setAttribute("category", activity.category.toLowerCase())
 
                 const title = document.createElement("div");
                 title.innerText = activity.title;
@@ -214,9 +218,10 @@ loadHeatMap().then(() => {
             const activityLegend = document.createElement("div");
             activityLegend.classList.add("activity-legend");
 
-            const categoryItems = Array.from(["Coding", "Reading", "Fitness"]).map(category => {
+            const categoryItems = categories.map((category) => {
                 const categoryItem = document.createElement("span");
                 categoryItem.classList.add("category-item");
+                categoryItem.setAttribute("category", category)
                 categoryItem.innerText = category;
                 categoryItem.setAttribute("size", "small")
                 return categoryItem;
