@@ -10,6 +10,7 @@ import "./custom-tooltip.js"
 
 const BASE_URL = "http://192.168.1.207:3000"
 
+
 const monthSuffix = {
     0: "th",
     1: "st",
@@ -42,33 +43,26 @@ loadHeatMap().then(() => {
     heatmap.addEventListener("mouseover", (event) => {
         const cell = event.target.closest("td");
         if (!cell) return;
-        const tooltip = cell.querySelector("span")
-        if(!tooltip) return;
         if (cell.classList.contains("activity-label")) return;
-        
-        tooltip.classList.add("active-tooltip")
+        const tooltip = document.querySelector("custom-tooltip");
+        if (!tooltip) return;
+        tooltip.showPopover();
+
         const cellDate = new Date(cell.getAttribute("data-date")) //the actual day
-        const rect = heatmap.getBoundingClientRect();
-        const heatmapMidpoint = (rect.width / 2) + rect.left;
-        if (event.clientX > heatmapMidpoint) {
-            tooltip.classList.add("tooltip-right")
-            tooltip.classList.remove("tooltip-left")
-        }
-        else {
-            tooltip.classList.add("tooltip-left")
-            tooltip.classList.remove("tooltip-right")
-        }
         const dataLevel = cell.getAttribute("data-activity-level")
         // dont convert to localTime, because data-date is UTC
-        tooltip.innerText = (`${dataLevel > 0 ? `${dataLevel} ` : "No "} Activities on ${cellDate.toLocaleDateString("en-US", { month: "long", timeZone: "UTC" })} ${cellDate.getUTCDate()}${monthSuffix[cellDate.getUTCDate() % 10]}`) //% 10 gets last digit
+
+        // const tooltipText = (`${dataLevel > 0 ? `${dataLevel} ` : "No "} Activities on ${cellDate.toLocaleDateString("en-US", { month: "long", timeZone: "UTC" })} ${cellDate.getUTCDate()}${monthSuffix[cellDate.getUTCDate() % 10]}`) //% 10 gets last digit
+        // tooltip.setAttribute("text", tooltipText);
     })
     heatmap.addEventListener("click", async (event) => {
 
         // const currentScrollTop = document.documentElement.scrollTop
         const cell = event.target.closest("td");
         if (!cell) return;
-        const tooltip = cell.querySelector("span")
-        if(!tooltip) return;
+        const tooltip = document.querySelector("custom-tooltip");
+        if (!tooltip) return;
+        tooltip.showPopover();
         if (cell.classList.contains("activity-label")) return;
         const previousSelectedCells = heatmap.querySelectorAll("td[selected='true']:not(.activity-label)");
         const activityOverview = document.querySelector(".activity-overview")
@@ -92,11 +86,9 @@ loadHeatMap().then(() => {
             cell.setAttribute("selected", "true");
             document.querySelectorAll('td:not([selected="true"]):not(.activity-label)').forEach(td => {
                 td.style.opacity = '0.5'
-                tooltip.style.opacity = '1'
             });
             document.querySelectorAll('td[selected="true"]:not(.activity-label)').forEach(td => {
                 td.style.opacity = '1'
-                tooltip.style.opacity = '1'
             });
             activityOverview.style.display = "block";
             const response = await fetch(`${BASE_URL}/activity?selected-day=${cellDate}`);
@@ -140,10 +132,9 @@ loadHeatMap().then(() => {
     heatmap.addEventListener("mouseout", (event) => {
         const cell = event.target.closest("td");
         if (!cell) return;
-        const tooltip = cell.querySelector("span")
-        if(!tooltip) return;
-        tooltip.innerText = ""
-        tooltip.classList.remove("active-tooltip");
+        const tooltip = document.querySelector("custom-tooltip");
+        if (!tooltip) return;
+        tooltip.hidePopover();
     })
 });
 
