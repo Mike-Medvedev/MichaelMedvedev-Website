@@ -260,11 +260,11 @@ button {
     --table-cell-height: var(--space-3);
     --table-cell-background-color: oklch(from var(--bluegray-700) l c h / 0.25);
 
-    --activity-1: oklch(0.30 0.04 255);   /* very dim, almost off */
-    --activity-2: oklch(0.46 0.08 255);   /* faintly visible */
-    --activity-3: oklch(0.62 0.15 255);   /* mid, noticeable */
-    --activity-4: oklch(0.74 0.18 255);   /* bright */
-    --activity-5: oklch(0.83 0.20 255);   /* fully bright (max) */
+    --activity-1: oklch(0.30 0.04 255); 
+    --activity-2: oklch(0.46 0.08 255);
+    --activity-3: oklch(0.62 0.15 255); 
+    --activity-4: oklch(0.74 0.18 255);
+    --activity-5: oklch(0.83 0.20 255); 
 
 }
 

@@ -6,6 +6,7 @@
  */
 
 import "./router.js"
+import "./custom-tooltip.js"
 
 const BASE_URL = "http://192.168.1.207:3000"
 
