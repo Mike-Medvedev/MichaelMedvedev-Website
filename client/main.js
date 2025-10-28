@@ -44,19 +44,18 @@ loadHeatMap().then(() => {
         const cell = event.target.closest("td");
         if (!cell) return;
         if (cell.classList.contains("activity-label")) return;
-        const cellDate = cell.getAttribute("data-date") //the actual day
+        const cellDate = cell.getAttribute("data-date") //I.E '2025-07-08'
         const tooltip = document.querySelector(`custom-tooltip[for="${cellDate}"]`);
         if (!tooltip) return;
 
-        //now we must position the tool tip by setting its top and left css variables to the top and left edges of the selected cell
-       const rect = cell.getBoundingClientRect();
+        const rect = cell.getBoundingClientRect();
         const offsetY = 30;
         const spaceRight = window.innerWidth - rect.right
         const spaceLeft = rect.left;
         let offsetX = 72;
-        console.log(spaceLeft)
-        if(spaceRight < 120) offsetX = 160;
+        if(spaceRight < 120) offsetX = 145;
         if(spaceLeft < 120) offsetX = 0;
+        
         tooltip.style.setProperty("--font-size", "12px");
         tooltip.style.setProperty("--border-radius", "4px");
         tooltip.style.setProperty("--background-color", "oklch(.551 .027 264.364)")
@@ -66,8 +65,6 @@ loadHeatMap().then(() => {
         tooltip.showPopover();        
     })
     heatmap.addEventListener("click", async (event) => {
-
-        // const currentScrollTop = document.documentElement.scrollTop
         const cell = event.target.closest("td");
         if (!cell) return;
         if (cell.classList.contains("activity-label")) return;
@@ -78,7 +75,6 @@ loadHeatMap().then(() => {
         if (cell.getAttribute("selected")) { //when selecting previously selected cell
             cell.removeAttribute("selected");
             document.querySelectorAll('td:not(.activity-label)').forEach(td => {
-                td.style.opacity = '1'
                 td.style.filter = '';
             });
             return;
@@ -93,11 +89,10 @@ loadHeatMap().then(() => {
 
             cell.setAttribute("selected", "true");
             document.querySelectorAll('td:not([selected="true"]):not(.activity-label)').forEach(td => {
-                td.style.opacity = '0.5'
+                td.style.filter = 'brightness(0.8)'
             });
             document.querySelectorAll('td[selected="true"]:not(.activity-label)').forEach(td => {
-                td.style.opacity = '1';
-                td.style.filter = 'brightness(1.2)';
+                td.style.filter = 'brightness(1.5)';
             });
             activityOverview.style.display = "block";
             const response = await fetch(`${BASE_URL}/activity?selected-day=${cellDate}`);
@@ -136,7 +131,6 @@ loadHeatMap().then(() => {
             activityLegend.append(...categoryItems);
             activityContainer.replaceChildren(...activityHtml, activityLegend);
         }
-        // document.documentElement.scroll({top: currentScrollTop})
     })
     heatmap.addEventListener("mouseout", (event) => {
         const cell = event.target.closest("td");
