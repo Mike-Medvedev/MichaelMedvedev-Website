@@ -71,7 +71,8 @@ class Activity {
     }
 }
 Object.seal(Activity.prototype)
-let x = new Activity("Title", "Category")
+
+
 class PublicActivity extends Activity {
     #id;
     constructor(id, title, category) {
@@ -184,6 +185,14 @@ app.post("/activity", (req, res) => {
     }
 
 
+})
+
+app.post("/token", (req, res) => {
+    console.log(req.headers)
+    if(req.headers["authorization"] === "bearer 12345b67"){
+        res.sendStatus(200)
+    }
+    else res.sendStatus(401)
 })
 
 //{*splat} is express v5 catchall route

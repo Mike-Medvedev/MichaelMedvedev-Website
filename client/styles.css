@@ -549,13 +549,14 @@ td {
     span {
         position: absolute;
         bottom: -3px;
-        right: 0;
+        right: 2px;
         font-size: var(--font-size-50);
     }
 }
 
 td.activity-label {
-    background-color: transparent
+    background-color: transparent;
+    font-size: var(--font-size-50);
 }
 
 div[data-activity-level="0"],
@@ -606,6 +607,12 @@ div[data-activity-level="4"] {
     padding: var(--card-padding);
     flex-direction: column;
 }
+
+.activity-header{
+    display: flex;
+    justify-content: space-between;
+}
+
 
 .activities {
     padding-inline: 1rem;
