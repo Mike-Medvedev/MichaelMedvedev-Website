@@ -1,36 +1,17 @@
 import express from "express"
 import path from "path"
 import * as functions from "./functions.js"
-import { DatabaseSync } from "node:sqlite"
+import DatabaseManagerSingleton from "./database/db.js"
+import ActivityRouter from "./controllers/Activity.controller.js"
+import AuthRouter from "./controllers/Auth.controller.js"
+import HeatmapRouter from "./controllers/Heatmap.controller.js"
+
 const app = express()
+app.use('/activities', ActivityRouter);
+app.use('/auth', AuthRouter);
+app.use('/heatmap', HeatmapRouter);
 
-console.log("Connecting to In-Memory Db...")
-const database = new DatabaseSync(':memory:');
-console.log("Connected to DB")
 
-console.log("Creating Activities Table...");
-database.exec(`
-    CREATE TABLE activities(
-      id INTEGER PRIMARY KEY,
-      title TEXT,
-      category TEXT,
-      date TEXT
-    ) STRICT
-  `);
-  const insert = database.prepare(`
-    INSERT INTO activities
-    (title, category, date)
-    VALUES (?, ?, ?)
-`)
-insert.run("Coding My Website", "coding", "2025-01-27")
-insert.run("Coding My Website", "coding", "2025-01-27")
-insert.run("Coding My Website", "coding", "2025-01-27")
-insert.run("Coding My Website", "coding", "2025-10-26")
-insert.run("Coding My Website", "coding", "2025-10-25")
-insert.run("Coding My Website", "coding", "2025-10-25")
-insert.run("Coding My Website", "coding", "2025-10-25")
-insert.run("Coding My Website", "coding", "2025-09-25")
-insert.run("Coding My Website", "coding", "2025-09-25")
 
 const CategoryEnum = ["coding", "reading", "fitness", "music"]
 Object.freeze(CategoryEnum)
@@ -142,16 +123,41 @@ app.get("/heatmap", (req, res) => {
     // i can get the last year by making a new date and doing .setFullyear()
 })
 
+// var someObj = {
+//     x: "x"
+// }
+
+// function func(req, res){
+//     console.log(this.x)
+//     res.send(this.x)
+// }
+
+// app.get("/test", func.bind(someObj))
+
 
 app.post("/", (req, res) => {
     res.status(200).send("OK")
 })
 
-app.get("/activity", (req, res) => {
+
+function withDB(fn){
+    const db = DatabaseManagerSingleton.db
+    const hoc = function(){
+        fn()
+    }
+    return hoc
+}
+
+var deps = {
+    db: DatabaseManagerSingleton.db,
+    redis: "example redis dep"
+}
+
+app.get("/activity", function(req, res){
     const selectedDay = req.query["selected-day"];
     if(!selectedDay) res.json({})
     if(selectedDay === "all"){
-        const selectAll = database.prepare(`
+        const selectAll = this.db.prepare(`
             SELECT * FROM activities`)
         const activities = selectAll.all();
         console.log(activities)
@@ -168,9 +174,9 @@ app.get("/activity", (req, res) => {
         activities: activities
     })
 
-})
+}.bind(deps))
 
-app.post("/activity", (req, res) => {
+app.post("/activity", function(req, res) {
     const {title, category} = req.body
     try {
 
@@ -187,19 +193,19 @@ app.post("/activity", (req, res) => {
     } catch (e) {
         throw new Error(e)
     }
-})
+}.bind(deps))
 
-app.delete("/activity", (req, res) => {
+app.delete("/activity", function(req, res) {
     const {id} = req.body
 
-    const deleteQuery = database.prepare(`
+    const deleteQuery = this.db.prepare(`
         DELETE FROM activities
         WHERE id = ?
         `)
     deleteQuery.run(id)
 
     res.sendStatus(200)
-})
+}.bind(deps))
 
 app.post("/token", (req, res) => {
     if(req.headers["authorization"] === "bearer 12345b67"){
