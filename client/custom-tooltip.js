@@ -8,8 +8,6 @@ class CustomToolTip extends HTMLElement {
         const span = document.createElement("span");
         span.innerText = this.getAttribute("text") || "I am a tooltip! Override me!";
         shadow.appendChild(span);
-        this.setAttribute("popover", "manual");
-
 
         const template = document.querySelector("#custom-tooltip-template")?.content
         if(template){
@@ -31,7 +29,6 @@ class CustomToolTip extends HTMLElement {
             --font-size: 1rem;
             --font-color: #000000;
             --opacity: 1;
-            display: inline;
             position: absolute;
             width: fit-content;
             top: var(--tooltip-top, 0px);
@@ -48,7 +45,6 @@ class CustomToolTip extends HTMLElement {
         }
             `)
         shadow.adoptedStyleSheets = [stylesheet]
-    
     }
 }
 customElements.define("custom-tooltip", CustomToolTip)
