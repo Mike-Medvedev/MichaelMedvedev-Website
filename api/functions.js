@@ -91,7 +91,6 @@ export function createTable(database) {
             const currentDateObject = week[i];
             const currentDayString = week[i].toISOString().split("T")[0] //"2024-05-07"
             const activityCountPerDay = activityCountMap[currentDayString] || 0;
-            console.log(activityCountPerDay)
             string += `<td data-activity-level="${activityCountPerDay}" data-date="${currentDayString}">
             <custom-tooltip for="${currentDayString}" popover>${activityCountPerDay > 0 ? activityCountPerDay : "No "} Activities on ${currentDateObject.toLocaleDateString("en-US", { month: "long", timeZone: "UTC" })} ${currentDateObject.getUTCDate()}${monthSuffix[currentDateObject.getUTCDate() % 10]}</custom-tooltip>
             </td>`

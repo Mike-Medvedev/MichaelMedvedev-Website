@@ -9,8 +9,30 @@ import "./router.js"
 import "./custom-tooltip.js"
 
 const BASE_URL = "http://192.168.1.207:3000"
+let isAdmin = false;
 
+const secretButton = document.querySelector("#secret-button");
+secretButton.hidden = true;
 
+secretButton.addEventListener("click", () => {
+    if (!isAdmin) return;
+    const dialog = document.querySelector("dialog");
+    dialog.showModal()
+  });
+
+const token = localStorage.getItem("token")
+async function validateUser() {
+    const response = await fetch(`${BASE_URL}/token`, {
+        method: "POST",
+        headers: {
+            "Authorization": `bearer ${token}`
+        }
+    })
+    if (response.ok) {
+        isAdmin = true;
+    }
+}
+validateUser()
 const monthSuffix = {
     0: "th",
     1: "st",
@@ -53,16 +75,16 @@ loadHeatMap().then(() => {
         const spaceRight = window.innerWidth - rect.right
         const spaceLeft = rect.left;
         let offsetX = 72;
-        if(spaceRight < 120) offsetX = 145;
-        if(spaceLeft < 120) offsetX = 0;
-        
+        if (spaceRight < 120) offsetX = 145;
+        if (spaceLeft < 120) offsetX = 0;
+
         tooltip.style.setProperty("--font-size", "12px");
         tooltip.style.setProperty("--border-radius", "4px");
         tooltip.style.setProperty("--background-color", "oklch(.551 .027 264.364)")
         tooltip.style.setProperty("--font-color", "white")
         tooltip.style.setProperty("--tooltip-left", `${rect.left - offsetX}px`)
         tooltip.style.setProperty("--tooltip-top", `${rect.top + window.scrollY - offsetY}px`)
-        tooltip.showPopover();        
+        tooltip.showPopover();
     })
     heatmap.addEventListener("click", async (event) => {
         const cell = event.target.closest("td");
@@ -72,6 +94,11 @@ loadHeatMap().then(() => {
         const activityOverview = document.querySelector(".activity-overview")
         const activityContainer = document.querySelector(".activities")
         const cellDate = cell.getAttribute("data-date");
+        const isSameDay = cellDate === new Date().toISOString().split("T")[0]
+        console.log(isAdmin, isSameDay)
+        secretButton.hidden = !(isAdmin && isSameDay)
+
+
         if (cell.getAttribute("selected")) { //when selecting previously selected cell
             cell.removeAttribute("selected");
             document.querySelectorAll('td:not(.activity-label)').forEach(td => {
@@ -95,11 +122,13 @@ loadHeatMap().then(() => {
                 td.style.filter = 'brightness(1.5)';
             });
             activityOverview.style.display = "block";
+
             const response = await fetch(`${BASE_URL}/activity?selected-day=${cellDate}`);
             const result = await response.json();
+
             const activityDateElement = document.querySelector(".activity-date")
             const activityDate = new Date(result.date)
-            activityDateElement.innerText = `${activityDate.toLocaleDateString("en-US", { month: "long" })} ${activityDate.getDate()}, ${activityDate.getFullYear()}`
+            activityDateElement.innerText = `${activityDate.toLocaleDateString("en-US", { month: "long" })} ${activityDate.getUTCDate()}, ${activityDate.getFullYear()}`
             const activityHtml = result.activities.map(activity => {
                 const container = document.createElement("div")
                 container.classList.add("activity");
