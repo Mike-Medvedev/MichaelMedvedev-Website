@@ -76,8 +76,21 @@
                     <p class="text-m ">Activity Overview</p>
                     <p class="text-sm activity-date text-muted"></p>
                 </div>
-                <button id="secret-button" >➕ New Activity</button>
-                <dialog id="activityDialog" >I am a Dialog!</dialog>
+                <button id="secret-button">➕ New Activity</button>
+                <dialog id="activityDialog">
+                    <section class="dialog-content">
+                        <form class="activity-form">
+                            <select id="activity-options" name="category" value="coding">
+                            </select>
+                            <textarea autofocus name="title" id="activity-title" value="Hi" placeholder="Enter Activity"></textarea>
+                            <button type="submit" id="add-activity">Add</button>
+                        </form>
+                        <footer>
+                            <button id="close">Close</button>
+                        </footer>
+
+                    </section>
+                </dialog>
             </div>
 
             <section class="activities">

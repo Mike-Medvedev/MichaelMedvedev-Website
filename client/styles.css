@@ -629,7 +629,28 @@ div[data-activity-level="4"] {
     display: flex;
     gap: var(--card-gap);
 }
+.activity-form{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: center;
 
+    select {
+        width: fit-content;
+    }
+    textarea {
+        width: 100%;
+    }
+}
+dialog {
+    width: 70vw;
+}
+.dialog-content{
+    display: flex;
+    flex-direction: column;
+    padding: var(--card-padding);
+    gap: var(--space-6);
+}
 .category {
     width: var(--space-4);
     height: var(--space-4);
