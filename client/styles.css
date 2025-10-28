@@ -598,28 +598,7 @@ div[data-activity-level="4"] {
     }
 }
 
-span.active-tooltip{
-    position: absolute;
-    width: fit-content;
-    bottom: 115%;
-    background-color: var(--white-400);
-    border-radius: var(--border-radius-m);
-    text-wrap: nowrap;
-    padding-inline: 0.5rem;
-    padding-block: 0.25rem;
-    font-size: var(--font-size-50);
-    z-index: 9999;
-    opacity: 1 !important;
-}
 
-
-span.active-tooltip.tooltip-right {
-    right: 0
-}
-
-span.active-tooltip.tooltip-left{
-    left: 0
-}
 
 .activity-overview {
     display: none;

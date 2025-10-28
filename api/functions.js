@@ -44,10 +44,10 @@ export function createTable(database) {
         AND date <= ?
         GROUP BY date
         `)
-    let activityLevelMap = allActivities.all(firstDay.toISOString().split("T")[0], lastDay.toISOString().split("T")[0]); //[{date: "2025-05-05", count: 5}]
-    const a = {}
-    Object.values(activityLevelMap).forEach(d => a[d.date] = d.count)
-
+    const results = allActivities.all(firstDay.toISOString().split("T")[0], lastDay.toISOString().split("T")[0]); //[{date: "2025-05-05", count: 5}]
+    const activityCountMap = {}
+    Object.values(results).forEach(row => activityCountMap[row.date] = row.count)
+        console.log(activityCountMap)
     //loop through array starting from currentMonth, if you reac end of array, go back to beginning until you hit 1 index before starting
     const currentMonthIndex = monthPrefixes.findIndex((month) => month === currentMonth.slice(0,3))
     let monthLabelString = ``
@@ -68,6 +68,19 @@ export function createTable(database) {
         3: "Wed",
         5: "Fri" 
     }
+
+    const monthSuffix = {
+        0: "th",
+        1: "st",
+        2: "nd",
+        3: "rd",
+        4: "th",
+        5: "th",
+        6: "th",
+        7: "th",
+        8: "th",
+        9: "th",
+    }
     
     for (let i = 0; i <= 6; i++) {
         let string = `<tr>`
@@ -75,7 +88,13 @@ export function createTable(database) {
         else string += `<td class="activity-label"></td>`;
         for (let week of dates) {
             if (!week[i]) continue;
-            string += `<td data-activity-level="${a[week[i].toISOString().split("T")[0]] || 0}" data-date="${week[i].toISOString().split("T")[0]}"><span></span<</td>`
+            const currentDateObject = week[i];
+            const currentDayString = week[i].toISOString().split("T")[0] //"2024-05-07"
+            const activityCountPerDay = activityCountMap[currentDayString] || 0;
+            console.log(activityCountPerDay)
+            string += `<td data-activity-level="${activityCountPerDay}" data-date="${currentDayString}">
+            <custom-tooltip for="${currentDayString}" popover>${activityCountPerDay > 0 ? activityCountPerDay : "No "} Activities on ${currentDateObject.toLocaleDateString("en-US", { month: "long", timeZone: "UTC" })} ${currentDateObject.getUTCDate()}${monthSuffix[currentDateObject.getUTCDate() % 10]}</custom-tooltip>
+            </td>`
         }
         string += `</tr>`
         table += string;
