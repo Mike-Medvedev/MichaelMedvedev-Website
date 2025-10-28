@@ -154,6 +154,7 @@ app.get("/activity", (req, res) => {
         const selectAll = database.prepare(`
             SELECT * FROM activities`)
         const activities = selectAll.all();
+        console.log(activities)
         return res.json({date: new Date(), activities})
     }
     
@@ -186,12 +187,21 @@ app.post("/activity", (req, res) => {
     } catch (e) {
         throw new Error(e)
     }
+})
 
+app.delete("/activity", (req, res) => {
+    const {id} = req.body
 
+    const deleteQuery = database.prepare(`
+        DELETE FROM activities
+        WHERE id = ?
+        `)
+    deleteQuery.run(id)
+
+    res.sendStatus(200)
 })
 
 app.post("/token", (req, res) => {
-    console.log(req.headers)
     if(req.headers["authorization"] === "bearer 12345b67"){
         res.sendStatus(200)
     }

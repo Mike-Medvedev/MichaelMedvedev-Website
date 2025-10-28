@@ -14,6 +14,24 @@ let isAdmin = false;
 const secretButton = document.querySelector("#secret-button");
 secretButton.hidden = true;
 
+async function deleteActivity(id) {
+    try {
+        const response = await fetch(`${BASE_URL}/activity`, {
+            method: "DELETE",
+            body: JSON.stringify({ "id": id }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+            
+        })
+        if (!response.ok) throw new Error("Respone not Ok!")
+    } catch (e) {
+        throw new Error("Delete Activity error!")
+    }
+
+
+}
+
 secretButton.addEventListener("click", async () => {
     if (!isAdmin) return;
     const response = await fetch(`${BASE_URL}/activity-options`);
@@ -33,30 +51,30 @@ secretButton.addEventListener("click", async () => {
 const form = document.querySelector(".activity-form")
 form.addEventListener("submit", async (event) => {
     event.preventDefault()
-    const formData = new FormData(event.target); 
-    for (let [key, value] of formData){
+    const formData = new FormData(event.target);
+    for (let [key, value] of formData) {
         console.log(key, value)
     }
-    try{
+    try {
         const response = await fetch(`${BASE_URL}/activity`, {
             method: "POST",
-            body: JSON.stringify({"title": formData.get("title"), "category": formData.get("category")}),
+            body: JSON.stringify({ "title": formData.get("title"), "category": formData.get("category") }),
             headers: {
                 "Content-type": "application/json"
             }
         })
-        if(!response.ok) throw new Error("Response not ok")
-    } catch (e){
+        if (!response.ok) throw new Error("Response not ok")
+    } catch (e) {
         throw new Error(e)
     }
-    
-    
+
+
 })
 
 const close = document.querySelector("#close");
 close.addEventListener("click", () => {
     const dialog = document.querySelector("dialog");
-    if(!dialog) return;
+    if (!dialog) return;
     dialog.close()
 })
 const token = localStorage.getItem("token")
@@ -134,7 +152,6 @@ loadHeatMap().then(() => {
         const activityContainer = document.querySelector(".activities")
         const cellDate = cell.getAttribute("data-date");
         const isSameDay = cellDate === new Date().toISOString().split("T")[0]
-        console.log(isAdmin, isSameDay)
         secretButton.hidden = !(isAdmin && isSameDay)
 
 
@@ -164,7 +181,6 @@ loadHeatMap().then(() => {
 
             const response = await fetch(`${BASE_URL}/activity?selected-day=${cellDate}`);
             const result = await response.json();
-
             const activityDateElement = document.querySelector(".activity-date")
             const activityDate = new Date(result.date)
             activityDateElement.innerText = `${activityDate.toLocaleDateString("en-US", { month: "long" })} ${activityDate.getUTCDate()}, ${activityDate.getFullYear()}`
@@ -180,7 +196,18 @@ loadHeatMap().then(() => {
                 title.classList.add("mr-1");
 
 
+
                 container.append(categoryIndicator, title);
+
+                if (isAdmin && isSameDay) {
+                    const deleteButton = document.createElement("button")
+                    deleteButton.textContent = "Delete";
+                    deleteButton.style.marginLeft = "auto";
+                    deleteButton.style.color = "#AA1111"
+                    deleteButton.addEventListener("click", () => deleteActivity(activity.id))
+                    container.appendChild(deleteButton)
+                }
+
                 return container;
             })
 
