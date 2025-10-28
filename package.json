@@ -19,7 +19,7 @@
   "main": "main.js",
   "scripts": {
     "server": "node api/server.js",
-    "devserver": "node --watch api/server.js"
+    "devserver": "node --watch --env-file .env api/server.js"
   },
   "dependencies": {
     "express": "^5.1.0"
