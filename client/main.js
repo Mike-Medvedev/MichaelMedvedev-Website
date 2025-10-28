@@ -14,12 +14,51 @@ let isAdmin = false;
 const secretButton = document.querySelector("#secret-button");
 secretButton.hidden = true;
 
-secretButton.addEventListener("click", () => {
+secretButton.addEventListener("click", async () => {
     if (!isAdmin) return;
+    const response = await fetch(`${BASE_URL}/activity-options`);
+    const result = await response.json();
+    console.log(result);
     const dialog = document.querySelector("dialog");
+    const select = document.querySelector("#activity-options");
+    if (!select) return;
+    result.forEach(activity => {
+        const option = document.createElement("option")
+        option.textContent = activity.charAt(0).toUpperCase() + activity.slice(1);
+        select.appendChild(option)
+    })
     dialog.showModal()
-  });
+});
 
+const form = document.querySelector(".activity-form")
+form.addEventListener("submit", async (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.target); 
+    for (let [key, value] of formData){
+        console.log(key, value)
+    }
+    try{
+        const response = await fetch(`${BASE_URL}/activity`, {
+            method: "POST",
+            body: JSON.stringify({"title": formData.get("title"), "category": formData.get("category")}),
+            headers: {
+                "Content-type": "application/json"
+            }
+        })
+        if(!response.ok) throw new Error("Response not ok")
+    } catch (e){
+        throw new Error(e)
+    }
+    
+    
+})
+
+const close = document.querySelector("#close");
+close.addEventListener("click", () => {
+    const dialog = document.querySelector("dialog");
+    if(!dialog) return;
+    dialog.close()
+})
 const token = localStorage.getItem("token")
 async function validateUser() {
     const response = await fetch(`${BASE_URL}/token`, {

@@ -114,8 +114,9 @@ class GetActivitiesReq {
         return undefined;
     }
 }
-
+app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+
 
 const logger = function (req, res, next) {
     console.log("Recieved Request from: ", req.host + req.url)
@@ -169,8 +170,10 @@ app.get("/activity", (req, res) => {
 })
 
 app.post("/activity", (req, res) => {
+    const {title, category} = req.body
     try {
-        const newActivity = new Activity("Coding My Website", "Coding")
+
+        const newActivity = new Activity(title, category)
         console.log(...newActivity.modelDump())
         const insert = database.prepare(`
         INSERT INTO activities
@@ -193,6 +196,9 @@ app.post("/token", (req, res) => {
         res.sendStatus(200)
     }
     else res.sendStatus(401)
+})
+app.get("/activity-options", (req, res) => {
+    res.json(CategoryEnum)
 })
 
 //{*splat} is express v5 catchall route
