@@ -44,25 +44,32 @@ loadHeatMap().then(() => {
         const cell = event.target.closest("td");
         if (!cell) return;
         if (cell.classList.contains("activity-label")) return;
-        const tooltip = document.querySelector("custom-tooltip");
+        const cellDate = cell.getAttribute("data-date") //the actual day
+        const tooltip = document.querySelector(`custom-tooltip[for="${cellDate}"]`);
         if (!tooltip) return;
-        tooltip.showPopover();
 
-        const cellDate = new Date(cell.getAttribute("data-date")) //the actual day
-        const dataLevel = cell.getAttribute("data-activity-level")
-        // dont convert to localTime, because data-date is UTC
-
-        // const tooltipText = (`${dataLevel > 0 ? `${dataLevel} ` : "No "} Activities on ${cellDate.toLocaleDateString("en-US", { month: "long", timeZone: "UTC" })} ${cellDate.getUTCDate()}${monthSuffix[cellDate.getUTCDate() % 10]}`) //% 10 gets last digit
-        // tooltip.setAttribute("text", tooltipText);
+        //now we must position the tool tip by setting its top and left css variables to the top and left edges of the selected cell
+       const rect = cell.getBoundingClientRect();
+        const offsetY = 30;
+        const spaceRight = window.innerWidth - rect.right
+        const spaceLeft = rect.left;
+        let offsetX = 72;
+        console.log(spaceLeft)
+        if(spaceRight < 120) offsetX = 160;
+        if(spaceLeft < 120) offsetX = 0;
+        tooltip.style.setProperty("--font-size", "12px");
+        tooltip.style.setProperty("--border-radius", "4px");
+        tooltip.style.setProperty("--background-color", "oklch(.551 .027 264.364)")
+        tooltip.style.setProperty("--font-color", "white")
+        tooltip.style.setProperty("--tooltip-left", `${rect.left - offsetX}px`)
+        tooltip.style.setProperty("--tooltip-top", `${rect.top + window.scrollY - offsetY}px`)
+        tooltip.showPopover();        
     })
     heatmap.addEventListener("click", async (event) => {
 
         // const currentScrollTop = document.documentElement.scrollTop
         const cell = event.target.closest("td");
         if (!cell) return;
-        const tooltip = document.querySelector("custom-tooltip");
-        if (!tooltip) return;
-        tooltip.showPopover();
         if (cell.classList.contains("activity-label")) return;
         const previousSelectedCells = heatmap.querySelectorAll("td[selected='true']:not(.activity-label)");
         const activityOverview = document.querySelector(".activity-overview")
@@ -72,6 +79,7 @@ loadHeatMap().then(() => {
             cell.removeAttribute("selected");
             document.querySelectorAll('td:not(.activity-label)').forEach(td => {
                 td.style.opacity = '1'
+                td.style.filter = '';
             });
             return;
         }
@@ -88,7 +96,8 @@ loadHeatMap().then(() => {
                 td.style.opacity = '0.5'
             });
             document.querySelectorAll('td[selected="true"]:not(.activity-label)').forEach(td => {
-                td.style.opacity = '1'
+                td.style.opacity = '1';
+                td.style.filter = 'brightness(1.2)';
             });
             activityOverview.style.display = "block";
             const response = await fetch(`${BASE_URL}/activity?selected-day=${cellDate}`);
@@ -132,7 +141,8 @@ loadHeatMap().then(() => {
     heatmap.addEventListener("mouseout", (event) => {
         const cell = event.target.closest("td");
         if (!cell) return;
-        const tooltip = document.querySelector("custom-tooltip");
+        const cellDate = cell.getAttribute("data-date") //the actual day
+        const tooltip = document.querySelector(`custom-tooltip[for="${cellDate}"]`);
         if (!tooltip) return;
         tooltip.hidePopover();
     })

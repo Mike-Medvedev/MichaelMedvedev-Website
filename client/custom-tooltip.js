@@ -5,10 +5,7 @@ class CustomToolTip extends HTMLElement {
     }
     connectedCallback(){
         const shadow = this.attachShadow({mode: "open"})
-        const span = document.createElement("span");
-        span.innerText = this.getAttribute("text") || "I am a tooltip! Override me!";
-        shadow.appendChild(span);
-
+        shadow.innerHTML = `<slot></slot>`
         const template = document.querySelector("#custom-tooltip-template")?.content
         if(template){
             shadow.appendChild(template.cloneNode(true))
@@ -30,9 +27,9 @@ class CustomToolTip extends HTMLElement {
             --font-color: #000000;
             --opacity: 1;
             position: absolute;
+            pointer-events: none;
             width: fit-content;
-            top: var(--tooltip-top, 0px);
-            left: var(--tooltip-left, 0px);
+            inset: var(--tooltip-top, 0px) auto auto var(--tooltip-left, 0px) !important;
             background-color: var(--background-color, #ffffff);
             border: var(--border-width, 0px) var(--border-style, solid) var(--border-color, transparent);
             border-radius: var(--border-radius, 0px);
