@@ -15,7 +15,7 @@ const categories = ["coding", "reading", "fitness", "music"];
 
 const secretButton = document.querySelector("#secret-button");
 secretButton.hidden = true;
-
+const dialog = document.querySelector("dialog");
 async function deleteActivity(id) {
     try {
         const response = await fetch(`${BASE_URL}/activity`, {
@@ -39,7 +39,6 @@ secretButton.addEventListener("click", async () => {
     const response = await fetch(`${BASE_URL}/activity-options`);
     const result = await response.json();
     console.log(result);
-    const dialog = document.querySelector("dialog");
     const select = document.querySelector("#activity-options");
     if (!select) return;
     result.forEach(activity => {
@@ -51,6 +50,8 @@ secretButton.addEventListener("click", async () => {
 });
 
 const form = document.querySelector(".activity-form")
+
+const close = document.querySelector("#close");
 form.addEventListener("submit", async (event) => {
     event.preventDefault()
     const formData = new FormData(event.target);
@@ -66,6 +67,7 @@ form.addEventListener("submit", async (event) => {
             }
         })
         if (!response.ok) throw new Error("Response not ok")
+            dialog.close()
     } catch (e) {
         throw new Error(e)
     }
@@ -73,9 +75,8 @@ form.addEventListener("submit", async (event) => {
 
 })
 
-const close = document.querySelector("#close");
+
 close.addEventListener("click", () => {
-    const dialog = document.querySelector("dialog");
     if (!dialog) return;
     dialog.close()
 })
