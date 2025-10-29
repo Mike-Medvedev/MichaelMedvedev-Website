@@ -8,7 +8,7 @@ class CustomToolTip extends HTMLElement {
         shadow.innerHTML = `<slot></slot>` //renders children with web component. I.E <custom-tooltip>children</custom-tooltip>
         const template = document.querySelector("#custom-tooltip-template")?.content
 
-        if(template){ //if template reference by id then render content;
+        if(template){ 
             shadow.appendChild(template.cloneNode(true))
         }
     

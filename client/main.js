@@ -5,10 +5,13 @@
  * Fetches Data from server
  */
 
-import "./router.js"
+import router from "./router.js"
 import "./custom-tooltip.js"
+import "./config.js"
 
-const BASE_URL = "http://192.168.1.207:3000"
+router.setupNavigation()
+
+
 let isAdmin = false;
 
 const categories = ["coding", "reading", "fitness", "music"];
@@ -19,7 +22,7 @@ const dialog = document.querySelector("dialog");
 
 async function deleteActivity(id) {
     try {
-        const response = await fetch(`${BASE_URL}/activities/${id}`, {
+        const response = await fetch(`${window.env.BASE_URL}/activities/${id}`, {
             method: "DELETE",
             body: JSON.stringify({ "id": id }),
             headers: {
@@ -37,7 +40,7 @@ async function deleteActivity(id) {
 
 secretButton.addEventListener("click", async () => {
     if (!isAdmin) return;
-    const response = await fetch(`${BASE_URL}/activities/options`);
+    const response = await fetch(`${window.env.BASE_URL}/activities/options`);
     const result = await response.json();
     console.log(result);
     const select = document.querySelector("#activity-options");
@@ -60,7 +63,7 @@ form.addEventListener("submit", async (event) => {
         console.log(key, value)
     }
     try {
-        const response = await fetch(`${BASE_URL}/activities`, {
+        const response = await fetch(`${window.env.BASE_URL}/activities`, {
             method: "POST",
             body: JSON.stringify({ "title": formData.get("title"), "category": formData.get("category") }),
             headers: {
@@ -83,7 +86,7 @@ close.addEventListener("click", () => {
 })
 const token = localStorage.getItem("token")
 async function validateUser() {
-    const response = await fetch(`${BASE_URL}/auth/token`, {
+    const response = await fetch(`${window.env.BASE_URL}/auth/token`, {
         method: "POST",
         headers: {
             "Authorization": `bearer ${token}`
@@ -94,24 +97,12 @@ async function validateUser() {
     }
 }
 validateUser()
-const monthSuffix = {
-    0: "th",
-    1: "st",
-    2: "nd",
-    3: "rd",
-    4: "th",
-    5: "th",
-    6: "th",
-    7: "th",
-    8: "th",
-    9: "th",
-}
-Object.freeze(monthSuffix)
+
 
 async function loadHeatMap() {
     try {
         console.log("Loading HeatMap...")
-        const heatmapHtmlResponse = await fetch(`${BASE_URL}/heatmap`);
+        const heatmapHtmlResponse = await fetch(`${window.env.BASE_URL}/heatmap`);
         const heatmapHtml = await heatmapHtmlResponse.text();
         console.log("Successfully Fetched Heatmap")
         const heatmap = document.querySelector(".heatmap")
@@ -183,7 +174,7 @@ loadHeatMap().then(() => {
             });
             activityOverview.style.display = "block";
 
-            const response = await fetch(`${BASE_URL}/activities?selected-day=${cellDate}`);
+            const response = await fetch(`${window.env.BASE_URL}/activities?selected-day=${cellDate}`);
             const result = await response.json();
             const activityDateElement = document.querySelector(".activity-date")
             const activityDate = new Date(result.date)

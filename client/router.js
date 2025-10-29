@@ -1,56 +1,38 @@
-const BASE_URL = "http://192.168.1.207:3000"
-const routes = {
-    home: "/",
-    programming: "/programming",
-    guitar: "/guitar",
-    snowboarding: "/snowboarding"
+import { getCurrentPathname } from "./utils/path.utils.js";
+
+function Router() {
+    const pages = document.querySelectorAll("main");
+    const navButtons = document.querySelectorAll("nav button");
+
+    function togglePage(route){
+        pages.forEach((page) => {
+            page.hidden = page.id !== route;
+        });
+        navButtons.forEach((button) => {
+            button.classList.toggle("active", button.id === route);
+        });
+    };
+
+    function navigate(route){
+        if (getCurrentPathname() === route) return;
+        window.history.pushState({ routesKey: route }, "", `${window.env.BASE_URL}${route}`);
+        togglePage(route);
+    };
+
+    function setupNavigation(){
+        togglePage(window.location.pathname);
+        navButtons.forEach((button) => {
+            const route = button.id;
+            button.addEventListener("click", () => navigate(route));
+        });
+        window.addEventListener("popstate", (event) => {
+            const route = event.state?.routesKey || window.location.pathname;
+            togglePage(route);
+        });
+    };
+
+    return { setupNavigation };
 }
-const pages = document.querySelectorAll("main");
-const navButtons = document.querySelectorAll("nav button")
 
-function toggleActivePage(pageToActivate){
-    if(pageToActivate === "/") pageToActivate = "home";
-    else if(pageToActivate.startsWith("/")) pageToActivate = pageToActivate.slice(1);
-    pages.forEach(page => page.hidden = page.id !== pageToActivate);
-    navButtons.forEach(button => button.classList.toggle("active", button.id === pageToActivate))
-}
-
-{
-    let initialPathname= URL.parse(window.location.href)?.pathname.slice(1) ?? "home";
-    if(!(initialPathname in routes)) initialPathname = "home";
-    toggleActivePage(initialPathname);
-}
-
-
-window.addEventListener("popstate", (event) => {
-    const routeKey = event.state?.routesKey
-    const route = routes[routeKey] || routes["home"];
-    toggleActivePage(route)
-})
-
-const homeButton = document.querySelector("button#home")
-const programmingButton = document.querySelector("button#programming")
-const guitarButton = document.querySelector("button#guitar")
-const snowboardingButton = document.querySelector("button#snowboarding")
-
-
-homeButton.addEventListener("click", () => {
-    if(URL.parse(window.location.href)?.pathname === routes.home) return;
-    window.history.pushState({routesKey: routes.home}, "", `${BASE_URL}`);
-    toggleActivePage(routes.home)
-})
-programmingButton.addEventListener("click", () => {
-    if(URL.parse(window.location.href)?.pathname === routes.programming) return;
-    window.history.pushState({routesKey: routes.programming}, "", `${BASE_URL}${routes.programming}`)
-    toggleActivePage(routes.programming);
-})
-guitarButton.addEventListener("click", () => {
-    if(URL.parse(window.location.href)?.pathname === routes.guitar) return;
-    window.history.pushState({routesKey: routes.guitar}, "", `${BASE_URL}${routes.guitar}`)
-    toggleActivePage(routes.guitar);
-})
-snowboardingButton.addEventListener("click", () => {
-    if(URL.parse(window.location.href)?.pathname === routes.snowboarding) return;
-    window.history.pushState({routesKey: routes.snowboarding}, "", `${BASE_URL}${routes.snowboarding}`)
-    toggleActivePage(routes.snowboarding);
-})
+const router = Router();
+export default router;
