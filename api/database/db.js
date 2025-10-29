@@ -1,24 +1,24 @@
 import { DatabaseSync } from "node:sqlite"
 
-class DatabaseManager {
+class DatabaseManagerClass {
     static #singleton = null;
     static #database = null;
-    constructor() { // syntactic sugar over Object.create(DatabaseManager.prototype)
-        if (!DatabaseManager.#singleton) {
-            DatabaseManager.#singleton = this; //store instance on DatabaseManager.constructor
-            DatabaseManager.#database = new DatabaseSync(process.env.DATABASE_CONNECTION_STRING)
+    constructor() { // syntactic sugar over Object.create(DatabaseManagerClass.prototype)
+        if (!DatabaseManagerClass.#singleton) {
+            DatabaseManagerClass.#singleton = this; //store instance on DatabaseManagerClass.constructor
+            DatabaseManagerClass.#database = new DatabaseSync(process.env.DATABASE_CONNECTION_STRING)
         }
-        DatabaseManager.seed();
-        return DatabaseManager.#singleton
+        DatabaseManagerClass.seed();
+        return DatabaseManagerClass.#singleton
     }
     get instance() {
-        return DatabaseManager.#singleton
+        return DatabaseManagerClass.#singleton
     }
     get db() {
-        return DatabaseManager.#database
+        return DatabaseManagerClass.#database
     }
-    static seed() { // regular method stored as DatabaseManager.prototype.seed
-        const database = DatabaseManager.#database;
+    static seed() { // regular method stored as DatabaseManagerClass.prototype.seed
+        const database = DatabaseManagerClass.#database;
         database.exec(` CREATE TABLE activities (
             id INTEGER PRIMARY KEY,
             title TEXT,
@@ -42,6 +42,6 @@ class DatabaseManager {
     }
 
 }
-const DatabaseManagerSingleton = new DatabaseManager();
-export default DatabaseManagerSingleton
+const DatabaseManager = new DatabaseManagerClass();
+export default DatabaseManager
 
