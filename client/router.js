@@ -23,7 +23,9 @@ function Router() {
         togglePage(window.location.pathname);
         navButtons.forEach((button) => {
             const route = button.id;
-            button.addEventListener("click", () => navigate(route));
+            button.addEventListener("click", () => {
+                navigate(route)
+            });
         });
         window.addEventListener("popstate", (event) => {
             const route = event.state?.routesKey || window.location.pathname;
