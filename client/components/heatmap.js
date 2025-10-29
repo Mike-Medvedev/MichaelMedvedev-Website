@@ -1,61 +1,16 @@
-/**
- * Javascript Entry point
- * Renders Dynamic Content
- * Registers Event Listeners
- * Fetches Data from server
- */
+function HeatMap(){
+    (async function loadHeatMap() {
+        try {
+            const heatmapHtmlResponse = await fetch(`${window.env.BASE_URL}/heatmap`);
+            const heatmapHtml = await heatmapHtmlResponse.text();
+            const heatmap = document.querySelector(".heatmap")
+            heatmap.innerHTML = heatmapHtml;
+        } catch (e) {
+            throw new Error(e)
+        }
+    
+    })()
 
-import router from "./router.js"
-import "./custom-tooltip.js"
-import "./config.js"
-import dialog from "./components/dialog.js"
-import dialogForm from "./components/dialog-form.js"
-import secretButton from "./components/secret-button.js"
-
-router.setupNavigation()
-
-
-
-const categories = ["coding", "reading", "fitness", "music"];
-
-
-async function deleteActivity(id) {
-    try {
-        const response = await fetch(`${window.env.BASE_URL}/activities/${id}`, {
-            method: "DELETE",
-            body: JSON.stringify({ "id": id }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-            
-        })
-        if (!response.ok) throw new Error("Respone not Ok!")
-    } catch (e) {
-        throw new Error("Delete Activity error!")
-    }
-
-
-}
-
-
-
-
-
-
-async function loadHeatMap() {
-    try {
-        console.log("Loading HeatMap...")
-        const heatmapHtmlResponse = await fetch(`${window.env.BASE_URL}/heatmap`);
-        const heatmapHtml = await heatmapHtmlResponse.text();
-        console.log("Successfully Fetched Heatmap")
-        const heatmap = document.querySelector(".heatmap")
-        heatmap.innerHTML = heatmapHtml;
-    } catch (e) {
-        throw new Error(e)
-    }
-
-}
-loadHeatMap().then(() => {
     const heatmap = document.querySelector("table");
     heatmap.addEventListener("mouseover", (event) => {
         const cell = event.target.closest("td");
@@ -176,5 +131,6 @@ loadHeatMap().then(() => {
         if (!tooltip) return;
         tooltip.hidePopover();
     })
-});
-
+}
+const heatMap = HeatMap();
+export default heatMap
