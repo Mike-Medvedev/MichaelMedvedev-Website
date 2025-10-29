@@ -18,4 +18,11 @@ class ActivitiesEntry{
         }
         else this.#activities.push(activities)
     }
+    modelDump(){
+        return [...this.#activities]
+    }
 }
+
+let date = new Date().toISOString().split("T")[0];
+let x = new Activity("t", "coding");
+let v  = new ActivitiesEntry(date, [x])
