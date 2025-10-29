@@ -1,21 +1,11 @@
-async function deleteActivity(id) {
-    try {
-        const response = await fetch(`${window.env.BASE_URL}/activities/${id}`, {
-            method: "DELETE",
-            body: JSON.stringify({ "id": id }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-            
-        })
-        if (!response.ok) throw new Error("Respone not Ok!")
-    } catch (e) {
-        throw new Error("Delete Activity error!")
-    }
+import http from "../http/http.client.js"
 
+async function deleteActivity(id) {
+    const { data, error } = await http.delete(`/activities/${id}`)
+    return !!data
 
 }
-export default function DeleteButton(activity){
+export default function DeleteButton(activity) {
     const deleteButton = document.createElement("button")
     deleteButton.textContent = "Delete";
     deleteButton.style.marginLeft = "auto";

@@ -20,9 +20,9 @@ ActivityRouter.post("/", (req, res) => {
 })
 
 ActivityRouter.delete("/:id", function(req, res) {
-    const {id} = req.body
+    const {id} = req.params
     ActivityService.deleteById(id)
-    res.sendStatus(204)
+    res.status(200).json({"ok": "ok"})
 })
 
 ActivityRouter.get("/options", (req, res) => {

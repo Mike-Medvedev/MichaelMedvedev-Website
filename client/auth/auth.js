@@ -1,24 +1,12 @@
 
 
-function Auth() {
-    const token = localStorage.getItem("token")
+import http from "../http/http.client.js"
+async function Auth() {
     let validated = false;
-    (async function validateUser() {
-        const response = await fetch(`${window.env.BASE_URL}/auth/token`, {
-            method: "POST",
-            headers: {
-                "Authorization": `bearer ${token}`
-            }
-        })
-        if (response.ok) {
-            validated = true;
-        }
-    })()
+    const { data, error } = await http.get("/auth/token");
+    validated = !!data;
 
-    function isAdmin() {
-        return validated;
-    }
-    return { isAdmin }
+    return { isAdmin: () => validated }
 }
-const auth = Auth();
+const auth = await Auth();
 export default auth;

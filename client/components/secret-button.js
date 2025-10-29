@@ -3,17 +3,16 @@
 import dialog from "./dialog.js"
 import auth from "../auth/auth.js"
 import activityOption from "./activity-option.js"
+import http from "../http/http.client.js"
 
-// secretButton.hidden = !(isAdmin && isSameDay) // used in heatmap event listenr
-
-function SecretButton(){
+function SecretButton() {
     const secretButton = document.querySelector("#secret-button");
     secretButton.hidden = true;
     secretButton.addEventListener("click", async () => {
         if (!auth.isAdmin()) return;
-        const response = await fetch(`${window.env.BASE_URL}/activities/options`);
-        const result = await response.json();
-        result.forEach(activity => {
+
+        const { data, error } = await http.get("/activities/options")
+        data.forEach(activity => {
             activityOption.render(activity)
         })
         dialog.open()
