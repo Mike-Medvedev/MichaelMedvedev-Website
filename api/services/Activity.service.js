@@ -4,6 +4,7 @@ import ActivityDate from "../models/activity/ActivityDate.js"
 import ActivityEntry from "../models/activity/ActivitiesEntry.js"
 import PublicActivity from "../models/activity/PublicActivity.js"
 import DatabaseManager from "../database/db.js"
+import DateUtils from "../utils/DateUtils.js"
 class ActivityServiceClass {
     static #instance = null;
     constructor() {
@@ -32,8 +33,17 @@ class ActivityServiceClass {
 
         return entry
     }
-    getByRange(date1, date2) {
-
+    getByRange(startDay, endDay) {
+        const allActivities = DatabaseManager.db.prepare(`
+            SELECT date, COUNT(*) as count FROM activities
+            WHERE date >= ? 
+            AND date <= ?
+            GROUP BY date
+            `)
+            const d1 = DateUtils.trimTime(startDay)
+            const d2 = DateUtils.trimTime(endDay)
+            const results = allActivities.all(d1, d2); //[{date: "2025-05-05", count: 5}, {date: "2025-05-06", count: 7}]
+            return results;
     }
     getByYear(year) {
 

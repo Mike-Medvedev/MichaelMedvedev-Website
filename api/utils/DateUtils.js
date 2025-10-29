@@ -21,4 +21,16 @@ export default class DateUtils{
         const date = new Date(dateString + 'T00:00:00.000Z');
         return this.trimTime(date) === dateString;
     }
+    static findFirstDayOfWeek(date){
+        let firstDayOfWeek = new Date(date)
+        const dayOfWeek = firstDayOfWeek.getUTCDay();
+        currDate.setUTCDate(firstDayOfWeek.getUTCDate() - dayOfWeek)
+        return firstDayOfWeek;
+    }
+    static getDateOneYearAgo(){
+        let lastYearsDate = new Date();
+        lastYearsDate.setUTCFullYear(currentDate.getUTCFullYear() - 1);
+        lastYearsDate = DateUtils.findFirstDayOfWeek(lastYearsDate); //set date to first day of week a year ago
+        lastYearsDate.setUTCHours(0, 0, 0, 0);
+    }
 }
