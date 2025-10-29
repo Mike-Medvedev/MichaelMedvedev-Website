@@ -24,13 +24,14 @@ export default class DateUtils{
     static findFirstDayOfWeek(date){
         let firstDayOfWeek = new Date(date)
         const dayOfWeek = firstDayOfWeek.getUTCDay();
-        currDate.setUTCDate(firstDayOfWeek.getUTCDate() - dayOfWeek)
+        firstDayOfWeek.setUTCDate(firstDayOfWeek.getUTCDate() - dayOfWeek)
         return firstDayOfWeek;
     }
-    static getDateOneYearAgo(){
+    static getDateOneYearAgo(currentDate){
         let lastYearsDate = new Date();
         lastYearsDate.setUTCFullYear(currentDate.getUTCFullYear() - 1);
         lastYearsDate = DateUtils.findFirstDayOfWeek(lastYearsDate); //set date to first day of week a year ago
         lastYearsDate.setUTCHours(0, 0, 0, 0);
+        return lastYearsDate
     }
 }
