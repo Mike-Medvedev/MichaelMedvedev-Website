@@ -26,7 +26,7 @@ function HeatMap(){
        
 
         const today = new Date()
-        if(auth.isAdmin && isEqualDay(cell.date, today)){
+        if(auth.isAdmin() && isEqualDay(cell.date, today)){
             secretButton.show()
         }
 

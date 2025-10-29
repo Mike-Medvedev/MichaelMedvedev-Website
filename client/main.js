@@ -6,9 +6,11 @@
  */
 
 import router from "./router.js"
-import "./components/custom-tooltip.js"
+import "./web-components/custom-tooltip.js"
 import "./config.js"
 import heatmap from "./components/heatmap.js"
 import dialogForm from "./components/dialog-form.js"
+
+
 router.setupNavigation()
 

@@ -1,6 +1,7 @@
 import auth from "../auth/auth.js"
 import DeleteButton from "./delete-button.js"
 import {isEqualDay} from "../utils/date-utils.js"
+
 export default function CreateActivity(activity){
     const container = document.createElement("div")
     container.classList.add("activity");
@@ -15,7 +16,7 @@ export default function CreateActivity(activity){
 
     container.append(categoryIndicator, title);
 
-    if (auth.isAdmin && isEqualDay(activity.date, new Date())) {
+    if (auth.isAdmin() && isEqualDay(activity.date, new Date())) {
         const deleteButton = DeleteButton(activity)
         container.appendChild(deleteButton)
     }
