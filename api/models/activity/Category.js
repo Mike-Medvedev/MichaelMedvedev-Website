@@ -14,7 +14,7 @@ export default class Category{
     get value(){
         return this.#category
     }
-    get categories(){
+    static get categories(){
         return Category.#categories
     }
 }

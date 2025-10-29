@@ -32,6 +32,7 @@ ActivityRouter.delete("/:id", function(req, res) {
 })
 
 ActivityRouter.get("/options", (req, res) => {
+    console.log(Category.categories)
     res.json(Category.categories)
 })
 

@@ -16,9 +16,10 @@ const categories = ["coding", "reading", "fitness", "music"];
 const secretButton = document.querySelector("#secret-button");
 secretButton.hidden = true;
 const dialog = document.querySelector("dialog");
+
 async function deleteActivity(id) {
     try {
-        const response = await fetch(`${BASE_URL}/activity`, {
+        const response = await fetch(`${BASE_URL}/activities/${id}`, {
             method: "DELETE",
             body: JSON.stringify({ "id": id }),
             headers: {
@@ -36,7 +37,7 @@ async function deleteActivity(id) {
 
 secretButton.addEventListener("click", async () => {
     if (!isAdmin) return;
-    const response = await fetch(`${BASE_URL}/activity-options`);
+    const response = await fetch(`${BASE_URL}/activities/options`);
     const result = await response.json();
     console.log(result);
     const select = document.querySelector("#activity-options");
@@ -59,7 +60,7 @@ form.addEventListener("submit", async (event) => {
         console.log(key, value)
     }
     try {
-        const response = await fetch(`${BASE_URL}/activity`, {
+        const response = await fetch(`${BASE_URL}/activities`, {
             method: "POST",
             body: JSON.stringify({ "title": formData.get("title"), "category": formData.get("category") }),
             headers: {
@@ -82,7 +83,7 @@ close.addEventListener("click", () => {
 })
 const token = localStorage.getItem("token")
 async function validateUser() {
-    const response = await fetch(`${BASE_URL}/token`, {
+    const response = await fetch(`${BASE_URL}/auth/token`, {
         method: "POST",
         headers: {
             "Authorization": `bearer ${token}`
@@ -182,7 +183,7 @@ loadHeatMap().then(() => {
             });
             activityOverview.style.display = "block";
 
-            const response = await fetch(`${BASE_URL}/activity?selected-day=${cellDate}`);
+            const response = await fetch(`${BASE_URL}/activities?selected-day=${cellDate}`);
             const result = await response.json();
             const activityDateElement = document.querySelector(".activity-date")
             const activityDate = new Date(result.date)
