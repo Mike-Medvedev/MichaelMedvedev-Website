@@ -12,6 +12,7 @@ const app = express()
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(logger)
+
 app.use('/activities', ActivityRouter);
 app.use('/auth', AuthRouter);
 app.use('/heatmap', HeatmapRouter);

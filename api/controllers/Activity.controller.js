@@ -2,6 +2,7 @@ import express from "express"
 const ActivityRouter = express.Router();
 import Activity from "../models/activity/Activity.js"
 import ActivityService from "../services/Activity.service.js"
+import Category from "../models/activity/Category.js"
 
 ActivityRouter.get("/", (req, res) => {
     const selectedDay = req.query["selected-day"];
@@ -25,17 +26,13 @@ ActivityRouter.post("/", (req, res) => {
 ActivityRouter.delete("/:id", function(req, res) {
     const {id} = req.body
 
-    const deleteQuery = this.db.prepare(`
-        DELETE FROM activities
-        WHERE id = ?
-        `)
-    deleteQuery.run(id)
+    ActivityService.deleteById(id)
 
-    res.sendStatus(200)
+    res.sendStatus(204)
 })
 
 ActivityRouter.get("/options", (req, res) => {
-    res.json(CategoryEnum)
+    res.json(Category.categories)
 })
 
 
