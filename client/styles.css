@@ -328,13 +328,6 @@ h5 {
     color: transparent;
 }
 
-.page {
-    display: none;
-}
-
-.page.active {
-    display: block
-}
 
 .mr-1 {
     margin-right: var(--space-1);

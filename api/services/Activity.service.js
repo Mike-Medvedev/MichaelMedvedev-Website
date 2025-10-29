@@ -10,9 +10,7 @@ class ActivityServiceClass {
     constructor() {
         if (!ActivityServiceClass.#instance) {
             ActivityServiceClass.#instance = this;
-            console.log("NO INSTANCE YET, MAKING NOW")
         }
-        console.log("RETURNING PREVIOUS INSTANCE")
         return ActivityServiceClass.#instance;
     }
     getByDate(date) {
