@@ -43,6 +43,9 @@ class CustomToolTip extends HTMLElement {
         }
             `)
         shadow.adoptedStyleSheets = [stylesheet]
+
     }
+    
+    
 }
 customElements.define("custom-tooltip", CustomToolTip)

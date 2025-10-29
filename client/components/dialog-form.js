@@ -1,6 +1,6 @@
 
 
-
+import dialog from "./dialog.js"
 function DialogForm(){
     const form = document.querySelector(".activity-form")
     const close = document.querySelector("#close");
