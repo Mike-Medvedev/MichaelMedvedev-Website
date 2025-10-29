@@ -9,12 +9,14 @@ import logger from "./middleware/logger.middleware.js"
 
 const app = express()
 
-app.use('/activities', ActivityRouter);
-app.use('/auth', AuthRouter);
-app.use('/heatmap', HeatmapRouter);
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(logger)
+app.use('/activities', ActivityRouter);
+app.use('/auth', AuthRouter);
+app.use('/heatmap', HeatmapRouter);
+
+
 
 //process.cwd is where node process started from (root dir)
 app.use(express.static(path.join(process.cwd(), "client")))
