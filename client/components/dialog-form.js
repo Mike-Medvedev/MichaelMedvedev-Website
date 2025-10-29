@@ -1,5 +1,5 @@
 
-
+import http from "../http/http.client.js"
 import dialog from "./dialog.js"
 function DialogForm(){
     const form = document.querySelector(".activity-form")
@@ -8,19 +8,9 @@ function DialogForm(){
     form.addEventListener("submit", async (event) => {
         event.preventDefault()
         const formData = new FormData(event.target);
-        try {
-            const response = await fetch(`${window.env.BASE_URL}/activities`, {
-                method: "POST",
-                body: JSON.stringify({ "title": formData.get("title"), "category": formData.get("category") }),
-                headers: {
-                    "Content-type": "application/json"
-                }
-            })
-            if (!response.ok) throw new Error("Response not ok")
-                dialog.close()
-        } catch (e) {
-            throw new Error(e)
-        }    
+        const payload = {"title": formData.get("title"), "category": formData.get("category")}
+        await http.post("/activities", payload)
+        dialog.close()
     })
 
     close.addEventListener("click", () => {

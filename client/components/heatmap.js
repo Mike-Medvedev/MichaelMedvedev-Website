@@ -4,16 +4,13 @@ import {isEqualDay} from "../utils/date-utils.js"
 import ActivityOverview from "../components/activity-overview.js"
 import secretButton from "./secret-button.js"
 import Cell from "./Cell.js"
+import http from "../http/http.client.js"
 function HeatMap(){
     const heatmap = document.querySelector(".heatmap");
     (async function loadHeatMap() {
-        try {
-            const heatmapHtmlResponse = await fetch(`${window.env.BASE_URL}/heatmap`);
-            const heatmapHtml = await heatmapHtmlResponse.text();
+            const { data, error } = await http.get("/heatmap")
+            const heatmapHtml = data.html
             heatmap.innerHTML = heatmapHtml;
-        } catch (e) {
-            throw new Error(e)
-        }
     
     })()
     heatmap.addEventListener("mouseover", (event) => {
@@ -42,10 +39,8 @@ function HeatMap(){
             cell.select(cell)
             cell.dimOtherCells()
 
-            const response = await fetch(`${window.env.BASE_URL}/activities?selected-day=${cell.date}`);
-            const result = await response.json();
-            
-            ActivityOverview(result).show();
+            const { data, error } = await http.get(`/activities?selected-day=${cell.date}`)
+            ActivityOverview(data).show();
         }
     })
     heatmap.addEventListener("mouseout", (event) => {

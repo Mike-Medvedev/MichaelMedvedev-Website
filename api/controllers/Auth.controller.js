@@ -2,9 +2,9 @@ import express from "express"
 
 const AuthRouter = express.Router();
 
-AuthRouter.post("/token", (req, res) => {
+AuthRouter.get("/token", (req, res) => {
     if(req.headers["authorization"] === "bearer 12345b67"){
-        res.sendStatus(200)
+        res.json({"ok": "ok"})
     }
     else res.sendStatus(401)
 })
