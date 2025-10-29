@@ -1,7 +1,5 @@
 import express from "express"
 import path from "path"
-import * as functions from "./functions.js"
-import DatabaseManagerSingleton from "./database/db.js"
 import ActivityRouter from "./controllers/Activity.controller.js"
 import AuthRouter from "./controllers/Auth.controller.js"
 import HeatmapRouter from "./controllers/Heatmap.controller.js"

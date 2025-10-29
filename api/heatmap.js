@@ -9,7 +9,6 @@ function generateWeeksFromPastYear() {
     let currentDate = new Date()
     currentDate.setUTCHours(0, 0, 0, 0);
     let lastYearsDate = DateUtils.getDateOneYearAgo(currentDate)
-
     
     let dates = [];
     let weeks = [];
@@ -37,7 +36,6 @@ export default function renderHeatMap() {
     const startDay = dates.flat(1)[0];
     const endDay = dates.flat(1)[dates.flat(1).length - 1]
     const currentMonth = new Date().toLocaleDateString("en-US", {month: "long"})
-    
 
     const activityRecords = ActivityService.getByRange(startDay, endDay) //[{date: "2025-05-05", count: 5}]
    
