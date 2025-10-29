@@ -321,6 +321,9 @@ h5 {
 .text-primary {
     color: var(--text-primary);
 }
+.text-primary-bright {
+    color: var(--text-primary-light);
+}
 
 .text-gradient {
     background-image: var(--text-gradiant);
