@@ -45,6 +45,7 @@ class ActivityServiceClass {
             (title, category, date)
             VALUES (?, ?, ?)
             `)
+
             const {title, category, date} = activity.modelDump()
             const obj = insert.run(title, category, date)
             
@@ -54,7 +55,16 @@ class ActivityServiceClass {
         }
     }
     deleteById(id) {
-
+        try{
+            const deleteQuery = DatabaseManager.db.prepare(`
+                DELETE FROM activities
+                WHERE id = ?
+                `)
+            deleteQuery.run(id)
+        } catch(e){
+            throw new Error(e)
+        }
+        
     }
 
 }
