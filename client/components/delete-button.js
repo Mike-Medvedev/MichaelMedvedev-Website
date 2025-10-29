@@ -10,6 +10,6 @@ export default function DeleteButton(activity) {
     deleteButton.textContent = "Delete";
     deleteButton.style.marginLeft = "auto";
     deleteButton.style.color = "#AA1111"
-    deleteButton.addEventListener("click", () => deleteActivity(activity.id)) //we must remove this eventListener to prevent leak
+    deleteButton.addEventListener("click", () => deleteActivity(activity.id), { once: true }) //removes after used once.
     return deleteButton;
 }
