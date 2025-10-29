@@ -1,48 +1,25 @@
 import express from "express"
 const ActivityRouter = express.Router();
+import Activity from "../models/activity/Activity.js"
+import ActivityService from "../services/Activity.service.js"
 
-
-ActivityRouter.get("/:id", function(req, res){
+ActivityRouter.get("/", (req, res) => {
     const selectedDay = req.query["selected-day"];
-    if(!selectedDay) res.json({})
-    if(selectedDay === "all"){
-        const selectAll = this.db.prepare(`
-            SELECT * FROM activities`)
-        const activities = selectAll.all();
-        console.log(activities)
-        return res.json({date: new Date(), activities})
-    }
+    if(!selectedDay) res.sendStatus(400)
     
-    const select = database.prepare(`
-        SELECT * FROM activities
-        WHERE date = ?`)
-    
-    const activities = select.all(selectedDay)
-    return res.json({
-        date: selectedDay,
-        activities: activities
-    })
+    const entry = ActivityService.getByDate(selectedDay)
+    return res.json(entry.modelDump())
 
 })
 
 
-ActivityRouter.post("/:id", function(req, res) {
+ActivityRouter.post("/", (req, res) => {
     const {title, category} = req.body
-    try {
+    const newActivity = new Activity(title, category)
 
-        const newActivity = new Activity(title, category)
-        console.log(...newActivity.modelDump())
-        const insert = database.prepare(`
-        INSERT INTO activities
-        (title, category, date)
-        VALUES (?, ?, ?)
-        `)
-        const obj = insert.run(...newActivity.modelDump())
-        console.log("Printing last row id: ", obj.lastInsertRowid)
-        res.json(newActivity)
-    } catch (e) {
-        throw new Error(e)
-    }
+    const createdId = ActivityService.create(newActivity);
+
+    res.status(201).send(createdId)
 })
 
 ActivityRouter.delete("/:id", function(req, res) {
@@ -64,3 +41,4 @@ ActivityRouter.get("/options", (req, res) => {
 
 
 export default ActivityRouter
+

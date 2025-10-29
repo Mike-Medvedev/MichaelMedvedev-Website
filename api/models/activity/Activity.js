@@ -22,6 +22,6 @@ export default class Activity {
         return this.#date.value;
     }
     modelDump() {
-        return [this.#title.value, this.#category.value, this.#date.value]
+        return {title: this.#title.value, category: this.#category.value, date: this.#date.value}
     }
 }

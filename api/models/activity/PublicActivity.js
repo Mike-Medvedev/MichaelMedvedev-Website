@@ -10,6 +10,6 @@ export default class PublicActivity extends Activity {
         return this.#id
     }
     modelDump() {
-        return [this.#id, ...super.modelDump()]
+        return {id: this.#id, ...super.modelDump()}
     }
 }

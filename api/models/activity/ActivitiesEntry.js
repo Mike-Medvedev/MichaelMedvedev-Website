@@ -1,6 +1,6 @@
 import Activity from "./Activity.js"
 import ActivityDate from "./ActivityDate.js"
-class ActivitiesEntry{
+export default class ActivitiesEntry{
     #activities;
     #date;
     constructor(date, activities = []){
@@ -19,10 +19,7 @@ class ActivitiesEntry{
         else this.#activities.push(activities)
     }
     modelDump(){
-        return [...this.#activities]
+        const activities = this.#activities.map(activity => ({...activity.modelDump()}))
+        return {date: this.#date.value, activities}
     }
 }
-
-let date = new Date().toISOString().split("T")[0];
-let x = new Activity("t", "coding");
-let v  = new ActivitiesEntry(date, [x])
