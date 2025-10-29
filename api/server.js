@@ -15,12 +15,8 @@ app.use('/activities', ActivityRouter);
 app.use('/auth', AuthRouter);
 app.use('/heatmap', HeatmapRouter);
 
-
-
 //process.cwd is where node process started from (root dir)
 app.use(express.static(path.join(process.cwd(), "client")))
-
-
 
 app.get("/", (req, res) => {
     res.send("Hello World!")
