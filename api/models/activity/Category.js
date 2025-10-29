@@ -8,7 +8,7 @@ export default class Category{
             Object.freeze(this); // make this Object instance immutable
         }
         else {
-            throw new Error("Input not a valid Category!")
+            throw new Error(`Input ${category} is not a valid Category!`)
         }
     }
     get value(){
