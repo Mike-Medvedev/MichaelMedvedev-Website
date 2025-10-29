@@ -10,27 +10,23 @@ class ActivityServiceClass {
     constructor() {
         if (!ActivityServiceClass.#instance) {
             ActivityServiceClass.#instance = this;
+            console.log("NO INSTANCE YET, MAKING NOW")
         }
+        console.log("RETURNING PREVIOUS INSTANCE")
         return ActivityServiceClass.#instance;
-    }
-    getById(id) {
-
     }
     getByDate(date) {
         const selectedDate = new ActivityDate(date).value
         const entry = new ActivityEntry(selectedDate);
-
         const query = DatabaseManager.db.prepare(`
             SELECT * FROM activities
             WHERE date = ?`
         )
         const result = query.all(selectedDate)
-        
         for (let activity of result) {
             const newActivity = new PublicActivity(activity.id, activity.title, activity.category)
             entry.add(newActivity)
         }
-
         return entry
     }
     getByRange(startDay, endDay) {
@@ -45,9 +41,6 @@ class ActivityServiceClass {
             const results = allActivities.all(d1, d2); //[{date: "2025-05-05", count: 5}, {date: "2025-05-06", count: 7}]
             return results;
     }
-    getByYear(year) {
-
-    }
     create(activity) {
         try {
             const insert = DatabaseManager.db.prepare(`
@@ -55,10 +48,8 @@ class ActivityServiceClass {
             (title, category, date)
             VALUES (?, ?, ?)
             `)
-
             const {title, category, date} = activity.modelDump()
             const obj = insert.run(title, category, date)
-            
             return obj.lastInsertRowid
         } catch (e) {
             throw new Error(e)
