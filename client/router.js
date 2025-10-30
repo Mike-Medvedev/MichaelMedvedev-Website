@@ -15,7 +15,7 @@ function Router() {
 
     function navigate(route){
         if (getCurrentPathname() === route) return;
-        window.history.pushState({ routesKey: route }, "", `${window.env.BASE_URL}${route}`);
+        window.history.pushState({ routesKey: route }, "", route);
         togglePage(route);
     };
 

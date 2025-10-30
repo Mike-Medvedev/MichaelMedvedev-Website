@@ -20,8 +20,10 @@
     --text-color-primary-gradient: var(--primary-gradient);
 
    --border-color-default: var(--white-500);
+   --border-color-primary: var(--blue-500);
    --border-color-active: color-mix(in srgb, var(--blue-500) 30%, transparent);
    --border-color-hover: color-mix(in srgb, var(--blue-500) 50%, transparent);
+   
    --border-width-default: var(--border-width-sm);
    --border-style-default: solid;
 

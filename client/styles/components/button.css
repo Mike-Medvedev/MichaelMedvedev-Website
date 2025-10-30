@@ -1,16 +1,13 @@
-@import "_primitives.css";
-@import "_semantics.css";
-@import "typography.css";
-
 .button{
    background-color: transparent;
    padding-inline: var(--space-5);
    padding-block: var(--space-3);
    color: var(--text-color-default);
-   font-size: var(--text-body-1-size);
-   font-weight: var(--text-body-1-weight);
-   line-height: var(--text-body-1-line-height);
+   font-size: var(--text-body-2-size);
+   font-weight: var(--text-body-2-weight);
+   line-height: var(--text-body-2-line-height);
    cursor: pointer;
+   border: var(--border-width-default) var(--border-style-default) transparent;
 
     &:hover{
         background-color: var(--background-color-primary-surface);
@@ -18,12 +15,11 @@
         border-width: var(--border-width-default);
         border-style: var(--border-style-default);
         border-color: var(--border-color-hover);
-    }
-    &.selected{
-        background-color: var(--background-color-primary);
-        border-color: var(--border-color-active);
+        color: var(--text-color-default);
     }
     &:active{
+        background-color: var(--background-color-primary);
         border-color: var(--border-color-active);
+        color: var(--text-color-primary);
     }
 }

@@ -1,0 +1,50 @@
+.text-xl {
+    font-size: var(--font-size-xl);
+}
+
+.text-lg {
+    font-size: var(--font-size-lg);
+}
+
+
+.text-muted {
+    color: var(--text-color-muted-sm);
+}
+
+.text-sm {
+    font-size: 0.875rem;
+}
+
+.text-muted-extra {
+    color: var(--text-color-muted-md);
+}
+
+.text-quote {
+    color: var(--text-color-muted-lg);
+}
+
+.text-primary {
+    color: var(--text-color-primary);
+}
+.text-primary-bright {
+    color: var(--text-color-primary);
+}
+
+.text-gradient {
+    background-image: var(--gradient-primary);
+    background-clip: text;
+    color: transparent;
+}
+
+
+.mr-1 {
+    margin-right: var(--space-1);
+}
+
+.mb-3 {
+    margin-bottom: var(--space-3)
+}
+
+.mb-4 {
+    margin-bottom: var(--space-4)
+}
