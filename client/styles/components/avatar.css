@@ -1,0 +1,9 @@
+.avatar{
+    width: 12rem;
+    height: 12rem;
+    border-width: var(--border-width-lg);
+    border-style: var(--border-style);
+    border-color: var(--border-color-active);
+    border-radius: var(--border-radius-circle);
+    box-shadow: var(--shadow-primary-default);
+}

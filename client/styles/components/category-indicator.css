@@ -1,0 +1,24 @@
+.category-indicator {
+    width: var(--space-3);
+    height: var(--space-3);
+    border-radius: var(--border-radius-circle);
+    background-color: var(--white-100);
+  
+    &[size="medium"] {
+      width: var(--space-4);
+      height: var(--space-4);
+    }
+  
+    &[category="coding"] {
+      background-color: blue;
+    }
+    &[category="reading"] {
+      background-color: red;
+    }
+    &[category="music"] {
+      background-color: orange;
+    }
+    &[category="fitness"] {
+      background-color: green;
+    }
+  }
