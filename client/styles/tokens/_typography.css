@@ -1,0 +1,48 @@
+@import "_primitives.css";
+:root {
+    --font-family: "Raleway", system-ui, sans-serif;
+
+    --font-size-default: var(--font-size-md);
+    --font-weight-regular: var(--font-weight-400);
+    --font-weight-bold: var(--font-weight-700);
+ 
+    --line-height-default: var(--line-height-md);
+    --line-height-header: var(--line-height-sm);
+
+    --text-title-1-size: 6rem;
+    --text-title-1-weight: var(--font-weight-300);
+    --text-title-1-line-height: var(--line-height-sm);
+
+    --text-title-2-size: 3.75rem;
+    --text-title-2-weight: var(--font-weight-400);
+    --text-title-2-line-height: var(--line-height-sm);
+
+    --text-title-3-size: 3rem;
+    --text-title-3-weight: var(--font-weight-500);
+    --text-title-3-line-height: var(--line-height-sm);
+
+    --text-title-4-size: 1.5rem;
+    --text-title-4-weight: var(--font-weight-700);
+    --text-title-4-line-height: var(--line-height-md);
+
+    --text-subtitle-1-size: 1rem;
+    --text-subtitle-1-weight: var(--font-weight-700);
+    --text-subtitle-1-line-height: var(--line-height-m);
+
+    --text-subtitle-2-size: 0.875rem;
+    --text-subtitle-2-weight: var(--font-weight-700);
+    --text-subtitle-2-line-height: var(--line-height-m);
+
+    --text-body-1-size: 1rem;
+    --text-body-1-weight: var(--font-weight-500);
+    --text-body-1-line-height: var(--line-height-m);
+
+    --text-body-2-size: 0.875rem;
+    --text-body-2-weight: var(--font-weight-500);
+    --text-body-2-line-height: var(--line-height-m);
+
+    --text-quote-1-size: 0.75rem;
+    --text-quote-1-weight: var(--font-weight-500);
+    --text-quote-1-line-height: var(--line-height-m);
+
+}

@@ -1,0 +1,13 @@
+@import "_primitives.css";
+@import "_semantics.css";
+@import "typography.css";
+
+.card{
+   background-color: var(--background-color-surface);
+   padding: var(--space-7);
+   border-color: var(--border-color-default);
+   border-style: var(--border-style-default);
+   border-width: var(--border-width-default);
+   border-radius: var(--border-radius-default);
+   max-width: 80rem;
+}
