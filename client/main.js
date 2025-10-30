@@ -1,10 +1,3 @@
-/**
- * Javascript Entry point
- * Renders Dynamic Content
- * Registers Event Listeners
- * Fetches Data from server
- */
-
 import router from "./router.js"
 import "./web-components/custom-tooltip.js"
 import "./config.js"

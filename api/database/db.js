@@ -11,7 +11,7 @@ class DatabaseManagerClass {
         DatabaseManagerClass.seed();
         return DatabaseManagerClass.#singleton
     }
-    get instance() {
+    static get instance() {
         return DatabaseManagerClass.#singleton
     }
     get db() {
