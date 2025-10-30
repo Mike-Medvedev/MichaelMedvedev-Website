@@ -1,8 +1,6 @@
 @import "_primitives.css";
 
 :root {
-    --font-family: "Raleway", system-ui, sans-serif;
-
     --primary-color: var(--blue-500);
 
     --background-color-default: var(--black-500);
@@ -20,13 +18,6 @@
     --text-color-muted-md: var(--white-400);
     --text-color-muted-lg: var(--white-500);
     --text-color-primary-gradient: var(--primary-gradient);
-
-   --font-size-default: var(--font-size-md);
-   --font-weight-regular: var(--font-weight-400);
-   --font-weight-bold: var(--font-weight-700);
-
-   --line-height-default: var(--line-height-md);
-   --line-height-header: var(--line-height-sm);
 
    --border-color-default: var(--white-500);
    --border-color-active: color-mix(in srgb, var(--blue-500) 30%, transparent);

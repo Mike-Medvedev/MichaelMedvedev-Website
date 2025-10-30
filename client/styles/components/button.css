@@ -1,0 +1,29 @@
+@import "_primitives.css";
+@import "_semantics.css";
+@import "typography.css";
+
+.button{
+   background-color: transparent;
+   padding-inline: var(--space-5);
+   padding-block: var(--space-3);
+   color: var(--text-color-default);
+   font-size: var(--text-body-1-size);
+   font-weight: var(--text-body-1-weight);
+   line-height: var(--text-body-1-line-height);
+   cursor: pointer;
+
+    &:hover{
+        background-color: var(--background-color-primary-surface);
+        border-radius: var(--border-radius-default);
+        border-width: var(--border-width-default);
+        border-style: var(--border-style-default);
+        border-color: var(--border-color-hover);
+    }
+    &.selected{
+        background-color: var(--background-color-primary);
+        border-color: var(--border-color-active);
+    }
+    &:active{
+        border-color: var(--border-color-active);
+    }
+}
