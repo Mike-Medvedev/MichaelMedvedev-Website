@@ -5,6 +5,7 @@ import ActivityOverview from "../components/activity-overview.js"
 import secretButton from "./secret-button.js"
 import Cell from "./Cell.js"
 import http from "../http/http.client.js"
+import registry from "../ComponentRegistry.js"
 function HeatMap(){
     const heatmap = document.querySelector(".heatmap");
     (async function loadHeatMap() {
@@ -40,7 +41,19 @@ function HeatMap(){
             cell.dimOtherCells()
 
             const { data, error } = await http.get(`/activities?selected-day=${cell.date}`)
-            ActivityOverview(data).show();
+            
+            
+            if(!registry.didMount(Symbol.for("ActivityOverview"))){
+                const activityOverview = ActivityOverview();
+                activityOverview.mount();
+                activityOverview.render(data);
+                registry.addMountedComponent(activityOverview)
+            }
+            else {
+                const activityOverview = registry.getMountedComponent(Symbol.for("ActivityOverview"));
+                activityOverview.render(data)
+            }
+            
         }
     })
     heatmap.addEventListener("mouseout", (event) => {

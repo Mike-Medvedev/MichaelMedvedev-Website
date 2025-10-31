@@ -5,11 +5,14 @@ async function deleteActivity(id) {
     return !!data
 
 }
-export default function DeleteButton(activity) {
-    const deleteButton = document.createElement("button")
-    deleteButton.textContent = "Delete";
-    deleteButton.style.marginLeft = "auto";
-    deleteButton.style.color = "#AA1111"
-    deleteButton.addEventListener("click", () => deleteActivity(activity.id), { once: true }) //removes after used once.
-    return deleteButton;
+export default function DeleteButton(activity){  //creates dom component 
+    function create() {
+        const deleteButton = document.createElement("button")
+        deleteButton.textContent = "Delete";
+        deleteButton.style.marginLeft = "auto";
+        deleteButton.style.color = "#AA1111"
+        deleteButton.addEventListener("click", () => deleteActivity(activity.id), { once: true }) //removes after used once.
+        return deleteButton;
+    }
+    return { create }
 }

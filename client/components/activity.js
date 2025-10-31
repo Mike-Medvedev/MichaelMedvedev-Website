@@ -1,26 +1,25 @@
 import auth from "../auth/auth.js"
 import DeleteButton from "./delete-button.js"
+import CategoryIndicator from "./category-indicator.js"
 import {isEqualDay} from "../utils/date-utils.js"
+import TextNode from "./text-node.js"
 
-export default function CreateActivity(activity){
-    const container = document.createElement("div")
-    container.classList.add("activity");
+export default function Activity(activity){
+    function createComponent(){
+        const container = document.createElement("div")
+        container.classList.add("activity");
 
-    const categoryIndicator = document.createElement("span")
-    categoryIndicator.classList.add("category-indicator")
-    categoryIndicator.setAttribute("category", activity.category.toLowerCase())
-    categoryIndicator.setAttribute("size", "medium");
+        const categoryIndicator = CategoryIndicator(activity).createComponent()
+        const activityTitle = TextNode(activity.title).createComponent()
 
-    const title = document.createElement("div");
-    title.innerText = activity.title;
-    title.classList.add("mr-1");
+        container.append(categoryIndicator, activityTitle);
 
-    container.append(categoryIndicator, title);
-
-    if (auth.isAdmin() && isEqualDay(activity.date, new Date())) {
-        const deleteButton = DeleteButton(activity)
-        container.appendChild(deleteButton)
+        if (auth.isAdmin() && isEqualDay(activity.date, new Date())) {
+            const deleteButton = DeleteButton(activity).create()
+            container.appendChild(deleteButton)
+        }
+        return container;
     }
 
-    return container
+    return { createComponent }
 }
