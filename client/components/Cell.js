@@ -18,9 +18,6 @@ export default class Cell{
     }
     select(){
         this.cell.setAttribute("selected", "true");
-        document.querySelectorAll('td[selected="true"]:not(.activity-label)').forEach(td => {
-            td.style.filter = 'brightness(1.5)';
-        });
     }
     deselect(cell){
         this.cell.removeAttribute("selected");
@@ -35,7 +32,7 @@ export default class Cell{
 
     dimOtherCells(){
         document.querySelectorAll('td:not([selected="true"]):not(.activity-label)').forEach(td => {
-            td.style.filter = 'brightness(0.8)'
+            td.style.filter = 'brightness(0.9)'
         });
         
     }
