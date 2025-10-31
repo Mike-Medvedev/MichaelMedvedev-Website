@@ -41,5 +41,16 @@
     --gradient-primary: linear-gradient(90deg, #4fc3f7 0%, #64b5f6 50%, #42a5f5 100%);
     --gradient-surface: linear-gradient(to bottom right, rgba(41, 56, 89, 0.3), rgba(28, 27, 38, 0.3));
 
+    --activity-level-0: var(--black-300);
+    --activity-level-1: lch(59.09 40.6 245.65 / 45.77%);
+    --activity-level-2: lch(65.33 41.57 246.71 / 79.06%);
+    --activity-level-3: lch(65.33 44 247.76);
+    --activity-level-4: #4fc3f7;
+
+
+    --category-coding: var(--primary-color);
+    --category-reading: #E84855;
+    --category-fitness: #8FD694;
+    --category-music: #7D7ABC;
 
 }

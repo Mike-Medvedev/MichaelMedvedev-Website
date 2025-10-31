@@ -25,16 +25,16 @@ td {
     }
 
     &[data-activity-level="1"]{
-        background-color: var(--blue-300);
+        background-color: var(--activity-level-1);
     }
     &[data-activity-level="2"]{
-        background-color: var(--blue-400);
+        background-color: var(--activity-level-2);
     }
     &[data-activity-level="3"]{
-        background-color: var(--blue-500);
+        background-color: var(--activity-level-3);
     }
     &[data-activity-level="4"]{
-        background-color: var(--blue-600);
+        background-color: var(--activity-level-4);
     }
  
     span {

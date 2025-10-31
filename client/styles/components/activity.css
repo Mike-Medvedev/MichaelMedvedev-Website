@@ -1,0 +1,56 @@
+
+
+.activity-overview {
+    display: none;
+    width: 100%;
+    max-width: 60rem;
+    padding: var(--space-7);
+    flex-direction: column;
+}
+
+.activity-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.activities {
+    padding-inline: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.activity {
+    padding: var(--space-5);
+    background-color: var(--background-color-surface);
+    border-radius: var(--border-radius-xl);
+    border-color: var(--border-color-default);
+    border-style: var(--border-style-default);
+    border-width: var(--border-width-default);
+    border-radius: var(--border-radius-default);
+    display: flex;
+    align-items: center;
+}
+.activity-form{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    align-items: center;
+
+    select {
+        width: fit-content;
+    }
+    textarea {
+        width: 100%;
+    }
+}
+
+.activity-legend {
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border: var(--card-border-width) var(--card-border-style) transparent;
+    border-top-color: var(--border-color-light);
+    display: flex;
+    gap: var(--space-3);
+}

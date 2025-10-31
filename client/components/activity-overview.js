@@ -13,7 +13,10 @@ export default function ActivityOverview(){
     function render(result){
         const activityDate = new Date(result.date)
         activityDateElement.innerText = `${activityDate.toLocaleDateString("en-US", { month: "long" })} ${activityDate.getUTCDate()}, ${activityDate.getFullYear()}`
-        const activities = result.activities.map(activity => Activity(activity).createComponent())
+        const activities = result.activities.map(activity => {
+            activity.date = result.date //quick patch for development
+            return Activity(activity).createComponent()
+        })
         activityContainer.replaceChildren(...activities);
     }
     function mount(){

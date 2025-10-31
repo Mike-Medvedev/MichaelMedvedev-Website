@@ -12,7 +12,7 @@ export default function SecretButton() {
     secretButton.hidden = true;
 
     async function handleClick(){
-            if (!auth.isAdmin()) return;
+            if (!auth.isAdmin) return;
     
             const { data, error } = await http.get("/activities/options")
             data.forEach(activity => {
