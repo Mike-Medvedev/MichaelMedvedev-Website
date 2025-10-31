@@ -4,12 +4,17 @@ export default function ActiviyLegend(){
     activityLegend.classList.add("activity-legend");
 
     const categoryItems = CATEGORIES.map((category) => {
-        const categoryItem = document.createElement("span");
-        categoryItem.classList.add("category-item");
-        categoryItem.setAttribute("category", category)
-        categoryItem.innerText = category;
-        categoryItem.setAttribute("size", "small")
-        return categoryItem;
+        const container = document.createElement("div");
+        container.classList.add("flex", "align-center");
+        const text = document.createTextNode("category")
+        const categoryIndicator = document.createElement("div");
+        categoryIndicator.classList.add("category-indicator");
+        categoryIndicator.setAttribute("category", category)
+        categoryIndicator.setAttribute("size", "small")
+
+        container.append(categoryIndicator, text)
+
+        return container;
     })
 
 

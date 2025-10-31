@@ -14,19 +14,23 @@ td {
     height: var(--space-3);
     width: var(--space-3);
     border-radius: calc(var(--border-radius-sm) + 1px);
-    background-color: var(--blue-800);
+    background-color: var(--black-300);
+
+    &[selected="true"]{
+        filter: brightness(1.1);
+    }
 
     &[data-activity-level="1"]{
-        background-color: var(--blue-100);
-    }
-    &[data-activity-level="2"]{
-        background-color: var(--blue-200);
-    }
-    &[data-activity-level="3"]{
         background-color: var(--blue-300);
     }
-    &[data-activity-level="4"]{
+    &[data-activity-level="2"]{
         background-color: var(--blue-400);
+    }
+    &[data-activity-level="3"]{
+        background-color: var(--blue-500);
+    }
+    &[data-activity-level="4"]{
+        background-color: var(--blue-600);
     }
  
     span {

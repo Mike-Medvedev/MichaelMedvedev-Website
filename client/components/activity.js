@@ -7,8 +7,9 @@ export default function CreateActivity(activity){
     container.classList.add("activity");
 
     const categoryIndicator = document.createElement("span")
-    categoryIndicator.classList.add("category")
+    categoryIndicator.classList.add("category-indicator")
     categoryIndicator.setAttribute("category", activity.category.toLowerCase())
+    categoryIndicator.setAttribute("size", "medium");
 
     const title = document.createElement("div");
     title.innerText = activity.title;

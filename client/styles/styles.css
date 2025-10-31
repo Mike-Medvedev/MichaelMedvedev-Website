@@ -4,7 +4,8 @@
 @import "./tokens/_typography.css";
 @import "./utils.css";
 @import "./components/index.css";
-/* Declaring Design System Primitives */
+
+
 :root {
     font-family: var(--font-family);
     color: var(--text-color-default);
@@ -78,7 +79,9 @@ header {
     width: 100%;
     background-color: var(--background-color-surface);
     border: var(--border-width-default) var(--border-style-default) var(--border-color-default);
-    padding: var(--space-7);
+    padding-block: var(--space-4);
+    padding-inline: var(--space-6);
+    border-top: none;
 
     .header-section {
         max-width: 80rem;
@@ -106,7 +109,6 @@ main {
     align-items: center;
     justify-content: center;
     padding: var(--space-9);
-    max-width: 60rem;
     width: 100%;
 
     .main-section {
@@ -140,12 +142,8 @@ footer {
     color: var(--text-muted-sm);
 }
 
-
-
-.heatmap-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.heatmap{
+    margin: var(--space-3);
 }
 
 .heatmap-container {
@@ -164,10 +162,6 @@ footer {
     }
 }
 
-.heatmap {
-    display: flex;
-}
-
 
 div[data-activity-level="0"],
 div[data-activity-level="1"],
@@ -179,23 +173,23 @@ div[data-activity-level="4"]{
     width: var(--space-3);
 }
 div[data-activity-level="0"] {
-    background-color: var(--blue-800);
+    background-color: var(--black-300);
 }
 
 div[data-activity-level="1"] {
-    background-color: var(--blue-100);
-}
-
-div[data-activity-level="2"] {
-    background-color: var(--blue-200);
-}
-
-div[data-activity-level="3"] {
     background-color: var(--blue-300);
 }
 
-div[data-activity-level="4"] {
+div[data-activity-level="2"] {
     background-color: var(--blue-400);
+}
+
+div[data-activity-level="3"] {
+    background-color: var(--blue-500);
+}
+
+div[data-activity-level="4"] {
+    background-color: var(--blue-600);
 }
 
 .button-stack {
@@ -203,7 +197,7 @@ div[data-activity-level="4"] {
     flex-direction: column;
 }
 
-@media (max-width: var(--breakpoint-xl)) {
+@media (max-width: 1010px) {
     .button-stack {
         display: none;
     }
@@ -214,6 +208,7 @@ div[data-activity-level="4"] {
 .activity-overview {
     display: none;
     width: 100%;
+    max-width: 60rem;
     padding: var(--space-7);
     flex-direction: column;
 }
@@ -241,7 +236,6 @@ div[data-activity-level="4"] {
     border-radius: var(--border-radius-default);
     display: flex;
     align-items: center;
-    gap: var(--space-3);
 }
 .activity-form{
     display: flex;
@@ -266,34 +260,6 @@ div[data-activity-level="4"] {
     gap: var(--space-3);
 }
 
-.category-item {
-    font-size: var(--font-size-50);
-    text-transform: capitalize;
-}
-
-.category-item::before {
-    content: "";
-    display: inline-block;
-    width: var(--space-2);
-    height: var(--space-2);
-    border-radius: var(--border-radius-circle);
-    margin-right: var(--space-1);
-}
-.category-item[category="coding"]::before {
-    background-color: blue;
-}
-
-.category-item[category="reading"]::before {
-    background-color: red;
-}
-
-.category-item[category="music"]::before {
-    background-color: orange;
-}
-
-.category-item[category="fitness"]::before {
-    background-color: green;
-}
 
 .arrow-svg {
     width: 6rem;

@@ -1,11 +1,12 @@
 .card{
+   width: 100%;
+   max-width: 60rem;
    background-color: var(--background-color-surface);
    padding: var(--space-7);
    border-color: var(--border-color-default);
    border-style: var(--border-style-default);
    border-width: var(--border-width-default);
    border-radius: var(--border-radius-default);
-   width: 100%;
    display: flex;
    flex-direction: column;
    gap: var(--space-3);
@@ -16,3 +17,4 @@
 .card::-webkit-scrollbar {
    display: none;
 }
+

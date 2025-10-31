@@ -19,7 +19,7 @@
     --text-color-muted-lg: var(--white-500);
     --text-color-primary-gradient: var(--primary-gradient);
 
-   --border-color-default: var(--white-500);
+   --border-color-default: var(--black-300);
    --border-color-primary: var(--blue-500);
    --border-color-active: color-mix(in srgb, var(--blue-500) 30%, transparent);
    --border-color-hover: color-mix(in srgb, var(--blue-500) 50%, transparent);
