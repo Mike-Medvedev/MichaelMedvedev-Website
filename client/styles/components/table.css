@@ -16,6 +16,10 @@ td {
     border-radius: calc(var(--border-radius-sm) + 1px);
     background-color: var(--black-300);
 
+    &.dim {
+        filter: brightness(0.9);
+      }
+
     &[selected="true"]{
         filter: brightness(1.1);
     }

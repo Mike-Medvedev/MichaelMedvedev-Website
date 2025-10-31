@@ -10,7 +10,7 @@
     --background-color-selected: color-mix(in srgb, var(--blue-900) 20%, transparent);
     --background-color-primary: var(--primary-color);
     --background-color-primary-surface: color-mix(in srgb, var(--blue-900) 40%, transparent);
-    --background-color-primary-hover: var(--blue-800);
+    --background-color-primary-hover: color-mix(in srgb, var(--blue-900) 10%, transparent);
     --background-color-primary-active: var(--blue-700);
 
     --text-color-default: var(--white-200);

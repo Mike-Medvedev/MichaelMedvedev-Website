@@ -57,8 +57,8 @@ function Heatmap() {
             }
             else {
                 cell.clearSelectedCells();
+                cell.dimOtherCells();
                 cell.select(cell)
-                cell.dimOtherCells()
 
                 const { data, error } = await http.get(`/activities?selected-day=${cell.date}`)
 

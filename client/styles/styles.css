@@ -228,7 +228,7 @@ div[data-activity-level="4"] {
 
 .activity {
     padding: var(--space-5);
-    background-color: var(--background-color-primary-surface);
+    background-color: var(--background-color-surface);
     border-radius: var(--border-radius-xl);
     border-color: var(--border-color-default);
     border-style: var(--border-style-default);
