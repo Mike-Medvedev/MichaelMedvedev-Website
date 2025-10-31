@@ -1,13 +1,14 @@
 class ComponentRegistry{
     #registry = new Map();
+
     addMountedComponent(component){
         this.#registry.set(component.id, component)
     }
     removeUnmountedComponent(id){
+        const component = this.getMountedComponent(id);
         this.#registry.delete(id)
     }
     didMount(id){
-        console.log(this.#registry)
         return this.#registry.has(id)
     }
     getMountedComponent(id){

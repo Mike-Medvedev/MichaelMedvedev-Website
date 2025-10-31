@@ -15,7 +15,7 @@ export default function Activity(activity){
         container.append(categoryIndicator, activityTitle);
 
         if (auth.isAdmin() && isEqualDay(activity.date, new Date())) {
-            const deleteButton = DeleteButton(activity).create()
+            const deleteButton = DeleteButton(activity).createComponent()
             container.appendChild(deleteButton)
         }
         return container;

@@ -2,25 +2,44 @@
 
 import dialog from "./dialog.js"
 import auth from "../auth/auth.js"
-import activityOption from "./activity-option.js"
+import ActivityOption from "./activity-option.js"
 import http from "../http/http.client.js"
 
-function SecretButton() {
+export default function SecretButton() {
+    const id = Symbol.for("SecretButton");
+    let isMounted = false;
     const secretButton = document.querySelector("#secret-button");
     secretButton.hidden = true;
-    secretButton.addEventListener("click", async () => {
-        if (!auth.isAdmin()) return;
 
-        const { data, error } = await http.get("/activities/options")
-        data.forEach(activity => {
-            activityOption.render(activity)
-        })
-        dialog.open()
-    });
+    async function handleClick(){
+            if (!auth.isAdmin()) return;
+    
+            const { data, error } = await http.get("/activities/options")
+            data.forEach(activity => {
+                ActivityOption(activity).createComponent()
+            })
+            dialog.open()
+    }
+
+
+    function mount(){
+        secretButton.hidden = false
+        secretButton.addEventListener("click", handleClick);
+        isMounted = true;
+    }
+
+    function unmount(){
+        secretButton.hidden = true
+        secretButton.removeEventListener("click", handleClick)
+        isMounted = false;
+    }
+
     return {
-        show: () => secretButton.hidden = false,
-        hide: () => secretButton.hidden = true
+        id,
+        mount,
+        unmount,
+        get isMounted(){
+            return isMounted;
+        }
     }
 }
-const secretButton = SecretButton()
-export default secretButton
