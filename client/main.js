@@ -1,9 +1,8 @@
 import router from "./router.js"
 import "./web-components/custom-tooltip.js"
 import "./config.js"
-import heatmap from "./components/heatmap.js"
-import dialogForm from "./components/dialog-form.js"
+import Heatmap from "./components/heatmap.js"
 
 
-router.setupNavigation()
-
+router.setupNavigation();
+Heatmap().mount();
