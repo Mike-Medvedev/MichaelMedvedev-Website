@@ -6,7 +6,7 @@ async function deleteActivity(id) {
 
 }
 export default function DeleteButton(activity){  //creates dom component 
-    function create() {
+    function createComponent() {
         const deleteButton = document.createElement("button")
         deleteButton.textContent = "Delete";
         deleteButton.style.marginLeft = "auto";
@@ -14,5 +14,5 @@ export default function DeleteButton(activity){  //creates dom component
         deleteButton.addEventListener("click", () => deleteActivity(activity.id), { once: true }) //removes after used once.
         return deleteButton;
     }
-    return { create }
+    return { createComponent }
 }
