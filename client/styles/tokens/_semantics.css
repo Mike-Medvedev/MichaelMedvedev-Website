@@ -7,8 +7,9 @@
     --background-color-surface: var(--black-400);
     --background-color-hover: var(--black-300);
     --background-color-active: var(--black-200);
+    --background-color-selected: color-mix(in srgb, var(--blue-900) 20%, transparent);
     --background-color-primary: var(--primary-color);
-    --background-color-primary-surface: var(--blue-900);
+    --background-color-primary-surface: color-mix(in srgb, var(--blue-900) 40%, transparent);
     --background-color-primary-hover: var(--blue-800);
     --background-color-primary-active: var(--blue-700);
 
@@ -22,7 +23,7 @@
    --border-color-default: var(--black-300);
    --border-color-primary: var(--blue-500);
    --border-color-active: color-mix(in srgb, var(--blue-500) 30%, transparent);
-   --border-color-hover: color-mix(in srgb, var(--blue-500) 50%, transparent);
+   --border-color-hover: color-mix(in srgb, var(--blue-700) 10%, rgba(170, 170, 170, 0.2));
    
    --border-width-default: var(--border-width-sm);
    --border-style-default: solid;
