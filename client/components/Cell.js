@@ -31,8 +31,8 @@ export default class Cell{
     }
 
     dimOtherCells(){
-        document.querySelectorAll('td:not([selected="true"]):not(.activity-label)').forEach(td => {
-            td.style.filter = 'brightness(0.9)'
+        document.querySelectorAll('td:not(.activity-label)').forEach(td => {
+            td.classList.add("dim")
         });
         
     }
