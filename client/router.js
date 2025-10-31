@@ -9,7 +9,7 @@ function Router() {
             page.hidden = page.id !== route;
         });
         navButtons.forEach((button) => {
-            button.classList.toggle("active", button.id === route);
+            button.classList.toggle("selected", button.id === route);
         });
     };
 

@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
     res.send("Hello World!")
 })
 
-//{*splat} is express v5 catchall route
+//catch all routes to render single page app
 app.get("/{*splat}", (req, res) => {
     res.status(200).sendFile(path.join(process.cwd(), "client", "index.html"))
 })

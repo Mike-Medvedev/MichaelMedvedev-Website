@@ -17,9 +17,12 @@
         border-color: var(--border-color-hover);
         color: var(--text-color-default);
     }
-    &:active{
-        background-color: var(--background-color-primary);
-        border-color: var(--border-color-active);
+    &.selected{
         color: var(--text-color-primary);
+        background-color: var(--background-color-selected);
+        border-color: var(--border-color-active);
+        border-radius: var(--border-radius-default);
+        border-width: var(--border-width-default);
+        border-style: var(--border-style-default);
     }
 }
