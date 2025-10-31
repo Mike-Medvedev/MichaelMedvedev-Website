@@ -1,0 +1,49 @@
+.heatmap{
+    margin: var(--space-3);
+}
+
+.heatmap-container {
+    width: 100%;
+    display: block;
+
+    .heatmap-legend {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        &>div {
+            display: flex;
+            place-items: center;
+        }
+    }
+}
+
+
+div[data-activity-level="0"],
+div[data-activity-level="1"],
+div[data-activity-level="2"],
+div[data-activity-level="3"],
+div[data-activity-level="4"]{
+    border-radius: calc(var(--border-radius-sm) + 1px);
+    height: var(--space-3);
+    width: var(--space-3);
+}
+div[data-activity-level="0"] {
+    background-color: var(--activity-level-0);
+}
+
+div[data-activity-level="1"] {
+    background-color: var(--activity-level-1);
+}
+
+div[data-activity-level="2"] {
+    background-color: var(--activity-level-2);
+}
+
+div[data-activity-level="3"] {
+    background-color: var(--activity-level-3);
+}
+
+div[data-activity-level="4"] {
+    background-color: var(--activity-level-4);
+}

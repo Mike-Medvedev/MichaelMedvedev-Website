@@ -1,4 +1,4 @@
-import { getCurrentPathname } from "./utils/path-utils.js";
+import { getCurrentPathname } from "./utils/path.utils.js";
 
 function Router() {
     const pages = document.querySelectorAll("main");

@@ -1,6 +1,6 @@
 import ToolTip from "./tooltip.js";
 import auth from "../auth/auth.js"
-import { isEqualDay } from "../utils/date-utils.js"
+import { isEqualDay } from "../utils/date.utils.js"
 import ActivityOverview from "../components/activity-overview.js"
 import SecretButton from "./secret-button.js"
 import Cell from "./Cell.js"
@@ -35,7 +35,7 @@ function Heatmap() {
 
 
             const today = new Date()
-            if (auth.isAdmin() && isEqualDay(cell.date, today)) {
+            if (auth.isAdmin && isEqualDay(cell.date, today)) {
                 if (!secretButton.isMounted) {
                     secretButton.mount();
                 }
@@ -61,7 +61,6 @@ function Heatmap() {
                 cell.select(cell)
 
                 const { data, error } = await http.get(`/activities?selected-day=${cell.date}`)
-
 
                 if (!registry.didMount(Symbol.for("ActivityOverview"))) {
                     const activityOverview = ActivityOverview();

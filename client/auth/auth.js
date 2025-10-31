@@ -6,7 +6,7 @@ async function Auth() {
     const { data, error } = await http.get("/auth/token");
     validated = !!data;
 
-    return { isAdmin: () => validated }
+    return { get isAdmin(){ return validated } }
 }
 
 const auth = await Auth();
