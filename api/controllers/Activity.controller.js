@@ -4,18 +4,18 @@ import Activity from "../models/activity/Activity.js"
 import ActivityService from "../services/Activity.service.js"
 import Category from "../models/activity/Category.js"
 
-ActivityRouter.get("/", (req, res) => {
+ActivityRouter.get("/", async (req, res) => {
     const selectedDay = req.query["selected-day"];
     if(!selectedDay) res.sendStatus(400)
-    const entry = ActivityService.getByDate(selectedDay)
+    const entry = await ActivityService.getByDate(selectedDay)
     return res.json(entry.modelDump())
 
 })
 
-ActivityRouter.post("/", (req, res) => {
+ActivityRouter.post("/", async (req, res) => {
     const {title, category} = req.body
     const newActivity = new Activity(title, category)
-    const createdId = ActivityService.create(newActivity);
+    const createdId = await ActivityService.create(newActivity);
     res.status(201).send(createdId)
 })
 
@@ -26,8 +26,12 @@ ActivityRouter.delete("/:id", function(req, res) {
 })
 
 ActivityRouter.get("/options", (req, res) => {
-    console.log(Category.categories)
     res.json(Category.categories)
+})
+
+ActivityRouter.get("/count", async(req, res) => {
+    const count = await ActivityService.getCount();
+    res.json(count)
 })
 
 export default ActivityRouter

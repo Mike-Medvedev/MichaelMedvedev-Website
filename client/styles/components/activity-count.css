@@ -1,0 +1,4 @@
+.activity-count{
+    font-size: var(--font-size-lg);
+    color: var(--text-color-muted-sm);
+}

@@ -3,8 +3,8 @@ import renderHeatMap from "../heatmap.js"
 
 const HeatmapRouter = express.Router();
 
-HeatmapRouter.get("/", (req, res) => {
-    const heatmapHtml = renderHeatMap()
+HeatmapRouter.get("/", async (req, res) => {
+    const heatmapHtml = await renderHeatMap()
     res.status(200).json({html: heatmapHtml});
 })
 

@@ -4,7 +4,7 @@ export default class Category{
     #category = null;
     constructor(category){
         if(Category.#categories.includes(StringUtils.clean(category))){
-            this.#category = category;
+            this.#category = StringUtils.clean(category);
             Object.freeze(this); // make this Object instance immutable
         }
         else {

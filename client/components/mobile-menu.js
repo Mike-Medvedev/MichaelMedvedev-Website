@@ -1,11 +1,13 @@
 export default function MobileMenu(){
-    const triggerButton = document.querySelector("#hamburger");
-    const rect = triggerButton.getBoundingClientRect();
+    function mount(){
+        const triggerButton = document.querySelector("#hamburger");
+        const rect = triggerButton.getBoundingClientRect();
+    
+        const menu = document.querySelector(".mobile-menu");
+        menu.style.top = rect.bottom + "px";
+    }
 
-    console.log(rect)
-
-    const menu = document.querySelector(".mobile-menu");
-    console.log(menu)
-    menu.style.top = rect.bottom + "px";
-
+    return {
+        mount
+    }
 }

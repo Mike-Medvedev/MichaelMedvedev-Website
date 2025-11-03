@@ -31,13 +31,13 @@ function generateWeeksFromPastYear() {
 
 }
 
-export default function renderHeatMap() {
+export default async function renderHeatMap() {
     const dates = generateWeeksFromPastYear();
     const startDay = dates.flat(1)[0];
     const endDay = dates.flat(1)[dates.flat(1).length - 1]
     const currentMonth = new Date().toLocaleDateString("en-US", {month: "long"})
 
-    const activityRecords = ActivityService.getByRange(startDay, endDay) //[{date: "2025-05-05", count: 5}]
+    const activityRecords = await ActivityService.getByRange(startDay, endDay) //[{date: "2025-05-05", count: 5}]
    
     const activityCountMap = new Map()
     for(const {date, count} of activityRecords){ // transform results into a map {"2025-05-05": 5}
