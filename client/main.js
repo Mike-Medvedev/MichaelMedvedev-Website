@@ -9,4 +9,4 @@ import ActivityCount from "./components/activity-count.js"
 router.setupNavigation();
 Heatmap().mount();
 MobileMenu().mount()
-ActivityCount().mount()
+await ActivityCount().mount()

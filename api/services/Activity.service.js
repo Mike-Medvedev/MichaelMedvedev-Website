@@ -55,8 +55,6 @@ class ActivityServiceClass {
 
         const { title, category, date } = activity.modelDump()
 
-        console.log(activity.modelDump())
-
         const { data, error } = await DatabaseManager.db
         .from('activities')
         .insert([
@@ -65,7 +63,6 @@ class ActivityServiceClass {
         .select('id');
         
         if(error) {console.error(error)}
-        console.log(data);
 
         return data
     }

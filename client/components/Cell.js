@@ -2,7 +2,6 @@ export default class Cell{
     #isLabel = false;
     isNull = false;
     #date;
-    #selected;
     constructor(event){
         this.cell = event.target.closest("td");
         if(!this.cell) {
@@ -14,15 +13,15 @@ export default class Cell{
         }
         this.rect = this.cell.getBoundingClientRect()
         this.#date = this.cell.getAttribute("data-date");
-        this.#selected = this.cell.getAttribute("selected");
     }
     select(){
         this.cell.setAttribute("selected", "true");
+        this.cell.classList.remove("dim")
     }
     deselect(cell){
         this.cell.removeAttribute("selected");
         document.querySelectorAll('td:not(.activity-label)').forEach(td => {
-            td.classList.toggle("dim");
+            td.classList.remove("dim");
         });
     }
     clearSelectedCells(){
@@ -31,9 +30,8 @@ export default class Cell{
     }
 
     dimOtherCells(){
-        document.querySelectorAll('td:not(.activity-label)').forEach(td => {
-            td.classList.toggle("dim");
-        });
+        document.querySelectorAll("td:not(.activity-label):not([selected='true'])")
+                .forEach(td => td.classList.add("dim"));
         
     }
     get isLabel(){
@@ -43,7 +41,7 @@ export default class Cell{
         return this.#date;
     }
     get isSelected(){
-        return this.#selected;
+        return this.cell.hasAttribute("selected");
     }
 
 }

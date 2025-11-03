@@ -11,39 +11,44 @@ tr {
 
 td {
     position: relative;
-    height: 12px; /* doo not scale this */
+    height: 12px;
     width: 12px;
     border-radius: calc(var(--border-radius-sm) + 1px);
     background-color: var(--black-300);
-
+  
     &.dim {
-        filter: brightness(0.9);
-      }
-
-    &[selected="true"]{
-        filter: brightness(1.4);
+      opacity: 0.5;
     }
-
-    &[data-activity-level="1"]{
-        background-color: var(--activity-level-1);
+  
+    &[selected="true"] {
+        filter: brightness(1.2);
     }
-    &[data-activity-level="2"]{
-        background-color: var(--activity-level-2);
+  
+    &[data-activity-level="1"] {
+      background-color: var(--activity-level-1);
     }
-    &[data-activity-level="3"]{
-        background-color: var(--activity-level-3);
+  
+    &[data-activity-level="2"] {
+      background-color: var(--activity-level-2);
     }
-    &[data-activity-level="4"]{
-        background-color: var(--activity-level-4);
+  
+    &[data-activity-level="3"] {
+      background-color: var(--activity-level-3);
     }
- 
+  
+    &[data-activity-level="4"] {
+      background-color: var(--activity-level-4);
+    }
+  
+  
     span {
-        position: absolute;
-        bottom: -3px;
-        right: 2px;
-        font-size: var(--font-quote-1-size);
+      position: absolute;
+      bottom: -3px;
+      right: 2px;
+      font-size: var(--font-quote-1-size);
     }
-}
+  }
+  
 
 td.activity-label {
     background-color: transparent;

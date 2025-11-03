@@ -31,6 +31,19 @@ function generateWeeksFromPastYear() {
 
 }
 
+
+
+function calculateActivityLevel(activityCount, highestActivityCount) {
+    const activityPercent = activityCount / highestActivityCount;
+    if (!activityPercent || activityPercent === 0) return 0;
+    if (activityPercent > 0 && activityPercent < 0.25) return 1;
+    if (activityPercent >= 0.25 && activityPercent < 0.5) return 2;
+    if (activityPercent >= 0.5 && activityPercent < 0.75) return 3;
+    if (activityPercent >= 0.75 && activityPercent <= 1) return 4;
+
+    return 0; 
+}
+
 export default async function renderHeatMap() {
     const dates = generateWeeksFromPastYear();
     const startDay = dates.flat(1)[0];
@@ -43,6 +56,10 @@ export default async function renderHeatMap() {
     for(const {date, count} of activityRecords){ // transform results into a map {"2025-05-05": 5}
         activityCountMap.set(date, count)
     }
+
+    const highestActivityCount = Math.max(...activityCountMap.values());
+
+    
 
     const currentMonthIndex = MONTH_PREFIXES.findIndex((month) => month === currentMonth.slice(0,3)) //get currentMonth in monthArray
     let monthLabelString = `` 
@@ -75,8 +92,8 @@ export default async function renderHeatMap() {
             if (!week[i]) continue; // each row of the heatmap contains the same weekday for every cell, row 1 = every monday from 2024-2025
             const currentDateObject = week[i];
             const currentDayString = DateUtils.trimTime(week[i]) //"2024-05-07"
-            const countForCurrentDate = activityCountMap.get(currentDayString) || 0; 
-            string += `<td data-activity-level="${countForCurrentDate}" data-date="${currentDayString}">
+            const countForCurrentDate = activityCountMap.get(currentDayString) || 0;
+            string += `<td data-activity-level="${calculateActivityLevel(countForCurrentDate, highestActivityCount)}" data-date="${currentDayString}">
             <custom-tooltip for="${currentDayString}" popover>${countForCurrentDate > 0 ? countForCurrentDate : "No "} Activities on ${currentDateObject.toLocaleDateString("en-US", { month: "long", timeZone: "UTC" })} ${currentDateObject.getUTCDate()}${MONTH_SUFFIX[currentDateObject.getUTCDate() % 10]}</custom-tooltip>
             </td>` // generate table cell and tooltip html
         }
