@@ -11,8 +11,8 @@ tr {
 
 td {
     position: relative;
-    height: var(--space-3);
-    width: var(--space-3);
+    height: 12px; /* doo not scale this */
+    width: 12px;
     border-radius: calc(var(--border-radius-sm) + 1px);
     background-color: var(--black-300);
 
@@ -21,7 +21,7 @@ td {
       }
 
     &[selected="true"]{
-        filter: brightness(1.1);
+        filter: brightness(1.4);
     }
 
     &[data-activity-level="1"]{

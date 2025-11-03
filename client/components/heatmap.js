@@ -47,7 +47,7 @@ function Heatmap() {
             }
 
 
-            if (cell.isSelected()) {
+            if (cell.isSelected) {
                 cell.deselect(cell);
                 if (registry.didMount(Symbol.for("ActivityOverview"))) {
                     const activityOverview = registry.getMountedComponent(Symbol.for("ActivityOverview"));

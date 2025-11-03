@@ -15,13 +15,20 @@
   &[category="coding"] {
     background-color: var(--category-coding);
   }
+
   &[category="reading"] {
     background-color: var(--category-reading);
   }
+
   &[category="music"] {
     background-color: var(--category-music);
   }
+
   &[category="fitness"] {
     background-color: var(--category-fitness);
   }
-  }
+}
+
+.category-text{
+  text-transform: capitalize;
+}

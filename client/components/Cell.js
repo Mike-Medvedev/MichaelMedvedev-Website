@@ -22,7 +22,7 @@ export default class Cell{
     deselect(cell){
         this.cell.removeAttribute("selected");
         document.querySelectorAll('td:not(.activity-label)').forEach(td => {
-            td.style.filter = '';
+            td.classList.toggle("dim");
         });
     }
     clearSelectedCells(){
@@ -32,7 +32,7 @@ export default class Cell{
 
     dimOtherCells(){
         document.querySelectorAll('td:not(.activity-label)').forEach(td => {
-            td.classList.add("dim")
+            td.classList.toggle("dim");
         });
         
     }
@@ -42,7 +42,7 @@ export default class Cell{
     get date(){
         return this.#date;
     }
-    isSelected(){
+    get isSelected(){
         return this.#selected;
     }
 

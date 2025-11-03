@@ -1,5 +1,6 @@
 .card{
    width: 100%;
+   position: relative;
    max-width: 60rem;
    background-color: var(--background-color-surface);
    padding: var(--space-7);

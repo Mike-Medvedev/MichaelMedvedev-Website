@@ -1,3 +1,3 @@
 window.env = {
-    BASE_URL: "http://192.168.1.207:3000",
+    BASE_URL: "https://02c217533376.ngrok-free.app",
 }

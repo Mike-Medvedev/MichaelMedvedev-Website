@@ -1,0 +1,13 @@
+@media (max-width: 768px) {
+    .mobile-menu {
+        position: absolute;
+        border: none;
+        background-color: var(--background-color-surface);
+        border: var(--border-width-default) var(--border-style-default) var(--border-color-default);
+        border-radius: var(--border-radius-default);
+        color: inherit;
+        font-family: inherit;
+        margin: var(--space-1);
+    }
+    
+}

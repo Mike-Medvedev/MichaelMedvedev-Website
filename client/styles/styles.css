@@ -16,6 +16,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 h1 {
     font-size: var( --text-title-1-size);
     font-weight: var(--text-title-1-weight);
@@ -83,21 +84,29 @@ header {
     padding-inline: var(--space-6);
     border-top: none;
 
-    .header-section {
-        max-width: 80rem;
-        margin-inline: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center
-    }
-
-    @media (max-width: 768px) {
-        .header-section {
-            flex-direction: column;
-        }
-    }
 }
 
+.header-section-desktop {
+    max-width: 80rem;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.header-section-mobile{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-1);
+    }
+}
+#hamburger {
+    display: none;
+}
 main[hidden] {
     display: none;
 }
@@ -152,4 +161,37 @@ footer {
     .button-stack {
         display: none;
     }
+}
+
+@media (max-width: 768px) {
+    #hamburger {
+        display: flex;
+        position: relative;
+    }
+    .header-section-desktop{
+        display: none;
+    }
+    .mobile-menu {
+        position: absolute;
+    }
+    
+}
+
+@media (max-width: 768px) {
+    :root { font-size: 14px; } 
+  }
+  
+@media (max-width: 480px) {
+:root { font-size: 12px; }
+}
+@media (min-width: 992px) {
+}
+
+.main-wrapper{
+    position: relative;
+    margin-top: var(--space-13);
+    width: 100%;
+    max-width: 60rem;
+    display: flex;
+    justify-content: center;
 }

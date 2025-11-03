@@ -3,6 +3,7 @@ import { getCurrentPathname } from "./utils/path.utils.js";
 function Router() {
     const pages = document.querySelectorAll("main");
     const navButtons = document.querySelectorAll("nav button");
+    const mobileMenu = document.querySelector("#hamburger");
 
     function togglePage(route){
         pages.forEach((page) => {
