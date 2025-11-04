@@ -33,8 +33,10 @@ function Heatmap() {
             const cell = new Cell(event)
             if (cell.isNull || cell.isLabel) return;
 
-
             const today = new Date()
+            today.setHours(0, 0, 0, 0) //set todays date to midnight so the DUMB date library doesnt convert day to tomorrow
+    
+
             if (auth.isAdmin && isEqualDay(cell.date, today)) {
                 if (!secretButton.isMounted) {
                     secretButton.mount();
