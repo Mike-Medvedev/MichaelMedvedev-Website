@@ -6,3 +6,12 @@ export function trimTime(date){
 export function isEqualDay(date1, date2){
     return trimTime(new Date(date1)) === trimTime(new Date(date2))
 }
+
+export function toLocalISO(date){
+    const localIso = [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, "0"),
+        String(date.getDate()).padStart(2, "0")
+      ].join("-");
+      return localIso;
+}

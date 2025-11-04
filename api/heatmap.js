@@ -7,7 +7,7 @@ const MONTH_SUFFIX = { 0: "th", 1: "st", 2: "nd", 3: "rd", 4: "th", 5: "th", 6: 
 
 function generateWeeksFromPastYear() {
     let currentDate = new Date()
-    currentDate.setUTCHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
     let lastYearsDate = DateUtils.getDateOneYearAgo(currentDate)
     
     let dates = [];
@@ -91,7 +91,7 @@ export default async function renderHeatMap() {
         for (let week of dates) { //iterate over each week only one day at a time, so all mondays of the year, then all tuesdays etc. 
             if (!week[i]) continue; // each row of the heatmap contains the same weekday for every cell, row 1 = every monday from 2024-2025
             const currentDateObject = week[i];
-            const currentDayString = DateUtils.trimTime(week[i]) //"2024-05-07"
+            const currentDayString = DateUtils.trimTime(currentDateObject) //"2024-05-07"
             const countForCurrentDate = activityCountMap.get(currentDayString) || 0;
             string += `<td data-activity-level="${calculateActivityLevel(countForCurrentDate, highestActivityCount)}" data-date="${currentDayString}">
             <custom-tooltip for="${currentDayString}" popover>${countForCurrentDate > 0 ? countForCurrentDate : "No "} Activities on ${currentDateObject.toLocaleDateString("en-US", { month: "long", timeZone: "UTC" })} ${currentDateObject.getUTCDate()}${MONTH_SUFFIX[currentDateObject.getUTCDate() % 10]}</custom-tooltip>
