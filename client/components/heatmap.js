@@ -18,7 +18,6 @@ function Heatmap() {
             const heatmapHtml = data.html
             heatmap.innerHTML = heatmapHtml;
             isMounted = true;
-
         })()
         heatmap.addEventListener("mouseover", (event) => {
             const cell = new Cell(event)
