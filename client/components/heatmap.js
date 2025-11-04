@@ -22,6 +22,11 @@ function Heatmap() {
             isMounted = true;
         })()
         heatmapContainer.addEventListener("changeyear", async (event) => {
+            if(registry.didMount(Symbol.for("ActivityOverview"))){
+                registry.getMountedComponent(Symbol.for("ActivityOverview")).unmount();
+                registry.removeUnmountedComponent(Symbol.for("ActivityOverview"));
+            }
+            Cell.clearSelectedCells();
             Loader.call(heatmap);
             const year = event.detail.year
             const [heatMapData, activityCountData] = await Promise.all([
@@ -72,9 +77,9 @@ function Heatmap() {
                 }
             }
             else {
-                cell.clearSelectedCells();
+                Cell.clearSelectedCells();
                 cell.select(cell)
-                cell.dimOtherCells();
+                Cell.dimOtherCells();
 
                 const { data, error } = await http.get(`/activities?selected-day=${cell.date}`)
 

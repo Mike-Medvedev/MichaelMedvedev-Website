@@ -3,6 +3,7 @@ export default function HeatMapYearButtons() {
     function createComponent() {
         heatmapButtons.forEach((button) => {
             button.addEventListener("click", function () {
+                if(button.classList.contains("selected")){return;}
                 heatmapButtons.forEach((b) => {
                     if (b !== button) b.classList.remove("selected");
                   });

@@ -24,12 +24,12 @@ export default class Cell{
             td.classList.remove("dim");
         });
     }
-    clearSelectedCells(){
+    static clearSelectedCells(){
         const previousSelectedCells = document.querySelectorAll("td[selected='true']:not(.activity-label)");
         previousSelectedCells.forEach(prev => prev.removeAttribute("selected"))
     }
 
-    dimOtherCells(){
+    static dimOtherCells(){
         document.querySelectorAll("td:not(.activity-label):not([selected='true'])")
                 .forEach(td => td.classList.add("dim"));
         
