@@ -13,8 +13,8 @@ ActivityRouter.get("/", async (req, res) => {
 })
 
 ActivityRouter.post("/", async (req, res) => {
-    const {title, category} = req.body
-    const newActivity = new Activity(title, category)
+    const {title, category, link} = req.body;
+    const newActivity = new Activity(title, category, link)
     const createdId = await ActivityService.create(newActivity);
     res.status(201).send(createdId)
 })

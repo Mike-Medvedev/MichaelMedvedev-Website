@@ -16,7 +16,7 @@ export default class ActivitiesEntry{
         if(Object.hasOwn(activities, "length")){ //if array then spread objs
             this.#activities.push(...activities)
         }
-        else this.#activities.push(activities)
+        else this.#activities.push(activities) //else support singular activity
     }
     modelDump(){
         const activities = this.#activities.map(activity => ({...activity.modelDump()}))

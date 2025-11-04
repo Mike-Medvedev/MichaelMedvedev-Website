@@ -23,7 +23,7 @@ class ActivityServiceClass {
         .eq('date', selectedDate)
 
         for (let activity of data) {
-            const newActivity = new PublicActivity(activity.id, activity.title, activity.category)
+            const newActivity = new PublicActivity(activity.id, activity.title, activity.category, activity.link)
             entry.add(newActivity)
         }
         return entry
@@ -53,12 +53,12 @@ class ActivityServiceClass {
     }
     async create(activity) {
 
-        const { title, category, date } = activity.modelDump()
+        const { title, category, link, date } = activity.modelDump()
 
         const { data, error } = await DatabaseManager.db
         .from('activities')
         .insert([
-            { title, category, date }
+            { title, category, link, date }
         ])
         .select('id');
         

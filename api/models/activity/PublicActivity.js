@@ -2,8 +2,8 @@ import Activity from "./Activity.js"
 
 export default class PublicActivity extends Activity {
     #id;
-    constructor(id, title, category) {
-        super(title, category) //does not inherit, but delegates lookups of these props, up prototype chain
+    constructor(id, title, category, link) {
+        super(title, category, link) //does not inherit, but delegates lookups of these props, up prototype chain
         this.#id = id
     }
     get id() {
