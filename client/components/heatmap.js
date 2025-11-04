@@ -7,6 +7,7 @@ import Cell from "./Cell.js"
 import http from "../http/http.client.js"
 import registry from "../ComponentRegistry.js"
 import activityCount from "../components/activity-count.js"
+import Loader from "../components/loader.js"
 function Heatmap() {
     const id = Symbol.for("heatmap")
     let isMounted = false;
@@ -21,6 +22,7 @@ function Heatmap() {
             isMounted = true;
         })()
         heatmapContainer.addEventListener("changeyear", async (event) => {
+            Loader.call(heatmap);
             const year = event.detail.year
             const [heatMapData, activityCountData] = await Promise.all([
                 http.get(`/heatmap?selected-year=${year}`),

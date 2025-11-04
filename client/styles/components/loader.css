@@ -14,7 +14,7 @@
 
   .loader-container{
     width: 100%;
-    padding-block: var(--space-12);
+    padding-block: var(--space-9);
     display: flex;
     align-items: center;
     justify-content: center;
