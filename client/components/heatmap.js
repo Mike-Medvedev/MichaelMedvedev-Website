@@ -6,11 +6,12 @@ import SecretButton from "./secret-button.js"
 import Cell from "./Cell.js"
 import http from "../http/http.client.js"
 import registry from "../ComponentRegistry.js"
-
+import activityCount from "../components/activity-count.js"
 function Heatmap() {
     const id = Symbol.for("heatmap")
     let isMounted = false;
     const heatmap = document.querySelector(".heatmap");
+    const heatmapContainer = document.querySelector(".heatmap-container")
     const secretButton = SecretButton();
     function mount() {
         (async function loadHeatMap() {
@@ -19,6 +20,18 @@ function Heatmap() {
             heatmap.innerHTML = heatmapHtml;
             isMounted = true;
         })()
+        heatmapContainer.addEventListener("changeyear", async (event) => {
+            const year = event.detail.year
+            const [heatMapData, activityCountData] = await Promise.all([
+                http.get(`/heatmap?selected-year=${year}`),
+                http.get(`/activities/count?selected-year=${year}`)
+            ]);
+            heatmap.innerHTML = heatMapData.data.html
+
+            const count = activityCountData.data.count;
+            activityCount.render(count)
+
+        })
         heatmap.addEventListener("mouseover", (event) => {
             const cell = new Cell(event)
             if (!cell.isNull && !cell.isLabel) {

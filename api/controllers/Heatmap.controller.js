@@ -4,7 +4,8 @@ import renderHeatMap from "../heatmap.js"
 const HeatmapRouter = express.Router();
 
 HeatmapRouter.get("/", async (req, res) => {
-    const heatmapHtml = await renderHeatMap()
+    const selectedYear = req.query["selected-year"];
+    const heatmapHtml = await renderHeatMap(selectedYear)
     res.status(200).json({html: heatmapHtml});
 })
 

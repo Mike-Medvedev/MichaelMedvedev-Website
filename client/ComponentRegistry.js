@@ -12,6 +12,7 @@ class ComponentRegistry{
     }
     getMountedComponent(id){
         const component = this.#registry.get(id);
+        if(!component) console.error("No Mounted Component found in Registry!");
         return component
     }
 }

@@ -5,10 +5,19 @@ const MONTH_PREFIXES = ["Jan", "Feb", "March", "April", "May", "Jun", "Jul", "Au
 const DAY_MAP = { 1: "Mon", 3: "Wed", 5: "Fri" }
 const MONTH_SUFFIX = { 0: "th", 1: "st", 2: "nd", 3: "rd", 4: "th", 5: "th", 6: "th", 7: "th", 8: "th", 9: "th"}
 
-function generateWeeksFromPastYear() {
-    let currentDate = new Date()
-    currentDate.setHours(0, 0, 0, 0);
-    let lastYearsDate = DateUtils.getDateOneYearAgo(currentDate)
+function generateWeeksFromPastYear(selectedYear) {
+    let currentDate;
+    let lastYearsDate;
+    if(selectedYear){
+        lastYearsDate = new Date(Date.UTC(selectedYear, 0, 1));
+        currentDate = new Date(Date.UTC(selectedYear, 11, 31));
+        currentDate.setUTCHours(0, 0, 0, 0);
+    }
+    else {
+        currentDate = new Date();
+        lastYearsDate = DateUtils.getDateOneYearAgo(currentDate)
+        currentDate.setHours(0, 0, 0, 0);
+    }
     
     let dates = [];
     let weeks = [];
@@ -44,8 +53,8 @@ function calculateActivityLevel(activityCount, highestActivityCount) {
     return 0; 
 }
 
-export default async function renderHeatMap() {
-    const dates = generateWeeksFromPastYear();
+export default async function renderHeatMap(selectedYear) {
+    const dates = generateWeeksFromPastYear(selectedYear);
     const startDay = dates.flat(1)[0];
     const endDay = dates.flat(1)[dates.flat(1).length - 1]
     const currentMonth = new Date().toLocaleDateString("en-US", {month: "long"})

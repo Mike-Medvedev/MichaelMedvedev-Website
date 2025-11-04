@@ -1,21 +1,11 @@
-.heatmap{
-    margin: var(--space-3);
+.heatmap-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.heatmap-container {
-    width: 100%;
-    display: block;
-
-    .heatmap-legend {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-
-        &>div {
-            display: flex;
-            place-items: center;
-        }
-    }
+.heatmap{
+    margin: var(--space-3);
 }
 
 

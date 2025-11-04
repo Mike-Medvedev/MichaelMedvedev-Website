@@ -30,7 +30,8 @@ ActivityRouter.get("/options", (req, res) => {
 })
 
 ActivityRouter.get("/count", async(req, res) => {
-    const count = await ActivityService.getCount();
+    const selectedYear = req.query["selected-year"]; 
+    const count = await ActivityService.getCount(selectedYear);
     res.json(count)
 })
 

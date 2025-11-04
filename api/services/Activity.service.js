@@ -41,13 +41,15 @@ class ActivityServiceClass {
         if (error) console.error(error);
         return data;
     }
-    async getCount(){
+    async getCount(selectedYear){
+        const currentYear = new Date().getFullYear();
+        const year = Number(selectedYear ?? currentYear);
 
         const { count } = await DatabaseManager.db
         .from("activities")
         .select('*', { count: 'exact' })
-        .gte('date', '2025-01-01')
-        .lt('date', '2026-01-01');
+        .gte('date', `${year}-01-01`)
+        .lt('date', `${year + 1}-01-01`);
 
         return { count };
     }
