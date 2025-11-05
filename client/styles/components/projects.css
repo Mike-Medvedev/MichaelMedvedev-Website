@@ -1,12 +1,21 @@
 .projects-container{
     margin-top: var(--space-10);
     width: 100%;
+    max-width: 60rem;
 }
 
 .projects{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-2);
+    gap: var(--space-4);
+
+    .card{
+        &:hover{
+            border-color: var(--border-color-active);
+            box-shadow: var(--shadow-primary-sm);
+        }
+    }
+    
 }
 
 
@@ -14,13 +23,6 @@
 @media (max-width: 768px){
     .projects{
         grid-template-columns: 1fr;
-    }
-}
-
-
-@media (min-width: 1200px){
-    .projects{
-        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 

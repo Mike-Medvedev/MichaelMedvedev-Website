@@ -1,0 +1,23 @@
+.chip-container{
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    gap: var(--space-2);
+    margin-top: var(--space-10);
+    margin-bottom: var(--space-2);
+    &::-webkit-scrollbar {
+        display: none;
+     }
+}
+
+.chip{
+    padding-inline: var(--space-3);
+    padding-block: var(--space-1);
+    font-weight: var(--font-weight-600);
+    background-color: var(--background-color-primary-hover);
+    border: var(--border-width-default) var(--border-style-default) var(--border-color-hover);
+    border-radius: var(--border-radius-xl);
+    color: var(--text-color-default);
+    font-size: var(--font-size-sm);
+    text-wrap: nowrap;
+}

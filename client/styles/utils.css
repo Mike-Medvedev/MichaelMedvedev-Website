@@ -38,6 +38,9 @@
 .text-center{
     text-align: center;
 }
+.text-lg{
+    font-size: var(--font-size-lg);
+}
 
 
 .mt-12 {
@@ -63,7 +66,9 @@
     text-transform: capitalize;
 }
 
-
+.self-end{
+    align-self: end;
+}
 .flex{
     display: flex;
 }

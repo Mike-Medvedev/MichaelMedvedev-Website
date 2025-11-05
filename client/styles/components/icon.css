@@ -8,8 +8,8 @@
         border-radius: var(--border-radius-lg);
        
     }
-    .icon{
-        width: var(--space-5);
-        height: var(--space-5);
-    }
+}
+.icon{
+    width: var(--space-5);
+    height: var(--space-5);
 }
