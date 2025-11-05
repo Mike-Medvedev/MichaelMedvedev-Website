@@ -1,0 +1,69 @@
+.technology-stack-container{
+    width: 100%;
+}
+
+.marquee{
+    display: flex;
+    user-select: none;
+    gap: var(--space-5);
+   
+}
+
+.marquee-content{
+    flex-shrink: 0;
+    display: flex;
+    gap: var(--space-5);
+    min-width: 100%;
+    justify-content: space-around;
+    animation: slide 25s infinite linear normal;
+    /*Animation-Name Animation-Duration Animation-Repeat Animaton-Timing-Function Animation-Direction */
+}
+.technology-stack-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: var(--space-2);
+    text-align: center;
+    padding-inline: var(--space-4);
+    padding-block: var(--space-3);
+    background-color: var(--background-color-surface);
+    border-radius: var(--border-radius-default);
+    border: var(--border-width-default) var(--border-style-default) var(--border-color-default);
+    box-shadow: var(--shadow-surface-default);
+    flex-shrink: 0;
+    width: 175px;
+    
+    &:hover{
+        border-color: var(--border-color-hover);
+    }
+
+    span {
+        color: var(--text-color-sm);
+        font-weight: var(--font-weight-600);
+    }
+}
+
+.technology-stack-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain; /* or 'cover' depending on your preference */
+  }
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-100% - var(--space-5)));
+    }
+}
+
+@media (max-width: 768px){
+    .technology-stack-item img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .technology-stack-item{
+        width: 120px;
+    }
+}

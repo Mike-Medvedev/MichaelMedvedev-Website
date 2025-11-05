@@ -35,6 +35,9 @@
     background-clip: text;
     color: transparent;
 }
+.text-center{
+    text-align: center;
+}
 
 
 .mt-12 {
@@ -51,6 +54,9 @@
 
 .mb-4 {
     margin-bottom: var(--space-4)
+}
+.mb-6 {
+    margin-bottom: var(--space-6)
 }
 
 .capitalize{

@@ -74,6 +74,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-x: hidden;
 }
 
 header {
@@ -116,9 +117,9 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: var(--space-9);
     width: 100%;
+    overflow-x: hidden;
 
     .main-section {
         display: flex;

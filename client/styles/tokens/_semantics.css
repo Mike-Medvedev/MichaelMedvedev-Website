@@ -36,7 +36,8 @@
    --icon-color-primary: var(--primary-color);
 
 
-    --shadow-primary-default: var(--shadow-md);
+   --shadow-surface-default: var(--shadow-sm); 
+   --shadow-primary-default: var(--shadow-md);
 
     --gradient-primary: linear-gradient(90deg, #4fc3f7 0%, #64b5f6 50%, #42a5f5 100%);
     --gradient-surface: linear-gradient(to bottom right, rgba(41, 56, 89, 0.3), rgba(28, 27, 38, 0.3));

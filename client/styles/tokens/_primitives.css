@@ -99,7 +99,8 @@
     --border-width-md: 2px;
     --border-width-lg: 4px;
 
-    --shadow-sm: 1.2px 2.4px 2.4px color-mix(in srgb, var(--blue-500) 10%, transparent);
+
+    --shadow-sm: 2px 3px 6px 3px color-mix(in srgb, #000000 10%, transparent);
     --shadow-md: 0px 0px 50.4px color-mix(in srgb, var(--blue-500) 20%, transparent);
     --shadow-lg: 6.2px 12.3px 12.3px color-mix(in srgb, var(--blue-500) 30%, transparent);
 
