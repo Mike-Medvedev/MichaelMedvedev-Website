@@ -279,7 +279,19 @@ iframe {
     scroll-snap-type: x mandatory;
 
     anchor-name: --guitar-carousel;
+    scroll-marker-group: after;
 }
+
+.carousel::scroll-marker-group {
+    position: absolute;
+    position-anchor: --guitar-carousel;
+    top: calc(anchor(bottom) - 70px);
+    justify-self: anchor-center;
+  
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
 
 .carousel::scroll-button(*) {
     border: 0;
@@ -291,6 +303,7 @@ iframe {
 
     position: absolute;
     position-anchor: --guitar-carousel;
+    
 
   }
   
@@ -323,6 +336,19 @@ iframe {
     flex: 0 0 100%;
     scroll-snap-align: center;
 }
+
+.carousel-item::scroll-marker {
+    content: "";
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 50%;
+  }
+
+  .carousel-item::scroll-marker:target-current{
+    background-color: black;
+  }
 
 .media-image {
     width: 100%;
