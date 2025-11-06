@@ -43,6 +43,12 @@
 }
 
 
+.p-0{
+    padding: 0;
+}
+.p-10{
+    padding: var(--space-10);
+}
 .mt-12 {
     margin-top: var(--space-12);
 }
