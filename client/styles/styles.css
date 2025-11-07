@@ -201,7 +201,6 @@ footer {
     }
 }
 
-@media (min-width: 992px) {}
 
 .main-wrapper {
     position: relative;
@@ -226,8 +225,11 @@ footer {
 }
 
 iframe {
-    width: 420px;
-    height: 350px;
+    display: block;
+    max-width: 100%;
+    width: clamp(100px, 80vw, 400px);
+    aspect-ratio: 3 / 2;
+    border-radius: var(--border-radius-xl);
 }
 
 .overlay {
@@ -239,16 +241,56 @@ iframe {
     justify-content: flex-end;
 }
 
+.overlay-content{
+    background: color-mix(in srgb, var(--black-400) 60%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: var(--space-6);
+    border-radius: var(--border-radius-default);
+    width: fit-content;
+    display: flex;
+    flex-direction: column; 
+    gap: var(--space-5);
+}
+
 .bio-section {
     margin-bottom: var(--space-12);
 }
 
-.bio-content-container {}
+.bio-content-container {
+    margin-bottom: var(--space-12);
+}
 
-.bio-content {
+.bio-content-1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-7);
+    grid-template-areas: "text media"; 
+}
+.bio-content-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    grid-template-areas: "media text"; 
+}
+
+.media-container {
+    grid-area: media;
+}
+  
+.bio-content .flex {
+grid-area: text;
+}
+
+@media (max-width: 1440px){
+    .bio-content-1{
+        grid-template-columns: 1fr;
+        grid-template-areas: "text" "media"; 
+    }
+    .bio-content-2{
+        grid-template-columns: 1fr;
+        grid-template-areas: "text" "media"; 
+    }
 }
 
 .media-container {
@@ -269,90 +311,48 @@ iframe {
 .carousel-section {}
 
 .carousel {
-    width: 100vw;
-    height: 300px;
-    padding: var(--space-7);
-    display: flex;
-    flex-direction: row;
-    gap: 4vw;
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--space-4);
+    width: 100%;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
-
-    anchor-name: --guitar-carousel;
-    scroll-marker-group: after;
 }
-
-.carousel::scroll-marker-group {
-    position: absolute;
-    position-anchor: --guitar-carousel;
-    top: calc(anchor(bottom) - 70px);
-    justify-self: anchor-center;
-  
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-
-.carousel::scroll-button(*) {
-    border: 0;
-    font-size: 2rem;
-    background: none;
-    color: black;
-    opacity: 0.7;
-    cursor: pointer;
-
-    position: absolute;
-    position-anchor: --guitar-carousel;
-    
-
-  }
-  
-  .carousel::scroll-button(*):hover,
-  .carousel::scroll-button(*):focus {
-    opacity: 1;
-  }
-  
-  .carousel::scroll-button(*):active {
-    translate: 1px 1px;
-  }
-  
-  .carousel::scroll-button(*):disabled {
-    opacity: 0.2;
-    cursor: unset;
-  }
-  .carousel::scroll-button(left) {
-    right: calc(anchor(left) - 70px);
-    bottom: calc(anchor(top) + 13px);
-    content: "◄";
-  }
-  
-  .carousel::scroll-button(right) {
-    left: calc(anchor(right) - 70px);
-    bottom: calc(anchor(top) + 13px);
-    content: "►";
-  }
 
 .carousel-item{
-    flex: 0 0 100%;
+    display: inline-block;
+    max-width: 100%;
+    width: clamp(100px, 80vw, 400px);
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border: var(--border-width-default) var(--border-style-default) var(--border-color-hover);
+    border-radius: var(--border-radius-xl);
     scroll-snap-align: center;
+    text-align: left;
 }
 
-.carousel-item::scroll-marker {
-    content: "";
-    width: 16px;
-    height: 16px;
-    background-color: transparent;
-    border: 2px solid black;
-    border-radius: 50%;
-  }
-
-  .carousel-item::scroll-marker:target-current{
-    background-color: black;
-  }
+  
 
 .media-image {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: var(--border-radius-xl);
+}
+
+.gilded-guitars-cta{
+    color: var(--white-100);
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-default);
+    padding-inline: var(--space-4);
+    padding-block: var(--space-3);
+    width: fit-content;
+    text-decoration: none;
+}
+
+.secondary-gradient{
+    background: linear-gradient(to right, var(--red-500), var(--amber-500));
+    background-clip: text;
+    color: transparent;
 }

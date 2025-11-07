@@ -2,22 +2,24 @@
 
 :root {
 
+    --red-500: oklch(63.7% .237 25.331);
+    --amber-500: oklch(76.9% .188 70.08);
+
     --blue-100: #e4edff;
     --blue-200: #c7d8ff;
     --blue-300: #a9c3ff;
     --blue-400: #7fa8ff;
-    --blue-500: #4a90ff;  /* primary */
+    --blue-500: #4a90ff;
     --blue-600: #3574e5;
     --blue-700: #295bbf;
     --blue-800: #204399;
     --blue-900: #1b2b59;
 
-    /* ===== Neutral (Black / Gray) ===== */
     --black-100: #52555a;
     --black-200: #3a3c40;
     --black-300: #2e2f32;
-    --black-400: #252526;  /* surface */
-    --black-500: #1e1e1e;  /* background */
+    --black-400: #252526;
+    --black-500: #1e1e1e;
     --black-600: #18191b;
     --black-700: #121315;
     --black-800: #0c0c0d;
