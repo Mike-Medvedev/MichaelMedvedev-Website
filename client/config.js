@@ -1,3 +1,3 @@
 window.env = {
-    BASE_URL: "http://192.168.1.207:3000",
+    BASE_URL: "__BASE_URL__",
 }

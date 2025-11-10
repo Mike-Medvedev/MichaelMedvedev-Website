@@ -24,7 +24,7 @@ function ToolTip(cell){
     }
     function unmount(){
         tooltip.hidePopover()
-        isMounted = true;
+        isMounted = false;
     }
     
     return { id, mount, unmount, get isMounted(){ return isMounted } }

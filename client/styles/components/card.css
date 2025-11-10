@@ -12,10 +12,4 @@
    flex-direction: column;
    gap: var(--space-3);
    overflow: auto;
-   scrollbar-width: none;
-   -ms-overflow-style: none;
 }
-.card::-webkit-scrollbar {
-   display: none;
-}
-

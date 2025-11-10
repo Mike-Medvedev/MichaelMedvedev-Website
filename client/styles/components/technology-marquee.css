@@ -46,7 +46,7 @@
 .technology-stack-item img {
     width: 50px;
     height: 50px;
-    object-fit: contain; /* or 'cover' depending on your preference */
+    object-fit: contain;
   }
 @keyframes slide {
     from {
