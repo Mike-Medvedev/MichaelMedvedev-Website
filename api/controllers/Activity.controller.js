@@ -1,8 +1,9 @@
 import express from "express"
-const ActivityRouter = express.Router();
 import Activity from "../models/activity/Activity.js"
 import ActivityService from "../services/Activity.service.js"
 import Category from "../models/activity/Category.js"
+
+const ActivityRouter = express.Router();
 
 ActivityRouter.get("/", async (req, res) => {
     const selectedDay = req.query["selected-day"];
