@@ -16,6 +16,7 @@ function convertImageToWebp(){
     const filesToConvert = assetContents.filter(file => file.endsWith(".jpg") || file.endsWith(".jpeg") || file.endsWith(".png") || file.endsWith(".webp"));
 
     for(const file of filesToConvert){
+        // -vf to scale images to a width of 800px. -1 for auto height -q:v for compressing image
         const subprocess = spawn("ffmpeg", ["-y", "-i", file, "-vf", "scale=800:-1", "-q:v", "80", "temp" + replaceExt(file, ".webp")], { cwd: assetsDir });
         subprocess.stderr.on(("data"), (data) => console.log(data.toString()));
     }

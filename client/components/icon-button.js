@@ -7,7 +7,7 @@ export default function IconButton(url) {
         a.classList.add("icon-container")
 
         const img = document.createElement("img");
-        img.src = "../assets/external-link.svg";
+        img.src = "https://bumvtrobdabtfwctluzs.supabase.co/storage/v1/object/public/pictures/external-link.svg";
         img.classList.add('icon', 'icon-button-img')
 
         a.appendChild(img);
