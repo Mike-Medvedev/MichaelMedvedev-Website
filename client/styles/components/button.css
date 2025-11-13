@@ -8,6 +8,8 @@
    line-height: var(--text-body-2-line-height);
    cursor: pointer;
    border: var(--border-width-default) var(--border-style-default) transparent;
+   text-decoration: none;
+   display: inline-block;
 
     &:hover{
         background-color: var(--background-color-primary-hover);

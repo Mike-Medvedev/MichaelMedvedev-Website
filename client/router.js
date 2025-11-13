@@ -2,14 +2,14 @@ import { getCurrentPathname } from "./utils/path.utils.js";
 
 function Router() {
     const pages = document.querySelectorAll("main");
-    const navButtons = document.querySelectorAll("nav button");
+    const navLinks = document.querySelectorAll("nav a[data-route]");
 
     function togglePage(route){
         pages.forEach((page) => {
             page.hidden = page.id !== route;
         });
-        navButtons.forEach((button) => {
-            button.classList.toggle("selected", button.id === route);
+        navLinks.forEach((link) => {
+            link.classList.toggle("selected", link.getAttribute("data-route") === route);
         });
     };
 
@@ -21,10 +21,11 @@ function Router() {
 
     function setupNavigation(){
         togglePage(window.location.pathname);
-        navButtons.forEach((button) => {
-            const route = button.id;
-            button.addEventListener("click", () => {
-                navigate(route)
+        navLinks.forEach((link) => {
+            const route = link.getAttribute("data-route");
+            link.addEventListener("click", (e) => {
+                e.preventDefault();
+                navigate(route);
             });
         });
         window.addEventListener("popstate", (event) => {
