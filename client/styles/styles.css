@@ -22,6 +22,17 @@ h1 {
     font-weight: var(--text-title-1-weight);
     line-height: var(--text-title-1-line-height);
 }
+@media (max-width: 768px){
+    h1 {
+        font-size: var(--space-10);
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1200px){
+    h1 {
+        font-size: var(--space-11);
+    }
+}
 
 h2 {
     font-size: var(--text-title-2-size);

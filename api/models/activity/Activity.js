@@ -9,7 +9,7 @@ export default class Activity {
     #date;
     #link;
     constructor(title, category, link) {
-        this.#title = new Title(title)
+        this.#title = new Title(title);
         this.#category = new Category(category);
         this.#link = new Link(link);
         this.#date = new ActivityDate(DateUtils.trimTime(new Date()))
