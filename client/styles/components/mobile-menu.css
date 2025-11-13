@@ -1,6 +1,7 @@
 @media (max-width: 768px) {
     .mobile-menu {
         position: absolute;
+        top: 45.5px;
         border: none;
         background-color: var(--background-color-surface);
         border: var(--border-width-default) var(--border-style-default) var(--border-color-default);
