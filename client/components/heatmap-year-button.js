@@ -1,7 +1,6 @@
 import { generateHeatMapYearButtons } from "../utils/date.utils.js";
 export default function HeatMapYearButtons() {
   const heatmapButtonContainer = document.querySelector(".button-stack");
-  console.log("YO THIS IS BUTTON STACK CONTAINER", heatmapButtonContainer);
   function createComponent() {
     const heatmapButtons = generateHeatMapYearButtons();
 
