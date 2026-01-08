@@ -56,3 +56,8 @@ td.activity-label {
 td.activity-label:has(span) {
   width: 2rem;
 }
+
+td.empty {
+  background-color: transparent;
+  pointer-events: none;
+}
