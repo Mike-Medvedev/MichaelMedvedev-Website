@@ -10,9 +10,14 @@ function DialogForm() {
     async function submitHandler(event) {
         event.preventDefault()
         const formData = new FormData(event.target);
-        const payload = { "title": formData.get("title"), "category": formData.get("category"), "link": formData.get("link") }
+        const payload = { 
+            "title": formData.get("title"), 
+            "category": formData.get("category"), 
+            "link": formData.get("link"),
+            "date": formData.get("date")
+        }
         await http.post("/activities", payload)
-    dialog.close()
+        dialog.close()
     }
 
     function closeDialog() {

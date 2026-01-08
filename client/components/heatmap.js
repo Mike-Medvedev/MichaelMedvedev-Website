@@ -60,7 +60,8 @@ function Heatmap() {
                 if (!secretButton.isMounted) {
                     secretButton.mount();
                 }
-
+                // Store the selected date for the activity form
+                document.getElementById("selected-date").value = cell.date;
             } else {
                 if (secretButton.isMounted) {
                     secretButton.unmount();
