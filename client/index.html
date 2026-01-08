@@ -114,6 +114,16 @@
                 <span class="svg-section-text text-primary-bright">Click a square to see what I'm up to!</span>
             </section>
             <section class="card">
+                <div class="year-select-small-screens">
+                    <button class="year-select-trigger" aria-expanded="false" aria-haspopup="listbox">
+                        <span class="year-select-value"></span>
+                        <svg class="year-select-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </button>
+                    <ul class="year-select-dropdown" role="listbox" hidden>
+                    </ul>
+                </div>
                 <p class="activity-count">0 Activities in the last year</p>
                 <div class="heatmap-container">
                     <div class="w-full">
@@ -134,8 +144,10 @@
                         </div>
                     </div>
                     <div class="button-stack">
+                        <button data-year="2026" id="heatmap-year-button" class="button">2026</button>
                         <button data-year="2025" id="heatmap-year-button" class="button">2025</button>
-                        <button data-year="2024" id="heatmap-year-button" class="button">2024</button>
+                        <button data-year="2024" id="heatmap-year-button" class="button">2024</button> 
+                        
                     </div>
                 </div>
             </section>

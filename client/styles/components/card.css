@@ -1,15 +1,14 @@
-.card{
-   width: 100%;
-   position: relative;
-   max-width: 60rem;
-   background-color: var(--background-color-surface);
-   padding: var(--space-7);
-   border-color: var(--border-color-default);
-   border-style: var(--border-style-default);
-   border-width: var(--border-width-default);
-   border-radius: var(--border-radius-default);
-   display: flex;
-   flex-direction: column;
-   gap: var(--space-3);
-   overflow: auto;
+.card {
+  width: 100%;
+  position: relative;
+  max-width: 60rem;
+  background-color: var(--background-color-surface);
+  padding: var(--space-7);
+  border-color: var(--border-color-default);
+  border-style: var(--border-style-default);
+  border-width: var(--border-width-default);
+  border-radius: var(--border-radius-default);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }

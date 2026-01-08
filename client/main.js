@@ -1,9 +1,11 @@
-import router from "./router.js"
-import "./web-components/custom-tooltip.js"
-import "./config.js"
-import Heatmap from "./components/heatmap.js"
-import HeatMapYearButtons from "./components/heatmap-year-button.js"
+import router from "./router.js";
+import "./web-components/custom-tooltip.js";
+import "./config.js";
+import Heatmap from "./components/heatmap.js";
+import HeatMapYearButtons from "./components/heatmap-year-button.js";
+import HeatMapYearSelect from "./components/heatmap-year-select.js";
 
 router.setupNavigation();
 Heatmap().mount();
-HeatMapYearButtons().createComponent()
+HeatMapYearButtons().createComponent();
+HeatMapYearSelect().createComponent();
