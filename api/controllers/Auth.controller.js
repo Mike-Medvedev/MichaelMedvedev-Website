@@ -1,12 +1,8 @@
 import express from "express"
+import { requireAdmin } from "../middleware/admin.middleware.js"
 
 const AuthRouter = express.Router();
 
-AuthRouter.get("/token", (req, res) => {
-    if(req.headers["authorization"] === "bearer 12345b67"){
-        res.json({"ok": "ok"})
-    }
-    else res.status(401).json({ ok: false });
-})
+AuthRouter.get("/token", requireAdmin, (req, res) => res.json({ ok: true }))
 
 export default AuthRouter

@@ -2,7 +2,13 @@ export default function IconButton(url) {
     function createComponent() {
         const a = document.createElement("a")
         a.target = "_blank";
-        a.href = url;
+        try {
+            const parsed = new URL(url);
+            if (parsed.protocol === "http:" || parsed.protocol === "https:") a.href = parsed.href;
+        } catch {
+            // Do not turn invalid stored links into executable URLs.
+        }
+        a.rel = "noopener noreferrer";
         a.classList.add("icon-button");
         a.classList.add("icon-container")
 

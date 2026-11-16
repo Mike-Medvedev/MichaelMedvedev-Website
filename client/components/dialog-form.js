@@ -16,8 +16,10 @@ function DialogForm() {
             "link": formData.get("link"),
             "date": formData.get("date")
         }
-        await http.post("/activities", payload)
-        dialog.close()
+        const { error } = await http.post("/activities", payload)
+        const errorMessage = document.querySelector("#activity-error")
+        errorMessage.hidden = !error
+        if (!error) dialog.close()
     }
 
     function closeDialog() {
