@@ -1125,19 +1125,24 @@
       </div>
     </main>
     <!-----------SNOWBOARDING PAGE-------------->
+    <main hidden id="/admin">
+      <section class="admin-panel">
+        <h2>Admin</h2>
+        <form id="admin-sign-in-form">
+          <label for="admin-token">Admin token</label>
+          <input id="admin-token" name="token" type="password" autocomplete="off" required />
+          <p id="admin-sign-in-error" role="alert" hidden>Could not sign in. Check your token and try again.</p>
+          <button type="submit">Sign in</button>
+        </form>
+        <div id="admin-signed-in" hidden>
+          <p>You're signed in.</p>
+          <button id="admin-sign-out" type="button">Sign out</button>
+        </div>
+        <a href="/">Back to site</a>
+      </section>
+    </main>
     <footer>
       <p>@Michael Medvedev 2025</p>
-      <button id="admin-sign-in" type="button">Admin sign in</button>
     </footer>
-    <dialog id="admin-sign-in-dialog">
-      <form id="admin-sign-in-form" class="dialog-content">
-        <h2>Admin sign in</h2>
-        <label for="admin-token">Admin token</label>
-        <input id="admin-token" name="token" type="password" autocomplete="off" required />
-        <p id="admin-sign-in-error" role="alert" hidden>Could not sign in. Check your token and try again.</p>
-        <button type="submit">Sign in</button>
-        <button id="admin-sign-in-cancel" type="button">Cancel</button>
-      </form>
-    </dialog>
   </body>
 </html>

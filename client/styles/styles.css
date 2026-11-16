@@ -170,6 +170,34 @@ footer {
   color: var(--text-muted-sm);
 }
 
+.admin-panel {
+  width: min(100%, 28rem);
+  padding: var(--space-7);
+  background: var(--background-color-surface);
+  border: var(--border-width-default) solid var(--border-color-default);
+  border-radius: var(--border-radius-default);
+}
+
+#admin-sign-in-form:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+#admin-token {
+  padding: var(--space-3);
+  color: var(--text-color-default);
+  background: var(--background-color-default);
+  border: var(--border-width-default) solid var(--border-color-default);
+  border-radius: var(--border-radius-default);
+}
+
+#admin-sign-in-form button, #admin-sign-out {
+  width: fit-content;
+  color: var(--text-color-primary);
+}
+
 .button-stack {
   display: flex;
   flex-direction: column;

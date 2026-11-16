@@ -11,26 +11,16 @@ async function Auth() {
 
 const auth = await Auth();
 
-const signInButton = document.querySelector("#admin-sign-in");
-const signInDialog = document.querySelector("#admin-sign-in-dialog");
 const signInForm = document.querySelector("#admin-sign-in-form");
 const signInError = document.querySelector("#admin-sign-in-error");
+const signedIn = document.querySelector("#admin-signed-in");
 
-if (auth.isAdmin) signInButton.textContent = "Admin sign out";
+signInForm.hidden = auth.isAdmin;
+signedIn.hidden = !auth.isAdmin;
 
-signInButton.addEventListener("click", () => {
-    if (auth.isAdmin) {
-        localStorage.removeItem("token");
-        location.reload();
-    } else {
-        signInDialog.showModal();
-    }
-});
-
-signInDialog.querySelector("#admin-sign-in-cancel").addEventListener("click", () => {
-    signInForm.reset();
-    signInError.hidden = true;
-    signInDialog.close();
+document.querySelector("#admin-sign-out").addEventListener("click", () => {
+    localStorage.removeItem("token");
+    location.assign("/");
 });
 
 signInForm.addEventListener("submit", async (event) => {
@@ -42,7 +32,7 @@ signInForm.addEventListener("submit", async (event) => {
         });
         if (!response.ok || !(await response.json()).ok) throw new Error("Invalid token");
         localStorage.setItem("token", token);
-        location.reload();
+        location.assign("/");
     } catch {
         signInError.hidden = false;
     }
