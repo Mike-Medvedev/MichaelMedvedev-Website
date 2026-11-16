@@ -64,7 +64,7 @@ class ActivityServiceClass {
         ])
         .select('id');
         
-        if(error) {console.error(error)}
+        if(error) throw error;
 
         return data
     }
@@ -75,7 +75,7 @@ class ActivityServiceClass {
         .delete()
         .eq('id', id)
         
-        if(error) console.error(error)
+        if(error) throw error;
         
     }
 

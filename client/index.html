@@ -243,6 +243,7 @@
                   placeholder="Enter Activity"
                 ></textarea>
                 <input name="link" id="link" placeholder="Enter Link" />
+                <p id="activity-error" role="alert" hidden>Could not save this activity. Please try again.</p>
                 <button type="submit" id="add-activity">Add</button>
               </form>
               <footer>
@@ -1126,6 +1127,17 @@
     <!-----------SNOWBOARDING PAGE-------------->
     <footer>
       <p>@Michael Medvedev 2025</p>
+      <button id="admin-sign-in" type="button">Admin sign in</button>
     </footer>
+    <dialog id="admin-sign-in-dialog">
+      <form id="admin-sign-in-form" class="dialog-content">
+        <h2>Admin sign in</h2>
+        <label for="admin-token">Admin token</label>
+        <input id="admin-token" name="token" type="password" autocomplete="off" required />
+        <p id="admin-sign-in-error" role="alert" hidden>Could not sign in. Check your token and try again.</p>
+        <button type="submit">Sign in</button>
+        <button id="admin-sign-in-cancel" type="button">Cancel</button>
+      </form>
+    </dialog>
   </body>
 </html>

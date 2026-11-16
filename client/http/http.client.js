@@ -12,6 +12,7 @@ function HTTPClient() {
                 })
 
                 const data = await response.json();
+                if (!response.ok) return { data: null, error: data };
                 return { data, error: null }
 
             } catch (error) {
@@ -31,6 +32,7 @@ function HTTPClient() {
                 })
 
                 const data = await response.json();
+                if (!response.ok) return { data: null, error: data };
                 return { data, error: null }
             } catch (error) {
                 console.error(error)
@@ -48,6 +50,7 @@ function HTTPClient() {
                     }
                 })
                 const data = await response.json();
+                if (!response.ok) return { data: null, error: data };
                 return { data, error: null }
             } catch (error) {
                 console.error(error)
